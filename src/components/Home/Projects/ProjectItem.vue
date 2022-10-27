@@ -1,7 +1,7 @@
 <template>
     <div>
         <p>{{ item.id }} - {{ item.name }}</p>
-        <button @click="deleteItem">Delete</button>
+        <q-btn  @click="deleteItem" color="deep-orange" glossy label="Delete" />
     </div>
 </template>
 

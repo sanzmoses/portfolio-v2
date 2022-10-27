@@ -1,8 +1,7 @@
 <template>
-  <div class="about">
-    <h1>About</h1>
+  <div class="q-pa-xl">
+    <h3 class="q-mt-none">About</h3>
 
-    <h1 class="text-xl font-medium text-white">This is an about page</h1>
   </div>
 </template>
 

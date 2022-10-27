@@ -4,9 +4,23 @@ import { loadFonts } from './plugins/webfontloader'
 import router from './router'
 import { createPinia } from 'pinia'
 
+import { Quasar } from 'quasar'
+import { Dark } from 'quasar'
+
+// Import icon libraries
+import '@quasar/extras/material-icons/material-icons.css'
+
+// Import Quasar css
+import 'quasar/src/css/index.sass'
+
 loadFonts()
 
 createApp(App)
   .use(router)
   .use(createPinia())
+  .use(Quasar, {
+    plugins: {}, 
+  })
   .mount('#app')
+
+Dark.set(true)

@@ -1,0 +1,44 @@
+<template lang="">
+  <div class="q-pa-md q-py-xl">
+
+    <div class="q-pa-md q-gutter-sm">
+
+      <q-banner inline-actions rounded class="bg-orange text-white">
+        You have lost connection to the internet. This app is offline.
+
+        <template v-slot:action>
+          <q-btn flat label="Turn ON Wifi" />
+          <q-btn flat label="Dismiss" />
+        </template>
+      </q-banner>
+
+      <q-banner class="bg-primary text-white">
+        Unfortunately, the credit card did not  go through, please try again.
+        <template v-slot:action>
+          <q-btn flat color="white" label="Dismiss" />
+          <q-btn flat color="white" label="Update Credit Card" />
+        </template>
+      </q-banner>
+
+      <q-banner class="bg-red">
+        <template v-slot:avatar>
+          <q-icon name="signal_wifi_off" color="white" />
+        </template>
+        You have lost connection to the internet. This app is offline.
+        <template v-slot:action>
+          <q-btn flat color="primary" label="Turn on Wifi" />
+        </template>
+      </q-banner>
+
+    </div>
+
+  </div>
+</template>
+<script>
+export default {
+  
+}
+</script>
+<style lang="">
+  
+</style>
