@@ -7,6 +7,8 @@ import { createPinia } from 'pinia'
 import { Quasar } from 'quasar'
 import { Dark } from 'quasar'
 
+// import 'animate.css/animate.min.css'
+import 'animate.css/animate.compat.css';
 // Import icon libraries
 import '@quasar/extras/material-icons/material-icons.css'
 
@@ -19,7 +21,7 @@ createApp(App)
   .use(router)
   .use(createPinia())
   .use(Quasar, {
-    plugins: {}, 
+    plugins: { }, 
   })
   .mount('#app')
 

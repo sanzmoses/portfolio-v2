@@ -3,7 +3,14 @@
 
     <div class="row">
       <div class="col-8">
-        <h3 class="q-mt-none">Quasar Components</h3>
+        <transition
+          name="custom-classes-transition"
+          enter-active-class="animated fadeIn"
+          leave-active-class="animated fadeOut">
+          <h3 v-if="toggle" class="q-mt-none">Quasar Components</h3>
+        </transition>
+
+       <q-btn @click="toggle = true" flat>Test</q-btn>
 
         <q-separator />
 
@@ -39,7 +46,17 @@ export default {
     BannerSection
   },
   data: () => ({
+    toggle: false,
   }),
+  watch: {
+    toggle: function (value) {
+      if(value) {
+        setTimeout(() => {
+          this.toggle = false
+        }, 3000)
+      }
+    }
+  }
 }
 </script>
 
