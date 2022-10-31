@@ -1,6 +1,8 @@
 <template lang="">
   <div class="q-pa-md q-py-xl">
 
+    <h5 class="q-mt-none text-weight-thin text-primary">Banners</h5>
+
     <div class="q-pa-md q-gutter-sm">
 
       <q-banner inline-actions rounded class="bg-orange text-white">

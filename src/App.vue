@@ -29,3 +29,10 @@ export default {
   }),
 }
 </script>
+
+<style lang="scss">
+body {
+  scrollbar-width: thin;          /* "auto" or "thin" */
+  scrollbar-color: blue orange;   /* scroll thumb and track */ 
+}
+</style>

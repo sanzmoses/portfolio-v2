@@ -3,14 +3,7 @@
 
     <div class="row">
       <div class="col-8">
-        <transition
-          name="custom-classes-transition"
-          enter-active-class="animated fadeIn"
-          leave-active-class="animated fadeOut">
-          <h3 v-if="toggle" class="q-mt-none">Quasar Components</h3>
-        </transition>
-
-       <q-btn @click="toggle = true" flat>Test</q-btn>
+        <h3>Quasar Components</h3>
 
         <q-separator />
 
