@@ -23,8 +23,20 @@ export function getData() {
     'pest_control_rodent'
   ])
 
+  const sizes = ref([
+    'xs',
+    'sm',
+    'md',
+    'lg',
+    'xl',
+    '80px',
+    'sm',
+    'md',
+  ])
+
   return {
     themes,
-    icons
+    icons,
+    sizes
   }
 }

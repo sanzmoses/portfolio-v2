@@ -7,15 +7,23 @@
 
         <q-separator />
 
-        <ButtonSection />
+        <Buttons />
 
         <q-separator />
 
-        <CardsSection />
+        <Cards />
 
         <q-separator />
 
-        <BannerSection />
+        <Banner />
+
+        <q-separator />
+
+        <Dialogs />
+
+        <q-separator />
+        
+        <Forms />
 
       </div>
       <div class="col-4 q-pa-md">
@@ -27,16 +35,20 @@
 </template>
 
 <script>
-import ButtonSection from "./Sections/buttons.vue"
-import CardsSection from "./Sections/cards.vue"
-import BannerSection from "./Sections/banner.vue"
+import Buttons from "./Sections/buttons.vue"
+import Cards from "./Sections/cards.vue"
+import Banner from "./Sections/banner.vue"
+import Dialogs from "./Sections/dialogs.vue"
+import Forms from "./Sections/forms.vue"
 
 export default {
   name: 'About',
   components: {
-    ButtonSection,
-    CardsSection,
-    BannerSection
+    Buttons,
+    Cards,
+    Banner,
+    Dialogs,
+    Forms
   },
   data: () => ({
     toggle: false,
