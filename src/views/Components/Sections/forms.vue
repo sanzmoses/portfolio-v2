@@ -102,7 +102,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed  } from 'vue'
 import { getData } from '@/composables/themes.js'
 
 export default {
@@ -113,6 +113,7 @@ export default {
     const disable = ref(false)
 
     return {
+      tabindex: computed(() => disable.value === true || readonly.value === true ? -1 : 0),
       shape: ref('line'),
       themes,
       sizes,

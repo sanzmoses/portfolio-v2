@@ -1,3 +1,5 @@
+@import './quasar-variables.sass';
+
 /* width */
 ::-webkit-scrollbar {
   width: 7px;
@@ -18,4 +20,8 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #404040; 
+}
+
+code {
+  font-family: 'Courier Prime', monospace !important;
 }

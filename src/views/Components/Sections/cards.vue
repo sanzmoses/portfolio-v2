@@ -5,7 +5,7 @@
 
     <div class="row q-gutter-md">
 
-      <div class="col-4">
+      <div class="col-6">
         <q-card :dark="false" class="my-card" flat bordered>
           <q-img
             src="https://cdn.quasar.dev/img/parallax2.jpg"
@@ -45,19 +45,23 @@
         </q-card>
       </div>
 
-      <div class="col-4">
-        <q-card dark bordered class="bg-grey-9 my-card">
+      <div class="col-5">
+        <q-card class="my-card bg-secondary q-pa-lg">
           <q-card-section>
             <div class="text-h6">Our Changing Planet</div>
             <div class="text-subtitle2">by John Doe</div>
           </q-card-section>
 
-          <q-separator dark inset />
+          <q-separator inset />
 
           <q-card-section>
             {{ lorem }}
           </q-card-section>
         </q-card>
+      </div>
+
+      <div class="col-12">
+        <BrowserCard />
       </div>
 
     </div>
@@ -67,8 +71,12 @@
 
 <script>
 import { ref } from 'vue'
+import BrowserCard from "../Single/BrowserCard.vue";
 
 export default {
+  components: {
+    BrowserCard
+  },
   setup () {
     return {
       expanded: ref(false),
@@ -78,8 +86,10 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
-.my-card
-  width: 100%
-  max-width: 350px
+<style lang="scss" scoped>
+.my-card {
+  width: 100%;
+  max-width: 350px;
+}
+  
 </style>

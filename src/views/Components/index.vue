@@ -2,8 +2,12 @@
   <div class="q-pa-xl">
 
     <div class="row">
-      <div class="col-8">
+      <div class="col-10 offset-1">
         <h3>Quasar Components</h3>
+
+        <q-separator />
+
+        <Text />
 
         <q-separator />
 
@@ -25,9 +29,8 @@
         
         <Forms />
 
-      </div>
-      <div class="col-4 q-pa-md">
-        <p class="text-weight-bold">Contents</p>
+        <q-separator />
+
       </div>
     </div>
 
@@ -40,6 +43,7 @@ import Cards from "./Sections/cards.vue"
 import Banner from "./Sections/banner.vue"
 import Dialogs from "./Sections/dialogs.vue"
 import Forms from "./Sections/forms.vue"
+import Text from "./Sections/text.vue"
 
 export default {
   name: 'About',
@@ -48,7 +52,8 @@ export default {
     Cards,
     Banner,
     Dialogs,
-    Forms
+    Forms,
+    Text
   },
   data: () => ({
     toggle: false,
