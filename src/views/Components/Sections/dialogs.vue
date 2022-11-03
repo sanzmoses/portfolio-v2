@@ -1,9 +1,12 @@
 <template>
   <div class="q-pa-md q-py-xl">
 
-    <h5 class="q-mt-none text-weight-thin">Dialogs</h5>
+    <q-chip square size="lg" class="text-weight-bold">
+      <q-avatar icon="star" color="accent" text-color="black" />
+      Dialogs
+    </q-chip>
 
-    <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+    <p class="q-my-xl"></p>
 
     <q-btn outline class="q-pa-5" label="Card dialog" color="primary" @click="card = true" />
     

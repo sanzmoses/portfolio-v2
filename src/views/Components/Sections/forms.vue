@@ -1,7 +1,12 @@
 <template>
   <div class="q-pa-md q-py-xl">
 
-    <h5 class="q-mt-none text-weight-thin">Forms</h5>
+    <q-chip square size="lg" class="text-weight-bold">
+      <q-avatar icon="star" color="accent" text-color="black" />
+      Forms
+    </q-chip>
+
+    <p class="q-my-xl"></p>
 
     <div class="q-gutter-sm">
       <template v-for="(theme, index) in themes" :key="theme">

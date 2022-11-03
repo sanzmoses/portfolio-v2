@@ -1,8 +1,11 @@
 <template>
-    <div>
-        <p>{{ item.id }} - {{ item.name }}</p>
-        <q-btn  @click="deleteItem" color="deep-orange" glossy label="Delete" />
-    </div>
+  <div>
+    <highlightjs
+      language="json"
+      :code="formatted"
+    />
+      <!-- <q-btn  @click="deleteItem" color="deep-orange" glossy label="Delete" /> -->
+  </div>
 </template>
 
 <script>
@@ -13,6 +16,11 @@ export default {
             type: Object,
             required: true,
         },
+    },
+    computed: {
+      formatted() {
+        return JSON.stringify(this.item, undefined, 2)
+      }
     },
     methods: {
         deleteItem() {

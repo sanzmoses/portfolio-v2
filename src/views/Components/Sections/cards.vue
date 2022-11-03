@@ -1,7 +1,12 @@
 <template lang="">
   <div class="q-pa-md q-py-xl">
 
-    <h5 class="q-mt-none text-weight-thin">Cards</h5>
+    <q-chip square size="lg" class="text-weight-bold">
+      <q-avatar icon="star" color="accent" text-color="black" />
+      Cards
+    </q-chip>
+
+    <p class="q-my-xl"></p>
 
     <div class="row q-gutter-md">
 

@@ -10,11 +10,9 @@ import { Dark } from 'quasar'
 // import VueHighlightJS from 'vue-highlightjs'
 // import VueHighlightJS from 'vue3-highlightjs'
 // import 'highlight.js/styles/solarized-light.css'
-import 'highlight.js/styles/stackoverflow-light.css'
-import hljs from 'highlight.js/lib/core';
-import javascript from 'highlight.js/lib/languages/javascript';
+import 'highlight.js/styles/tokyo-night-dark.css';
+import hljs from 'highlight.js/lib/common';
 import hljsVuePlugin from "@highlightjs/vue-plugin";
-hljs.registerLanguage('javascript', javascript);
 
 // import 'animate.css/animate.min.css'
 import 'animate.css/animate.compat.css';

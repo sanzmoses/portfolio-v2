@@ -2,26 +2,48 @@
 
 /* width */
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 5px;
+  height: 5px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #404040; 
+  background: $dark; 
   border-radius: 10px;
 }
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #64ffda; 
+  background: $accent; 
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #404040; 
+  background: $primary; 
 }
 
 code {
   font-family: 'Courier Prime', monospace !important;
+  // font-family: $typography-font-family;
+  white-space: pre-wrap;
+  word-break: break-word;
+
+  .hljs {
+    &-attr {
+      color: $primary;
+    }
+
+    &-string {
+      color: $positive;
+    }
+
+    &-number {
+      color: $negative;
+    }
+
+    &-punctuation {
+      color: $warning;
+    }
+  }
 }

@@ -1,53 +1,69 @@
 <template>
   <div class="q-pa-md q-py-xl">
 
-      <h5 class="q-mt-none text-weight-thin">Buttons</h5>
+    <q-chip square size="lg" class="text-weight-bold">
+      <q-avatar icon="star" color="accent" text-color="black" />
+      Buttons
+    </q-chip>
 
-      <template v-for="(theme, index) in themes" :key="theme">
-        <q-btn 
-          outline
-          @click="loading = true" 
-          :loading="loading" 
-          :color="theme" 
-          :label="theme" 
-          :icon="icons[index]"  
-          class="q-ma-sm q-px-lg q-py-sm text-capitalize"
-        />
+    <p class="q-my-xl"></p>
+    
+    <template v-for="(theme, index) in themes" :key="theme">
+      <q-btn 
+        outline
+        @click="loading = true" 
+        :loading="loading" 
+        :color="theme" 
+        :label="theme" 
+        :icon="icons[index]"  
+        class="q-ma-sm q-px-lg q-py-sm text-capitalize"
+      />
 
-        <q-btn 
-          @click="loading = true" 
-          :loading="loading" 
-          :color="theme" 
-          :label="theme" 
-          text-color="black"
-          class="q-ma-sm q-px-lg q-py-sm text-capitalize"
-        />
-      </template>
+      <q-btn 
+        @click="loading = true" 
+        :loading="loading" 
+        :color="theme" 
+        :label="theme" 
+        text-color="black"
+        class="q-ma-sm q-px-lg q-py-sm text-capitalize"
+      />
+    </template>
 
-      <br />
+    <br />
 
-      <template v-for="(theme, index) in themes" :key="theme">
-        <q-btn 
-          round 
-          :color="theme"
-          text-color="white"
-          :icon="icons[index]" 
-          class="q-ma-sm"
-        />
-      </template>
+    <template v-for="(theme, index) in themes" :key="theme">
+      <q-btn 
+        round 
+        :color="theme"
+        text-color="white"
+        :icon="icons[index]" 
+        class="q-ma-sm"
+      />
+    </template>
 
-      <h5 class="text-weight-thin">Chips</h5>
+    <p class="q-my-xl"></p>
 
-      <template v-for="(theme, index) in themes" :key="theme">
-        <q-chip 
-          outline 
-          :color="theme"
-          text-color="white"
-          :icon="icons[index]"
-        >
-          {{ theme }}
-        </q-chip>
-      </template>
+    <q-separator />
+
+    <p class="q-my-xl"></p>
+
+    <q-chip square size="lg" class="text-weight-bold">
+      <q-avatar icon="star" color="accent" text-color="black" />
+      Chips
+    </q-chip>
+
+    <p class="q-my-xl"></p>
+
+    <template v-for="(theme, index) in themes" :key="theme">
+      <q-chip 
+        outline 
+        :color="theme"
+        text-color="white"
+        :icon="icons[index]"
+      >
+        {{ theme }}
+      </q-chip>
+    </template>
   </div>
 </template>
 

@@ -1,9 +1,10 @@
 <template>
-  <div class="q-pa-xl">
+  <div>
 
     <div class="row">
-      <div class="col-10 offset-1">
-        <h3>Quasar Components</h3>
+      <div class="col-12 col-sm-10 offset-sm-1">
+        
+        <h2 class="text-primary">Style Guide</h2>
 
         <q-separator />
 

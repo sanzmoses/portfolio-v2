@@ -19,7 +19,6 @@ export default {
     setup() {
         const projectStore = useProjectStore()
 
-        const projects = ref([])
         const error = ref(null)
 
         const load = async () => {
@@ -29,7 +28,8 @@ export default {
                     throw Error("no data available")
                 }
 
-                projects.value = await data.json()
+                const projects = await data.json()
+                projectStore.SET_PROJECTS(projects)
 
             } catch (err) {
                 error.value = err.message
@@ -40,7 +40,6 @@ export default {
 
         return { 
             projectStore,
-            projects, 
             error, 
             load
         }

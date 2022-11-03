@@ -15,7 +15,18 @@ export default defineConfig({
 		}),
     VitePluginFonts({
       google: {
-        families: ['Courier Prime', 'JetBrains Mono'],
+        families: [
+          {
+            name: 'Courier Prime',
+            styles: 'wght@400;700',
+            defer: true,
+          },
+          {
+            name: 'JetBrains Mono',
+            styles: 'wght@100;400;800',
+            defer: true,
+          },
+        ],
       },
     }),
 	],
