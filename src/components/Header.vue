@@ -9,14 +9,6 @@
         flat 
       />
     </template>
-
-    <q-btn 
-      label="open"  
-      @click="drawer = true" 
-      color="primary"
-      class="text-capitalize"
-      flat 
-    />
   </div>
 </template>
 

@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div ref="scrollAreaRef">
     <q-scroll-observer @scroll="onScroll" />
+
     <div class="row">
       <div class="col-12 col-sm-10 offset-sm-1">
         
@@ -8,18 +9,27 @@
           <h2 class="text-primary">Style Guide</h2>
 
           <div class="row flex-center">
-            <SeamlessNav :class="[{'fixed': is_fixed}]" />
+            <SeamlessNav 
+              style="z-index: 99"
+              class="fixed" 
+              :is_fixed="is_fixed"
+            />
           </div>
         </div>
 
         <q-separator />
-
+        
         <template v-for="link in compagestore.links" :key="'links-'+link">
-          <component :id="link" :is="link"></component>
-
-          <q-separator />
+          <div 
+            :id="link" 
+            v-intersection="intersect" 
+            style="min-height: 100vh;" 
+            class="flex flex-center"
+          >
+            <component :is="link"></component>
+          </div>
         </template>
-
+        
       </div>
     </div>
 
@@ -32,7 +42,7 @@ import SeamlessNav from "./Single/SeamlessNav.vue"
 import buttons from "./Sections/buttons.vue"
 import chips from "./Sections/chips.vue"
 import cards from "./Sections/cards.vue"
-import banner from "./Sections/banner.vue"
+import banners from "./Sections/banners.vue"
 import dialogs from "./Sections/dialogs.vue"
 import forms from "./Sections/forms.vue"
 import typography from "./Sections/typography.vue"
@@ -40,14 +50,36 @@ import { useComponentsPageStore } from '/src/stores/ComponentsPageStore'
 import { ref } from 'vue'
 
 export default {
-  name: 'About',
+  name: 'Components',
+  components: {
+    SeamlessNav,
+    buttons,
+    cards,
+    banners,
+    dialogs,
+    forms,
+    typography,
+    chips
+  },
   setup () {
+    const thresholds = []
+    for (let i = 0; i <= 1.0; i += 0.01) {
+      thresholds.push(i)
+    }
+
+    const position = ref(300)
+    const scrollAreaRef = ref(null)
+
     const compagestore = useComponentsPageStore()
+
     const setActive = compagestore.SET_ACTIVE
+    const setScrollTo = compagestore.SET_SCROLL_TO
+    const setScrollTop = compagestore.SET_SCROLL_TOP
+
     const is_fixed = ref(false)
 
-    function onScroll (evt) {
-      console.log("position", evt.position)
+    const onScroll = (evt) => {
+      setScrollTop(Math.floor(evt.position.top))
       if(evt.position.top > 50) {
         is_fixed.value = true;
       } else {
@@ -56,21 +88,23 @@ export default {
     }
 
     return { 
-      onScroll: debounce(onScroll, 200),
+      onScroll: debounce(onScroll, 100),
       compagestore,
       setActive,
-      is_fixed
+      setScrollTo,
+      setScrollTop,
+      is_fixed,
+      position,
+      scrollAreaRef,
+      intersect: {
+        handler (entry) {
+          if(entry.isIntersecting) { setActive(entry.target.id) }
+        },
+        cfg: {
+          threshold: thresholds
+        }
+      },
     }
-  },
-  components: {
-    SeamlessNav,
-    buttons,
-    cards,
-    banner,
-    dialogs,
-    forms,
-    typography,
-    chips
   },
   data: () => ({
     toggle: false,
@@ -82,8 +116,19 @@ export default {
           this.toggle = false
         }, 3000)
       }
+    },
+    'compagestore.scroll_to': function (value) {
+      if(value) {
+        const element = document.getElementById(this.compagestore.active)
+
+        element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+
+        setTimeout(() => {
+          this.setScrollTo(false)
+        }, 500)
+      }
     }
-  }
+  },
 }
 </script>
 

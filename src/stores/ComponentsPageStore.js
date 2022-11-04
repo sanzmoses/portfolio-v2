@@ -2,16 +2,18 @@ import { defineStore } from 'pinia'
 
 export const useComponentsPageStore = defineStore('ComponentsPageStore', {
   state: () => ({
-      links: [
-        "typography",
-        "buttons",
-        "chips",
-        "cards",
-        "banners",
-        "dialogs",
-        "forms",
-      ],
-      active: ""
+    links: [
+      "typography",
+      "buttons",
+      "chips",
+      "cards",
+      "banners",
+      "dialogs",
+      "forms",
+    ],
+    active: "",
+    scroll_to: false,
+    scroll_top: 0,
   }),
   actions: {
     // since we rely on `this`, we cannot use an arrow function
@@ -20,6 +22,12 @@ export const useComponentsPageStore = defineStore('ComponentsPageStore', {
     },
     SET_ACTIVE(link) {
       this.active = link
+    },
+    SET_SCROLL_TO(value) {
+      this.scroll_to = value
+    },
+    SET_SCROLL_TOP(value) {
+      this.scroll_top = value
     }
   },
 })
