@@ -27,13 +27,15 @@
           <q-btn flat round icon="close" v-close-popup />
         </q-card-section>
 
-        <q-card-section class="q-px-xl q-pt-none q-pb-lg">
+        <q-card-section class="q-px-lg q-pt-none q-pb-lg">
           <template v-for="link in compagestore.links" :key="'links-'+link">
             <q-btn 
-              flat 
-              class="text-capitalize" 
+              :outline="compagestore.active == link"
+              :flat="compagestore.active != link"
+              class="text-capitalize q-ma-xs" 
               color="warning" 
               :label="link"
+              @click="setActive(link)"
             />
           </template>
           
@@ -51,10 +53,12 @@ export default {
   setup () {
 
     const compagestore = useComponentsPageStore()
+    const setActive = compagestore.SET_ACTIVE
 
     return {
       seamless: ref(false),
-      compagestore
+      compagestore,
+      setActive
     }
   }
 }
