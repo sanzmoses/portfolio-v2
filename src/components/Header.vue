@@ -9,6 +9,14 @@
         flat 
       />
     </template>
+
+    <q-btn 
+      label="open"  
+      @click="drawer = true" 
+      color="primary"
+      class="text-capitalize"
+      flat 
+    />
   </div>
 </template>
 
@@ -32,7 +40,8 @@ export default {
 
     return { 
       goTo,
-      routes
+      routes,
+      drawer: ref(false)
     }
   },
 }

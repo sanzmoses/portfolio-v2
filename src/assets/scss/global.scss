@@ -47,3 +47,11 @@ code {
     }
   }
 }
+
+.q-field--dark {
+  &.q-field--focused {
+    .q-field__label {
+      color: $dark;
+    }
+  }
+}

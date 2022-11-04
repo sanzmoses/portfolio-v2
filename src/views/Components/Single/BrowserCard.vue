@@ -58,7 +58,7 @@ import { getData } from '@/composables/projects.js'
 export default {
   name: "BrowserCard",
   setup () {
-    const drawer = ref(false)
+    const drawer = ref(true)
     const { pretty_json, project } = getData()
     
     return {
@@ -84,6 +84,7 @@ export default {
     max-height: 600px;
     overflow: auto;
     padding: 0px;
+    width: 100%;
   }
 }
 </style>
