@@ -1,15 +1,14 @@
 <template>
     <div>
-        <template v-for="project in projectStore.projects" :key="project.name">
+        <template v-for="project in projects" :key="project.name">
             <ProjectItem :item="project" />
         </template>
     </div>
 </template>
 
 <script>
-import { ref } from 'vue'
 import ProjectItem from "./ProjectItem.vue"
-import { useProjectStore } from '/src/stores/ProjectStore'
+import { getData } from '@/composables/projects.js'
 
 export default {
     name: "Projects",
@@ -17,32 +16,11 @@ export default {
         ProjectItem
     },
     setup() {
-        const projectStore = useProjectStore()
+      const { projects } = getData()
 
-        const error = ref(null)
-
-        const load = async () => {
-            try { 
-                let data = await fetch('http://localhost:3000/projects')
-                if(!data.ok) {
-                    throw Error("no data available")
-                }
-
-                const projects = await data.json()
-                projectStore.SET_PROJECTS(projects)
-
-            } catch (err) {
-                error.value = err.message
-            }
-        }
-
-        load()
-
-        return { 
-            projectStore,
-            error, 
-            load
-        }
+      return { 
+        projects
+      }
     },
 }
 </script>
