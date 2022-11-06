@@ -26,7 +26,7 @@
 
     <template v-if="pretty_json">
       <highlightjs
-        language="json"
+        language="javascript"
         :code="pretty_json"
       />
     </template>

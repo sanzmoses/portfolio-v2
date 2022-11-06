@@ -51,7 +51,7 @@
       </div>
 
       <div class="col-5">
-        <q-card class="my-card bg-secondary q-pa-lg">
+        <q-card class="my-card bg-accent q-pa-lg">
           <q-card-section>
             <div class="text-h6">Our Changing Planet</div>
             <div class="text-subtitle2">by John Doe</div>
@@ -65,7 +65,7 @@
         </q-card>
       </div>
 
-      <div class="col-12">
+      <div class="col-12 mt-15">
         <BrowserCard />
       </div>
 

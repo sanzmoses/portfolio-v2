@@ -8,114 +8,120 @@
 
     <p class="q-my-xl"></p>
 
-    <div class="q-gutter-sm">
-      <template v-for="(theme, index) in themes" :key="theme">
-        <q-radio 
-          v-model="shape" 
-          :color="theme" 
-          :size="sizes[index]"         
-          :val="sizes[index]" 
-          :label="sizes[index]+'-'+theme" 
-        />
-      </template>
-    </div>
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="q-gutter-sm">
+          <template v-for="(theme, index) in themes" :key="theme">
+            <q-radio 
+              v-model="shape" 
+              :color="theme" 
+              :size="sizes[index]"         
+              :val="sizes[index]" 
+              :label="sizes[index]+'-'+theme" 
+            />
+          </template>
+        </div>
 
-    <div class="q-px-sm">
-      Your selection is: <strong>{{ shape }}</strong>
-    </div>
+        <div class="q-px-sm">
+          Your selection is: <strong>{{ shape }}</strong>
+        </div>
 
-    <div class="q-gutter-sm">
-      <template v-for="(theme, index) in themes" :key="theme">
-        <q-checkbox
-          v-model="shape" 
-          :color="theme" 
-          :size="sizes[index]"         
-          :val="sizes[index]" 
-          :label="sizes[index]+'-'+theme" 
-        />
-      </template>
-    </div>
-
-    <div class="q-gutter-y-md column" style="max-width: 300px">
-      <div>
-        <q-toggle v-model="readonly" label="Readonly" dark />
-        <q-toggle v-model="disable" label="Disable" dark />
+        <div class="q-gutter-sm">
+          <template v-for="(theme, index) in themes" :key="theme">
+            <q-checkbox
+              v-model="shape" 
+              :color="theme" 
+              :size="sizes[index]"         
+              :val="sizes[index]" 
+              :label="sizes[index]+'-'+theme" 
+            />
+          </template>
+        </div>
       </div>
 
-      <q-field dark :readonly="readonly" :disable="disable">
-        <template v-slot:prepend>
-          <q-icon name="event" />
-        </template>
+      <div class="col-12 col-md-6 pl-15">
+        <div class="q-gutter-y-md column" style="max-width: 300px">
+          <div>
+            <q-toggle v-model="readonly" label="Readonly" dark />
+            <q-toggle v-model="disable" label="Disable" dark />
+          </div>
 
-        <template v-slot:control>
-          <div class="self-center full-width no-outline" :tabindex="tabindex">{{text}}</div>
-        </template>
-      </q-field>
+          <q-field dark :readonly="readonly" :disable="disable">
+            <template v-slot:prepend>
+              <q-icon name="event" />
+            </template>
 
-      <q-field dark filled :readonly="readonly" :disable="disable">
-        <template v-slot:prepend>
-          <q-icon name="event" />
-        </template>
+            <template v-slot:control>
+              <div class="self-center full-width no-outline" :tabindex="tabindex">{{text}}</div>
+            </template>
+          </q-field>
 
-        <template v-slot:control>
-          <div class="self-center full-width no-outline" :tabindex="tabindex">{{text}}</div>
-        </template>
-      </q-field>
+          <q-field dark filled :readonly="readonly" :disable="disable">
+            <template v-slot:prepend>
+              <q-icon name="event" />
+            </template>
 
-      <q-field outlined :readonly="readonly" :disable="disable">
-        <template v-slot:control>
-          <div class="self-center full-width no-outline" :tabindex="tabindex">{{text}}</div>
-        </template>
+            <template v-slot:control>
+              <div class="self-center full-width no-outline" :tabindex="tabindex">{{text}}</div>
+            </template>
+          </q-field>
 
-        <template v-slot:append>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-dark.svg">
-          </q-avatar>
-        </template>
-      </q-field>
+          <q-field outlined :readonly="readonly" :disable="disable">
+            <template v-slot:control>
+              <div class="self-center full-width no-outline" :tabindex="tabindex">{{text}}</div>
+            </template>
 
-      <q-input  
-        standout 
-        bottom-slots 
-        stack-label 
-        counter 
-        label="Labels" 
-        v-model="text"
-        :disable="disable"
-      >
-        <template v-slot:prepend>
-          <q-icon name="place" />
-        </template>
+            <template v-slot:append>
+              <q-avatar>
+                <img src="https://cdn.quasar.dev/logo-v2/svg/logo-dark.svg">
+              </q-avatar>
+            </template>
+          </q-field>
 
-        <template v-slot:control>
-          <div class="self-center full-width no-outline" :tabindex="tabindex">
-            {{text}}</div>
-        </template>
+          <q-input  
+            standout 
+            bottom-slots 
+            stack-label 
+            counter 
+            label="Labels" 
+            v-model="text"
+            :disable="disable"
+          >
+            <template v-slot:prepend>
+              <q-icon name="place" />
+            </template>
 
-        <template v-slot:append>
-          <q-icon name="close" @click="text = ''" class="cursor-pointer" />
-        </template>
+            <template v-slot:control>
+              <div class="self-center full-width no-outline" :tabindex="tabindex">
+                {{text}}</div>
+            </template>
 
-        <template v-slot:hint>
-          Field hint
-        </template>
-      </q-input>
+            <template v-slot:append>
+              <q-icon name="close" @click="text = ''" class="cursor-pointer" />
+            </template>
 
-      <q-field dark borderless :readonly="readonly" :disable="disable">
-        <template v-slot:control>
-          <div class="self-center full-width no-outline" :tabindex="tabindex">{{text}}</div>
-        </template>
+            <template v-slot:hint>
+              Field hint
+            </template>
+          </q-input>
 
-        <template v-slot:append>
-          <q-icon name="search" />
-        </template>
-      </q-field>
+          <q-field dark borderless :readonly="readonly" :disable="disable">
+            <template v-slot:control>
+              <div class="self-center full-width no-outline" :tabindex="tabindex">{{text}}</div>
+            </template>
 
-      <q-input 
-        standout 
-        v-model="text" 
-        label="Standout" 
-      />
+            <template v-slot:append>
+              <q-icon name="search" />
+            </template>
+          </q-field>
+
+          <q-input 
+            standout 
+            v-model="text" 
+            label="Standout" 
+          />
+        </div>
+      </div>
     </div>
     
   </div>

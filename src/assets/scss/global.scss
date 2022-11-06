@@ -1,5 +1,6 @@
 @import './quasar-variables.sass';
 
+/** Global Definite **/
 /* width */
 ::-webkit-scrollbar {
   width: 5px;
@@ -22,7 +23,9 @@
 ::-webkit-scrollbar-thumb:hover {
   background: $primary; 
 }
+/** End of Global Definite **/
 
+/** Overide **/
 code {
   font-family: 'Courier Prime', monospace !important;
   // font-family: $typography-font-family;
@@ -55,7 +58,37 @@ code {
     }
   }
 }
+/** End of Overide **/
 
-a {
-  
+/** Utility **/
+@mixin margin-classes {
+  @for $i from 1 through $utility-sizes {
+     $margin: $i * 0.25em;
+    /* margin #{$margin} */
+    .ma-#{$i}  {margin: $margin;}
+    .ml-#{$i} {margin-left: $margin;}
+    .mr-#{$i} {margin-right: $margin;}
+    .mt-#{$i} {margin-top: $margin;}
+    .mb-#{$i} {margin-bottom: $margin;}
+    .mx-#{$i} {margin-left: $margin; margin-right: $margin;}
+    .my-#{$i} {margin-top: $margin; margin-bottom: $margin;}
+  }
 }
+@include margin-classes;
+
+
+@mixin padding-classes {
+  @for $i from 1 through $utility-sizes {
+    $padding: $i * 0.5em;
+    /* padding #{$padding} */
+    .pa-#{$i} {padding: $padding;}
+    .pl-#{$i} {padding-left: $padding;}
+    .pr-#{$i} {padding-right: $padding;}
+    .pt-#{$i} {padding-top: $padding;}
+    .pb-#{$i} {padding-bottom: $padding;}
+    .px-#{$i} {padding-left: $padding; padding-right: $padding;}
+    .py-#{$i} {padding-top: $padding; padding-bottom: $padding;}
+  }
+}
+@include padding-classes;
+/** End of Utility **/
