@@ -9,14 +9,13 @@ npm run build
 # navigate into the build output directory
 cd dist
 
+cp ../.github ./ -r
+
 # place .nojekyll to bypass Jekyll processing
 echo > .nojekyll
 
 # if you are deploying to a custom domain
 # echo 'www.example.com' > CNAME
-
-git init
-git checkout -B prod
 git add -A
 git diff-index --quiet HEAD || git commit -m 'deploy'
 
@@ -24,6 +23,6 @@ git diff-index --quiet HEAD || git commit -m 'deploy'
 # git push -f git@github.com:sanzmoses/<USERNAME>.github.io.git main
 
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
-git push -f https://github.com/sanzmoses/portfolio-v2.git main:prod
+git push origin prod
 
 cd -
