@@ -1,0 +1,22 @@
+name: Build and deploy
+on:
+  push:
+    branches: [gh_pages]
+  workflow_dispatch
+
+jobs:
+  deploy:
+    name: Deploy,
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@gh_pages
+        with:
+          name: dist
+          path: dist
+        name: Sync files to hosting
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: ftp://sanzmoses.ml
+          username: u562569675.sanzmoses.ga
+          password: ${{ secrets.ftp_password }}
