@@ -1,5 +1,7 @@
 <template>
-  <div>
+  <div class="col-12 col-md-6 pa-2">
+    <h6 class="ma-0 text-primary">Project Name</h6>
+    <h4 class="mt-0">{{ item.name }}</h4>
     <highlightjs
       language="json"
       :code="formatted"
@@ -13,8 +15,8 @@ export default {
     name: "Project Item",
     props: {
         item: {
-            type: Object,
-            required: true,
+          type: Object,
+          required: true,
         },
     },
     computed: {
@@ -24,12 +26,13 @@ export default {
     },
     methods: {
         deleteItem() {
-            fetch(`http://localhost:3000/projects/${this.item.id}`, {
-                method: 'DELETE',
-            })
-            .then(response => {
-                console.log("response", response.json())
-            })
+          console.log("deleting item", this.item.id)
+            // fetch(`http://localhost:3000/projects/${this.item.id}`, {
+            //     method: 'DELETE',
+            // })
+            // .then(response => {
+            //     console.log("response", response.json())
+            // })
         }
     }
 }

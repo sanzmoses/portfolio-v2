@@ -61,8 +61,9 @@ code {
 /** End of Overide **/
 
 /** Utility **/
+
 @mixin margin-classes {
-  @for $i from 1 through $utility-sizes {
+  @for $i from 0 through $utility-sizes {
      $margin: $i * 0.25em;
     /* margin #{$margin} */
     .ma-#{$i}  {margin: $margin;}
@@ -78,7 +79,7 @@ code {
 
 
 @mixin padding-classes {
-  @for $i from 1 through $utility-sizes {
+  @for $i from 0 through $utility-sizes {
     $padding: $i * 0.5em;
     /* padding #{$padding} */
     .pa-#{$i} {padding: $padding;}
