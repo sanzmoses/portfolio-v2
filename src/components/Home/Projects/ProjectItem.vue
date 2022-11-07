@@ -2,17 +2,25 @@
   <div class="col-12 col-md-6 pa-2">
     <h6 class="ma-0 text-primary">Project:</h6>
     <h4 class="mt-0">{{ item.name }}</h4>
-    <highlightjs
+
+    <BrowserCard :project="item" />
+
+    <!-- <highlightjs
       language="json"
       :code="formatted"
-    />
+    /> -->
       <!-- <q-btn  @click="deleteItem" color="deep-orange" glossy label="Delete" /> -->
   </div>
 </template>
 
 <script>
+import BrowserCard from "@/components/BrowserCard.vue";
+
 export default {
     name: "Project Item",
+    components: {
+      BrowserCard
+    },
     props: {
         item: {
           type: Object,

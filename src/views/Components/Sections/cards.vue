@@ -66,7 +66,9 @@
       </div>
 
       <div class="col-12 mt-15">
-        <BrowserCard />
+        <template v-if="project">
+          <BrowserCard :project="project" />
+        </template>
       </div>
 
     </div>
@@ -77,13 +79,17 @@
 <script>
 import { ref } from 'vue'
 import BrowserCard from "@/components/BrowserCard.vue";
+import { getData } from '@/composables/projects.js'
 
 export default {
   components: {
     BrowserCard
   },
   setup () {
+    const { project } = getData()
+
     return {
+      project,
       expanded: ref(false),
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     }

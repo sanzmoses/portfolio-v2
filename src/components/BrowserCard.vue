@@ -32,14 +32,12 @@
     
     <q-card class="no-border-radius" flat :bordered="false">
       <q-card-section horizontal>
-        <template v-if="!loading">
-          <q-img
-            :img-class="`image-ss ${drawer?'on-filter':''}`"
-            :class="[drawer?'col-6 col-md-8':'col-12']"
-            :src="getImageUrl(project.img)"
-            :ratio="16/9"
-          />
-        </template>
+        <q-img
+          :img-class="`image-ss ${drawer?'on-filter':''}`"
+          :class="[drawer?'col-6 col-md-8':'col-12']"
+          :src="getImageUrl(project.img)"
+          :ratio="16/9"
+        />
         <q-card-section v-show="drawer" class="console-section">
           <template v-if="pretty_json">
             <highlightjs
@@ -55,30 +53,26 @@
 </template>
 
 <script>
-import { ref, watchEffect } from 'vue'
-import { getData } from '@/composables/projects.js'
+import { ref } from 'vue'
 
 export default {
   name: "BrowserCard",
-  setup () {
+  props: {
+    project: {
+      type: Object,
+      required: true
+    }
+  },
+  setup (props) {
     const drawer = ref(true)
-    const { pretty_json, project } = getData()
-
-    const loading = ref(true)
+    const project = props.project
+    const pretty_json = "export default "+JSON.stringify(project, undefined, 2)
 
     const getImageUrl = (name) => {
         return new URL(`../assets/screenshots/${name}`, import.meta.url).href
     }
 
-    watchEffect(() => {
-      if(project.value) {
-        console.log("project", project.value.img)
-        loading.value = false
-      }
-    })
-
     return {
-      loading,
       drawer,
       project,
       pretty_json,
@@ -88,16 +82,6 @@ export default {
       }
     }
   },
-  computed: {
-    static_image() {
-      if(this.project) {
-        console.log(this.project)
-        // return require(this.project.img)
-      }
-
-      return ""
-    }
-  }
 }
 </script>
 
