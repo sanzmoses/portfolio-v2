@@ -27,7 +27,16 @@
 
       <q-btn dense flat round icon="lens" size="7px" color="red" />
       <q-btn dense flat round icon="lens" size="7px" color="yellow" />
-      <q-btn @click="toggleDrawer" dense flat round icon="lens" size="7px" color="green" />
+      <q-btn 
+        dense 
+        flat 
+        round 
+        icon="lens" 
+        size="7px" 
+        color="green" 
+        :class="[{'flash-animation':!drawer_toggled}]" 
+        @click="toggleDrawer" 
+      />
     </q-bar>    
     
     <q-card class="no-border-radius" flat :bordered="false">
@@ -65,6 +74,7 @@ export default {
   },
   setup (props) {
     const drawer = ref(true)
+    const drawer_toggled = ref(false)
     const project = props.project
     const pretty_json = "export default "+JSON.stringify(project, undefined, 2)
 
@@ -77,8 +87,10 @@ export default {
       project,
       pretty_json,
       getImageUrl,
+      drawer_toggled,
       toggleDrawer () {
         drawer.value = !drawer.value
+        drawer_toggled.value = true;
       }
     }
   },
@@ -109,5 +121,17 @@ export default {
   }
 }
 
+.flash-animation {
+  animation: flashes 3s infinite ease-in-out;
+}
 
+@keyframes flashes {
+  0%, 20%, 40%, 100% {
+    opacity: 0;
+  }
+
+  10%, 30%, 50%, 90% {
+    opacity: 1;
+  }
+}
 </style>
