@@ -32,11 +32,14 @@
     
     <q-card class="no-border-radius" flat :bordered="false">
       <q-card-section horizontal>
-        <q-img
-          :class="[drawer?'col-6 col-md-8':'col-12']"
-          src="https://cdn.quasar.dev/img/parallax2.jpg"
-          :ratio="16/9"
-        />
+        <template v-if="!loading">
+          <q-img
+            :img-class="`image-ss ${drawer?'on-filter':''}`"
+            :class="[drawer?'col-6 col-md-8':'col-12']"
+            :src="getImageUrl(project.img)"
+            :ratio="16/9"
+          />
+        </template>
         <q-card-section v-show="drawer" class="console-section">
           <template v-if="pretty_json">
             <highlightjs
@@ -52,7 +55,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import { getData } from '@/composables/projects.js'
 
 export default {
@@ -60,14 +63,39 @@ export default {
   setup () {
     const drawer = ref(true)
     const { pretty_json, project } = getData()
-    
+
+    const loading = ref(true)
+
+    const getImageUrl = (name) => {
+        return new URL(`../assets/screenshots/${name}`, import.meta.url).href
+    }
+
+    watchEffect(() => {
+      if(project.value) {
+        console.log("project", project.value.img)
+        loading.value = false
+      }
+    })
+
     return {
+      loading,
       drawer,
       project,
       pretty_json,
+      getImageUrl,
       toggleDrawer () {
         drawer.value = !drawer.value
       }
+    }
+  },
+  computed: {
+    static_image() {
+      if(this.project) {
+        console.log(this.project)
+        // return require(this.project.img)
+      }
+
+      return ""
     }
   }
 }
@@ -86,5 +114,16 @@ export default {
     padding: 0px;
     width: 100%;
   }
+
+  .image-ss {
+    margin-top: -20px !important;
+    transition: all 0.4s ease-in-out;
+
+    &.on-filter {
+      filter: grayscale(100%);
+    }
+  }
 }
+
+
 </style>

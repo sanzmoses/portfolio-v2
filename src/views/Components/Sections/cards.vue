@@ -76,7 +76,7 @@
 
 <script>
 import { ref } from 'vue'
-import BrowserCard from "../Single/BrowserCard.vue";
+import BrowserCard from "@/components/BrowserCard.vue";
 
 export default {
   components: {

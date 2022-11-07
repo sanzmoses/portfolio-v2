@@ -38,7 +38,7 @@
 
 <script>
 import { debounce } from 'quasar'
-import SeamlessNav from "./Single/SeamlessNav.vue"
+import SeamlessNav from "@/components/SeamlessNav.vue"
 import buttons from "./Sections/buttons.vue"
 import chips from "./Sections/chips.vue"
 import cards from "./Sections/cards.vue"
