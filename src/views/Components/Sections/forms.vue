@@ -42,8 +42,8 @@
       <div class="col-12 col-md-6 pl-15">
         <div class="q-gutter-y-md column" style="max-width: 300px">
           <div>
-            <q-toggle v-model="readonly" label="Readonly" dark />
-            <q-toggle v-model="disable" label="Disable" dark />
+            <q-toggle v-model="readonly" label="Readonly" />
+            <q-toggle v-model="disable" label="Disable" />
           </div>
 
           <q-field dark :readonly="readonly" :disable="disable">
