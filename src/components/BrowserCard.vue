@@ -79,7 +79,7 @@ export default {
     const pretty_json = "export default "+JSON.stringify(project, undefined, 2)
 
     const getImageUrl = (name) => {
-        return new URL(`../assets/screenshot/${name}`, import.meta.url).href
+        return new URL(`../assets/screenshot/a_${name}`, import.meta.url).href
     }
 
     return {
