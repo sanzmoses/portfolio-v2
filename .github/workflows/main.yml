@@ -15,5 +15,5 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@4.3.2
       with:
         server: ftp.sanzmoses.ml
-        username: u562569675.sanzmoses.ga
+        username: u562569675.sanz.ml
         password: ${{ secrets.ftp_password }}
