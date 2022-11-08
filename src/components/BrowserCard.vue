@@ -43,17 +43,15 @@
       <q-card-section horizontal>
         <q-img
           :img-class="`image-ss ${drawer?'on-filter':''}`"
-          :class="[drawer?'col-6 col-md-8':'col-12']"
+          :class="[drawer?'col-6 col-md-7':'col-12']"
           :src="getImageUrl(project.img)"
           :ratio="16/9"
         />
         <q-card-section v-show="drawer" class="console-section">
-          <template v-if="pretty_json">
-            <highlightjs
-              class="text-caption text-weight-thin q-ma-none"
-              language="json"
-              :code="pretty_json"
-            />
+          <template v-if="project">
+<pre class="text-caption text-weight-thin">
+<code v-html="syntaxHighlight(project)"></code>
+</pre>
           </template>
         </q-card-section>
       </q-card-section>
@@ -63,6 +61,7 @@
 
 <script>
 import { ref } from 'vue'
+import { process } from '@/composables/jsonHighlighter.js'
 
 export default {
   name: "BrowserCard",
@@ -73,10 +72,10 @@ export default {
     }
   },
   setup (props) {
+    const { syntaxHighlight } = process(props.project)
     const drawer = ref(true)
     const drawer_toggled = ref(false)
     const project = props.project
-    const pretty_json = "export default "+JSON.stringify(project, undefined, 2)
 
     const getImageUrl = (name) => {
         return new URL(`../assets/screenshot/a_${name}`, import.meta.url).href
@@ -85,13 +84,13 @@ export default {
     return {
       drawer,
       project,
-      pretty_json,
       getImageUrl,
       drawer_toggled,
       toggleDrawer () {
         drawer.value = !drawer.value
         drawer_toggled.value = true;
-      }
+      },
+      syntaxHighlight
     }
   },
 }
@@ -107,8 +106,9 @@ export default {
   .console-section {
     max-height: 600px;
     overflow: auto;
-    padding: 0px;
+    padding: 0px 15px;
     width: 100%;
+    background: $grey-10
   }
 
   .image-ss {

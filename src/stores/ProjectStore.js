@@ -4,15 +4,15 @@ export const useProjectStore = defineStore('ProjectStore', {
     state: () => ({
         projects: [
           {
-            name: 'Link Value',
-            link: 'https://linkvalue.net/',
-            code: '#',
-            img: 'linkvalue.png',
-            responsibilities: ['Frontend'],
-            tools: ['CSS', 'Javascript', 'LESS', 'UIkit', 'Bootstrap', 'Laravel', 'VueJS'],
-            type: 'Freelance',
-            description: 'Front end development',
-            color: 'orange-card', base: 'md-accent'
+              name: 'Link Value',
+              link: 'https://linkvalue.net/',
+              code: '#',
+              img: 'linkvalue.png',
+              responsibilities: ['Frontend'],
+              tools: ['CSS', 'Javascript', 'LESS', 'UIkit', 'Bootstrap', 'Laravel', 'VueJS'],
+              type: 'Freelance',
+              description: 'Front end development',
+              color: 'orange-card', base: 'md-accent'
           },
           {
               name: 'GS Living',

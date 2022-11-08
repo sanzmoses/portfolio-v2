@@ -31,23 +31,22 @@ code {
   // font-family: $typography-font-family;
   white-space: pre-wrap;
   word-break: break-word;
+  color: orange;
 
-  .hljs {
-    &-attr {
-      color: $primary;
-    }
+  .key {
+    color: $primary;
+  }
 
-    &-string {
-      color: $positive;
-    }
+  .string {
+    color: $positive;
+  }
 
-    &-number {
-      color: $negative;
-    }
+  .number, .null {
+    color: $negative;
+  }
 
-    &-punctuation {
-      color: $warning;
-    }
+  .boolean {
+    color: $warning;
   }
 }
 
