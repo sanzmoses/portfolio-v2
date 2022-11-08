@@ -48,11 +48,14 @@
           :ratio="16/9"
         />
         <q-card-section v-show="drawer" class="console-section">
+
           <template v-if="project">
+
 <pre class="text-caption text-weight-thin">
 <code v-html="syntaxHighlight(project)"></code>
 </pre>
           </template>
+          
         </q-card-section>
       </q-card-section>
     </q-card>
