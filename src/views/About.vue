@@ -2,15 +2,22 @@
   <div class="q-pa-xl">
     <h3 class="q-mt-none">{{ '<About/>' }}</h3>
 
-    <p class="text-h5 text-primary">Skills</p>
-    <div class="q-pa-md text-white">
-      <q-icon color="white" name="fab fa-html5" />
-      <q-tree
-        :nodes="skills_on_tree"
-        node-key="label"
-        v-model:expanded="expanded"
-        dark
-      />
+    <div class="row">
+      <div class="col-6">
+        <p class="text-h5 text-primary">Skills</p>
+        <div class="q-pa-md text-white">
+          <q-icon color="white" name="fab fa-html5" />
+          <q-tree
+            :nodes="skills_on_tree"
+            node-key="label"
+            v-model:expanded="expanded"
+            dark
+          />
+        </div>
+      </div>
+      <div class="col-6">
+        <p class="text-h5 text-primary">Experience</p>
+      </div>
     </div>
     
   </div>
@@ -19,10 +26,10 @@
 <script>
 import { ref } from 'vue'
 import { useSkillsStore } from '@/stores/SkillsStore'
-  
+import _ from 'lodash'  
+
 export default {
   name: 'About',
-
   setup () {
     const skills_store = useSkillsStore()
     const expanded = ref([ 'Satisfied customers (with avatar)', 'Good food (with icon)' ])
