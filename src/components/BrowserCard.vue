@@ -81,16 +81,18 @@ export default {
         return new URL(`../assets/screenshot/a_${name}`, import.meta.url).href
     }
 
+    const toggleDrawer = () => {
+      drawer.value = !drawer.value
+      drawer_toggled.value = true;
+    }
+
     return {
       drawer,
       project,
-      getImageUrl,
       drawer_toggled,
-      toggleDrawer () {
-        drawer.value = !drawer.value
-        drawer_toggled.value = true;
-      },
-      syntaxHighlight
+      syntaxHighlight,
+      getImageUrl,
+      toggleDrawer,
     }
   },
 }
