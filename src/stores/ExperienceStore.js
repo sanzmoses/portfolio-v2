@@ -13,7 +13,7 @@ export const useExpStore = defineStore('ExpStore', {
             description: 'Self-employed',
           },
           datestamp: {
-            start: '2021/02/01',
+            start: '2021-02-01',
             end: 'present'
           },
           description: 'Develops web app as front-end developer for an engineering firm using vue and laravel'
@@ -28,8 +28,8 @@ export const useExpStore = defineStore('ExpStore', {
             description: 'Self-employed',
           },
           datestamp: {
-            start: '2020/02/01',
-            end: '2021/10/01'
+            start: '2020-02-01',
+            end: '2021-10-01'
           },
           description: 'Develops web app as front-end developer - with Vue and Nuxt as JS framework, UIKit as library and GIT as version control. Working on Social site for a crypto coin in thailand called LVC.'
         },
@@ -43,8 +43,8 @@ export const useExpStore = defineStore('ExpStore', {
             description: 'Full-time',
           },
           datestamp: {
-            start: '2019/08/01',
-            end: '2020/01/01'
+            start: '2019-08-01',
+            end: '2020-01-01'
           },
           datestamp: 'August 2019 - January 2020',
           description: 'Develops websites for clients and uses mostly plain CSS and Javascript, UIKIT as library, GIT as version control.'
@@ -59,8 +59,8 @@ export const useExpStore = defineStore('ExpStore', {
             description: 'Remote',
           },
           datestamp: {
-            start: '2019/04/01',
-            end: '2019/08/01'
+            start: '2019-04-01',
+            end: '2019-08-01'
           },
           description: 'Development of plugins in a web marketing app,  and automated testings using selenium and codeception.'
         },
@@ -74,8 +74,8 @@ export const useExpStore = defineStore('ExpStore', {
             description: 'Freelance',
           },
           datestamp: {
-            start: '2019/02/01',
-            end: '2019/04/01'
+            start: '2019-02-01',
+            end: '2019-04-01'
           },
           description: 'Development of web app using Laravel and VueJS, and Gitlab CI for automated deployment. Involved in the whole Software Development Life Cycle, design, implementation, production, update and maintenance.'
         },
@@ -89,8 +89,8 @@ export const useExpStore = defineStore('ExpStore', {
             description: 'Hackathon',
           },
           datestamp: {
-            start: '2018/08/25',
-            end: '2018/08/26'
+            start: '2018-08-25',
+            end: '2018-08-26'
           },
           description: 'Prototype for a block chain app called AXONN'
         },
@@ -104,8 +104,8 @@ export const useExpStore = defineStore('ExpStore', {
             description: 'Full-time', // Hackathon
           },
           datestamp: {
-            start: '2018/04/01',
-            end: '2019/02/01'
+            start: '2018-04-01',
+            end: '2019-02-01'
           },
           description: 'Developing and maintaining cms, microsites and web applications for marketing purpose using Wordpress, OctoberCMS and Laravel framework. Assigned in both back-end and front-end tasks as well as documentations. Working with tools like Git, Gitlab CI, APIs and SaaS integrations.'
         },
@@ -119,8 +119,8 @@ export const useExpStore = defineStore('ExpStore', {
             description: 'Hackathon',
           },
           datestamp: {
-            start: '2016/11/19',
-            end: '2016/11/20'
+            start: '2016-11-19',
+            end: '2016-11-20'
           },
           description: 'Trying to build a prototype of a smart kiosk machine, just for the sake of it, using Arduino and Java as backend for data storage'
         },
@@ -134,8 +134,8 @@ export const useExpStore = defineStore('ExpStore', {
             description: 'B.S. Information Technology', 
           },
           datestamp: {
-            start: '2014/11/01',
-            end: '2018/04/21'
+            start: '2014-11-01',
+            end: '2018-04-21'
           },
           description: ''
         },

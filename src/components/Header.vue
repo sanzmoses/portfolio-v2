@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center q-pt-sm">
+  <div class="fixed-header text-center q-pt-sm">
     <template v-for="route in routes" :key="route.name">
       <q-btn 
         :label="route.name" 
@@ -42,3 +42,11 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+.fixed-header {
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+}
+</style>
