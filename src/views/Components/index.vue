@@ -46,6 +46,7 @@ import banners from "./Sections/banners.vue"
 import dialogs from "./Sections/dialogs.vue"
 import forms from "./Sections/forms.vue"
 import typography from "./Sections/typography.vue"
+import datepicker from "./Sections/datepicker.vue"
 import { useComponentsPageStore } from '/src/stores/ComponentsPageStore'
 import { ref } from 'vue'
 import gsap from 'gsap'
@@ -60,7 +61,8 @@ export default {
     dialogs,
     forms,
     typography,
-    chips
+    chips,
+    datepicker,
   },
   setup () {
     const thresholds = []

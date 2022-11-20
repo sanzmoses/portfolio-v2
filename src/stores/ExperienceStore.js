@@ -46,7 +46,6 @@ export const useExpStore = defineStore('ExpStore', {
             start: '2019-08-01',
             end: '2020-01-01'
           },
-          datestamp: 'August 2019 - January 2020',
           description: 'Develops websites for clients and uses mostly plain CSS and Javascript, UIKIT as library, GIT as version control.'
         },
         {

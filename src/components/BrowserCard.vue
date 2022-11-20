@@ -27,16 +27,23 @@
 
       <q-btn dense flat round icon="lens" size="7px" color="red" />
       <q-btn dense flat round icon="lens" size="7px" color="yellow" />
-      <q-btn 
-        dense 
-        flat 
-        round 
-        icon="lens" 
-        size="7px" 
-        color="green" 
-        :class="[{'flash-animation':!drawer_toggled}]" 
-        @click="toggleDrawer" 
-      />
+      <div class="overlap">
+        <q-spinner-puff
+          class="spinner-puff"
+          color="secondary"
+          size="2em"
+        />
+        <q-btn 
+          dense 
+          flat 
+          round 
+          icon="lens" 
+          size="7px" 
+          color="green" 
+          @click="toggleDrawer" 
+        />
+      </div>
+      
     </q-bar>    
     
     <q-card class="no-border-radius" flat :bordered="false">
@@ -123,6 +130,18 @@ export default {
     &.on-filter {
       filter: grayscale(100%);
     }
+  }
+}
+
+.overlap {
+  position: relative;
+  margin-left: 3px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .spinner-puff {
+    position: absolute;
   }
 }
 

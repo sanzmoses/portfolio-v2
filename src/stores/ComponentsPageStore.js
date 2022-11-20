@@ -10,6 +10,7 @@ export const useComponentsPageStore = defineStore('ComponentsPageStore', {
       "banners",
       "dialogs",
       "forms",
+      "datepicker"
     ],
     active: "",
     scroll_to: false,

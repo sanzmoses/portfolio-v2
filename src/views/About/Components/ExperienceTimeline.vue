@@ -12,10 +12,9 @@
         :side="(index%2==0)?'left':'right'"
       >
         <div>
-          <p class="mb-0">{{ '<'+exp.experience.description+'/>' }}</p>
-          <q-chip class="glossy" square color="teal" text-color="white" icon="bookmark" size="sm">
-            {{ exp.role }}
-          </q-chip>
+          <p class="mb-0 text-bold">{{ '<'+exp.experience.description+'/>' }}</p>
+        <p>{{formatDate(exp.datestamp.start)}}</p>
+          <p class="text-caption">{{ exp.role }}</p>
           <p class="text-caption mt-2">
             {{ exp.description }}
           </p>
