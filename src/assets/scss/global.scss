@@ -57,6 +57,39 @@ code {
     }
   }
 }
+
+blockquote {
+  position: relative;
+  padding: 20px 30px;
+  margin: 0;
+
+  &::before {
+    content: '"';
+    font-size: 15rem;
+    position: absolute;
+    top: -85px;
+    left: -30px;
+    opacity: .2; 
+  }
+
+  span {
+    font-style: italic;
+    line-height: 1.5rem;
+    word-spacing: 0.1rem;
+  }
+
+  p {
+    text-align: right;
+    font-size: 1.2rem;
+    margin-top: 5px;
+    margin-bottom: 0px;
+
+    &::before {
+      content: "+";
+      margin-right: 10px;
+    }
+  }
+}
 /** End of Overide **/
 
 /** Utility **/

@@ -24,6 +24,15 @@
 
     <p>Lorem, ipsum dolor sit amet <b>consectetur adipisicing elit.</b> Dicta debitis quasi <i>repellendus rem reprehenderit excepturi omnis aliquam,</i> <code>saepe neque a, dolorum porro nesciunt esse? </code> Totam, nulla. Debitis minus perspiciatis odit!</p>
 
+    <div style="max-width: 500px">
+      <blockquote>
+        <span>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex blanditiis ab error consequatur, repellat et veniam aut quidem ut, minus tenetur saepe debitis quaerat dolores optio odit enim nemo amet.
+        </span>
+        <p>Anonymous</p>
+      </blockquote>
+    </div>
+
     <template v-if="pretty_json">
       <highlightjs
         language="javascript"

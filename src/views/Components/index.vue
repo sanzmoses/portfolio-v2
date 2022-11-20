@@ -6,7 +6,7 @@
       <div class="col-12 col-sm-10 offset-sm-1">
         
         <div class="row justify-between">
-          <h2 class="text-primary">Style Guide</h2>
+          <h2 id="title" class="text-primary">Style Guide</h2>
 
           <div class="row flex-center">
             <SeamlessNav 
@@ -48,6 +48,7 @@ import forms from "./Sections/forms.vue"
 import typography from "./Sections/typography.vue"
 import { useComponentsPageStore } from '/src/stores/ComponentsPageStore'
 import { ref } from 'vue'
+import gsap from 'gsap'
 
 export default {
   name: 'Components',
@@ -129,6 +130,18 @@ export default {
       }
     }
   },
+  mounted() {
+    gsap.fromTo("#typography",  {
+      opacity: 0,
+      x: "-200px",
+    },
+    {
+      duration: 1,
+      opacity: 1,
+      ease: "power3.inOut",
+      x: 0,
+    });
+  }
 }
 </script>
 
