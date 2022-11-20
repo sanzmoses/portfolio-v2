@@ -1,22 +1,23 @@
 <template>
-  <div class="fixed-header text-center q-pt-sm">
-    <template v-for="route in routes" :key="route.name">
-      <q-btn 
-        :label="route.name" 
-        :outline="route.name === vueRoute.name" 
-        :flat="route.name !== vueRoute.name"
-        @click="goTo(route.link)" 
-        color="primary"
-        class="text-capitalize"
-        
-      />
-    </template>
+  <div id="header" :class="['fixed-header text-center']">
+    <q-tabs v-model="tab">
+      <template v-for="route in routes" :key="route.name">
+        <q-tab 
+          color="primary"
+          class="text-capitalize"
+          @click="goTo(route.link)" 
+          :name="route.name" 
+          :label="route.name" 
+        />
+      </template>
+      </q-tabs>
   </div>
 </template>
 
 <script>
 import { useRouter, useRoute  } from 'vue-router';
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
+import gsap from 'gsap'
 
 export default {
   setup() {
@@ -37,9 +38,24 @@ export default {
       goTo,
       routes,
       vueRoute,
-      drawer: ref(false)
+      drawer: ref(false),
+      tab: ref('Home')
     }
   },
+  mounted() {
+    let animation = gsap.to("#header", {
+          backgroundColor: '#00355c', 
+          duration: .5,
+          paused: true
+        });
+    window.onscroll = () => {
+      if(document.documentElement.scrollTop > 100) {
+        animation.play()
+      } else {
+        animation.reverse()
+      }
+    };
+  }
 }
 </script>
 
