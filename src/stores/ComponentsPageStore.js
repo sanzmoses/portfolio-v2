@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 export const useComponentsPageStore = defineStore('ComponentsPageStore', {
   state: () => ({
     links: [
+      "palette",
       "typography",
       "buttons",
       "chips",
@@ -10,7 +11,8 @@ export const useComponentsPageStore = defineStore('ComponentsPageStore', {
       "banners",
       "dialogs",
       "forms",
-      "datepicker"
+      "datepicker",
+      "others"
     ],
     active: "",
     scroll_to: false,

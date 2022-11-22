@@ -47,6 +47,8 @@ import dialogs from "./Sections/dialogs.vue"
 import forms from "./Sections/forms.vue"
 import typography from "./Sections/typography.vue"
 import datepicker from "./Sections/datepicker.vue"
+import others from "./Sections/others.vue"
+import palette from "./Sections/palette.vue"
 import { useComponentsPageStore } from '/src/stores/ComponentsPageStore'
 import { ref } from 'vue'
 import gsap from 'gsap'
@@ -63,6 +65,8 @@ export default {
     typography,
     chips,
     datepicker,
+    others,
+    palette,
   },
   setup () {
     const thresholds = []
