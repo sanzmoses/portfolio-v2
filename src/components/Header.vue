@@ -7,7 +7,8 @@
           class="text-capitalize"
           @click="goTo(route.link)" 
           :name="route.name" 
-          :label="route.name" 
+          :label="route.name"
+          :value="route.name"
         />
       </template>
       </q-tabs>
@@ -16,7 +17,7 @@
 
 <script>
 import { useRouter, useRoute  } from 'vue-router';
-import { ref, watchEffect } from 'vue'
+import { ref, watch } from 'vue'
 import gsap from 'gsap'
 
 export default {
@@ -27,19 +28,29 @@ export default {
       { name: 'Components', link: '/components' },
     ])
 
-    const router = useRouter();
-    const vueRoute = useRoute();
+    let first_load = false;
+    const router = useRouter()
+    const vueRoute = useRoute()
+    const tab = ref('Home')
 
     const goTo = (value) => {
       router.push(value);
     }   
+    
+    // Bad Implementation
+    watch(() => vueRoute.name, () => {
+      if(!first_load) {
+        tab.value = vueRoute.name
+        first_load = true;
+      }
+    });    
 
     return { 
       goTo,
+      tab,
       routes,
       vueRoute,
       drawer: ref(false),
-      tab: ref('Home')
     }
   },
   mounted() {

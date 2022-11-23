@@ -8,6 +8,9 @@
 
     <p class="q-my-xl"></p>
     
+    <h6 class="ma-0"> 'JetBrains Mono', monospace <q-chip color="primary" text-color="black" size="md">Global font</q-chip></h6>
+    <h6 class="ma-0"> 'Courier Prime', monospace <q-chip color="primary" text-color="black" size="md">Code font</q-chip></h6>
+
     <h1><span class="text-weight-bold">Sanz</span> loves kaye 12345</h1>
 
     <h2>Sanz loves kaye 12345</h2>

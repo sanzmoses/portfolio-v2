@@ -2,16 +2,18 @@
   <div>
     <Header />
 
-    <router-view v-slot="{ Component }">
-      <transition
-        appear
-        enter-active-class="animated fadeIn"
-        leave-active-class="animated fadeOut"
-        mode="out-in"
-      >
-        <component :is="Component" />
-      </transition>
-    </router-view>
+    <div class="pt-10">
+      <router-view v-slot="{ Component }">
+        <transition
+          appear
+          enter-active-class="animated fadeIn"
+          leave-active-class="animated fadeOut"
+          mode="out-in"
+        >
+          <component :is="Component" />
+        </transition>
+      </router-view>
+    </div>
     
   </div>
 </template>
