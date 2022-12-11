@@ -10,17 +10,21 @@
 
     <div class="q-pa-md q-gutter-sm">
 
-      
+      <SideSeek />
 
     </div>
 
   </div>
 </template>
+
 <script>
+import SideSeek from "@/components/Global/SideSeeker/index.vue";
 export default {
-  
+  components: {
+    SideSeek,
+  }
 }
 </script>
+
 <style lang="">
-  
 </style>

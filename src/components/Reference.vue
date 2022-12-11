@@ -14,9 +14,14 @@ import { ref } from 'vue'
 import { process } from '@/composables/jsonHighlighter.js'
 import { useComponentsPageStore } from '/src/stores/ComponentsPageStore'
 import { useSkillsStore } from '@/stores/SkillsStore'
+import BrowserCard from "@/components/BrowserCard.vue";
+import gsap from 'gsap'
 
 export default {
   name: "Reference",
+  components: {
+    BrowserCard
+  },
   props: {
     project: {
       type: Object,
@@ -54,6 +59,20 @@ export default {
         drawer_toggled.value = true;
       },
     }
+  },
+  mounted() {
+    let animation = gsap.to("#header", {
+          backgroundColor: '#00355c', 
+          duration: .5,
+          paused: true
+        });
+    window.onscroll = () => {
+      if(document.documentElement.scrollTop > 100) {
+        animation.play()
+      } else {
+        animation.reverse()
+      }
+    };
   }
 }
 </script>
