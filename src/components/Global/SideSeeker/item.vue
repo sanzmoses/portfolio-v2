@@ -2,6 +2,7 @@
   <div class="item-container" 
     @mouseenter="onHover"
     @mouseleave="onLeave"
+    @click="onClick(index)"
   >
       <div :id="`seeker-shape-${index}`" class="shape"></div>
       <div class="text-container">
@@ -43,6 +44,13 @@ export default {
         this.shape.reverse();
         this.text.reverse();
       }
+    },
+    onClick(index) {
+      gsap.fromTo("#seeker-shape-"+this.index, {
+        scaleY: -1,
+      }, {
+        scaleY: 1,
+      });
     }
   },
   mounted() {

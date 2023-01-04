@@ -67,7 +67,9 @@
 
       <div class="col-12 mt-15">
         <template v-if="project">
-          <BrowserCard :project="project" />
+          <BrowserCard class="mb-10" :project="project" />
+
+          <ProjectCard :project="project" />
         </template>
       </div>
 
@@ -79,11 +81,13 @@
 <script>
 import { ref } from 'vue'
 import BrowserCard from "@/components/BrowserCard.vue";
+import ProjectCard from "@/components/ProjectCard.vue";
 import { getData } from '@/composables/projects.js'
 
 export default {
   components: {
-    BrowserCard
+    BrowserCard,
+    ProjectCard
   },
   setup () {
     const { project } = getData()
