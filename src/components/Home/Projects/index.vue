@@ -27,16 +27,8 @@ export default {
     setTimeout(() => {
       this.projects.forEach(project => {
         gsap.from("#project-"+project.id, {
-          scrollTrigger: {
-            trigger: "#project-"+project.id,
-            // start: "top center",
-            // end: "20%",
-            toggleActions: "restart pause resume none",
-            scrub: 1,
-          },
           x: -100,
           opacity: 0,
-          
         });
       })
     }, 100)

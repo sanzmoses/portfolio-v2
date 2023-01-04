@@ -1,7 +1,5 @@
 <template>
   <div class="q-pa-xl">
-    <h3 class="q-mt-none"> {{ '<Projects/>' }} </h3>
-
     <Projects />
   </div>
 </template>

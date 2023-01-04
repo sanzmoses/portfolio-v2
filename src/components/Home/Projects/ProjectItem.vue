@@ -1,9 +1,8 @@
 <template>
-  <div class="col-12 col-md-6 pa-2">
-    <h6 class="ma-0 text-primary">Project:</h6>
-    <h4 class="mt-0">{{ item.name }}</h4>
-
-    <BrowserCard :project="item" />
+  <div class="col-6">
+    <div class="full-width row justify-center">
+      <ProjectCard :project="item" />
+    </div>
 
     <!-- <highlightjs
       language="json"
@@ -14,12 +13,12 @@
 </template>
 
 <script>
-import BrowserCard from "@/components/BrowserCard.vue";
+import ProjectCard from "@/components/ProjectCard.vue";
 
 export default {
     name: "Project Item",
     components: {
-      BrowserCard
+      ProjectCard
     },
     props: {
         item: {

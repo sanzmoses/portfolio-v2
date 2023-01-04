@@ -57,6 +57,8 @@ export default {
 
 <style lang="scss">
 .project-card {
+  width: 100%;
+  height: 100%;
   max-width: 900px;
   max-height: 600px;
   overflow: hidden;
