@@ -1,15 +1,13 @@
 <template>
-  <div class="col-6">
-    <div class="full-width row justify-center">
-      <ProjectCard :project="item" />
-    </div>
-
-    <!-- <highlightjs
-      language="json"
-      :code="formatted"
-    /> -->
-      <!-- <q-btn  @click="deleteItem" color="deep-orange" glossy label="Delete" /> -->
+  <div class="full-width row justify-center">
+    <ProjectCard :project="item" />
   </div>
+
+  <!-- <highlightjs
+    language="json"
+    :code="formatted"
+  /> -->
+    <!-- <q-btn  @click="deleteItem" color="deep-orange" glossy label="Delete" /> -->
 </template>
 
 <script>
@@ -18,7 +16,7 @@ import ProjectCard from "@/components/ProjectCard.vue";
 export default {
     name: "Project Item",
     components: {
-      ProjectCard
+      ProjectCard,
     },
     props: {
         item: {

@@ -10,7 +10,7 @@
 
     <div class="q-pa-md q-gutter-sm">
 
-      <SideSeek />
+      <!-- <SideSeek /> -->
 
     </div>
 

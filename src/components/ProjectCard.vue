@@ -9,7 +9,6 @@
         :ratio="16/9"
       />
 
-
       <template v-if="project">
         <div class="overlay-section">
           <div class="bg-div"></div>
@@ -59,8 +58,8 @@ export default {
 .project-card {
   width: 100%;
   height: 100%;
-  max-width: 900px;
-  max-height: 600px;
+  max-width: 1200px;
+  max-height: 650px;
   overflow: hidden;
   position: relative;
 

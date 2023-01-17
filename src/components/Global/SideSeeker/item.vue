@@ -2,11 +2,11 @@
   <div class="item-container" 
     @mouseenter="onHover"
     @mouseleave="onLeave"
-    @click="onClick(index)"
+    @click="onClick(item.id)"
   >
-      <div :id="`seeker-shape-${index}`" class="shape"></div>
+      <div :id="`seeker-shape-${item.id}`" class="shape"></div>
       <div class="text-container">
-        <p :id="`seeker-text-${index}`">{{ item }}</p>
+        <p :id="`seeker-text-${item.id}`">{{ item.nickname }}</p>
       </div>
     </div>
 </template>
@@ -18,11 +18,7 @@ export default {
   name: "SeekerItem",
   props: {
     item: {
-      type: String,
-      required: true
-    },
-    index: {
-      type: Number,
+      type: Object,
       required: true
     },
     active: {
@@ -32,8 +28,18 @@ export default {
   },
   data: () => ({
     shape: null,
-    text: null
+    text: null,
+    char_limit: 5,
   }),
+  computed: {
+    shorten_name() {
+      if(this.item.name.length > this.char_limit) {
+        return this.item.name.substr(0, this.char_limit)+".."
+      }
+
+      return this.item.name
+    }
+  },
   methods: {
     onHover() {
       this.shape.play();
@@ -46,24 +52,24 @@ export default {
       }
     },
     onClick(index) {
-      gsap.fromTo("#seeker-shape-"+this.index, {
+      gsap.fromTo("#seeker-shape-"+this.item.id, {
         scaleY: -1,
       }, {
         scaleY: 1,
       });
-    }
+    },
   },
   mounted() {
-    this.shape = gsap.to("#seeker-shape-"+this.index, {
-      height: '25px',
+    this.shape = gsap.to("#seeker-shape-"+this.item.id, {
+      height: '30px',
       width: '1px',
-      marginLeft: '3px',
+      marginLeft: '2px',
       borderRadius: '0px',
       duration: .3,
       paused: true
     });
 
-    this.text = gsap.to("#seeker-text-"+this.index, {
+    this.text = gsap.to("#seeker-text-"+this.item.id, {
       x: 10,
       duration: .5,
       paused: true
@@ -72,6 +78,8 @@ export default {
     if(this.active) {
       this.onHover();
     }
+
+    this.$emit("mounted")
   },
   watch: {
     active: function(value) {
@@ -95,8 +103,8 @@ export default {
   caret-color: transparent;
 
   .shape {
-    height: 7px;
-    width: 7px;
+    height: 5px;
+    width: 5px;
     border-radius: 25px;
     background-color: white;
   }
