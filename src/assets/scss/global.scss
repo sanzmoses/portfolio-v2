@@ -1,5 +1,9 @@
 @import './quasar-variables.sass';
 
+* {
+  caret-color: transparent;
+}
+
 /** Global Definite **/
 /* width */
 ::-webkit-scrollbar {

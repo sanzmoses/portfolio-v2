@@ -1,5 +1,14 @@
 <template>
   <div class="side-seeker">
+    <transition
+      @before-enter="beforeEnterNumber"
+      @enter="enterNumber"
+    >
+      <template v-if="show_number">
+        <h1 class="current_index">{{ index_of_current_item }}</h1>
+      </template>
+    </transition>
+
     <transition-group
      appear
      tag="div"
@@ -18,16 +27,7 @@
       />
     </transition-group>
 
-    <transition
-      @before-enter="beforeEnterArrow"
-      @enter="enterArrow"
-    >
-      <template v-if="show_arrow">
-        <Arrow @arrowClicked="itemClicked('next')" />
-      </template>
-    </transition>
-    
-    
+    <Arrow @arrowClicked="itemClicked('next')" />
   </div>
 </template>
 
@@ -50,7 +50,7 @@ export default {
   },
   data: () => ({
     active: 1,
-    show_arrow: false,
+    show_number: false,
   }),
   computed: {
     current_item() {
@@ -63,9 +63,12 @@ export default {
       })
     },
     next_item() {
-      let indexOfCurrentItem = this.items.indexOf(this.current_item);
+      let indexOfCurrentItem = this.index_of_current_item;
       if(indexOfCurrentItem >= this.items.length - 1) indexOfCurrentItem = -1
       return this.items[indexOfCurrentItem+=1]
+    },
+    index_of_current_item() {
+      return this.items.indexOf(this.current_item)
     }
   },
   watch: {
@@ -94,21 +97,23 @@ export default {
         onComplete: done
       })
     },
-    beforeEnterArrow(el) {
+    beforeEnterNumber(el) {
       el.style.opacity = 0;
       el.style.transform = "translateY(-30)"
     },
-    enterArrow(el, done) {
+    enterNumber(el, done) {
       gsap.to(el, {
-        y: 0,
-        opacity: 1,
+        y: -20,
+        opacity: .1,
         duration: .5,
         onComplete: done
       })
     },
   },
   mounted() {
-    this.show_arrow = true;
+    setTimeout(() => {
+      this.show_number = true;
+    }, 2000)
   }
 }
 </script>
@@ -119,5 +124,13 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.current_index {
+  position: absolute;
+  margin: 0px;
+  opacity: .7;
+  font-size: 15em;
+  transform: translateX(-80px);
 }
 </style>

@@ -13,11 +13,12 @@
         <div class="overlay-section">
           <div class="bg-div"></div>
           <div class="content">
-            <q-icon class="text-h2" :name="project.icon" />
-            
-            <p class="text-h4 text-weight-bold mt-2">{{ project.name }}</p>
+            <p class="text-h4 text-weight-bold mt-2 text">{{ project.name }}</p>
 
-            <p class="text-body1 text-weight-thin">{{ project.description }}</p>
+            <p class="text-body1 text-weight-thin text">
+              <q-icon class="text-h5" :name="project.icon" />
+              {{ project.description }}
+            </p>
           </div>
         </div>
       </template>
@@ -28,6 +29,8 @@
 
 <script>
 import { process } from '@/composables/jsonHighlighter.js'
+import gsap from 'gsap'
+import { onMounted } from 'vue'
 
 export default {
   name: "BrowserCard",
@@ -42,8 +45,18 @@ export default {
     const project = props.project
 
     const getImageUrl = (name) => {
-        return new URL(`../assets/screenshot/a_${name}`, import.meta.url).href
+      return new URL(`../assets/screenshot/a_${name}`, import.meta.url).href
     }
+
+    onMounted(() => {
+      gsap.to('.text', {
+        x: 0,
+        opacity: 1,
+        ease: 'Power.easeIn',
+        duration: .4,
+        stagger: .1
+      }); 
+    })
 
     return {
       project,
@@ -79,13 +92,12 @@ export default {
       background: $grey-10;
       z-index: 9;
       opacity: .7;
-      
     }
 
     .content {
       position: relative;
       z-index: 10;
-      text-align: center;
+      text-align: left;
     }
   }
 
