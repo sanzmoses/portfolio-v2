@@ -5,7 +5,7 @@
       @enter="enterNumber"
     >
       <template v-if="show_number">
-        <h1 class="current_index">{{ index_of_current_item }}</h1>
+        <h1 class="current_index">{{ index_of_current_item + 1 }}</h1>
       </template>
     </transition>
 

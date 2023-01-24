@@ -117,7 +117,7 @@ export const useProjectStore = defineStore('ProjectStore', {
           },
           {
               id: 9,
-              name: 'Cased Dimensions Microsite',
+              name: 'Cased Dimensions',
               nickname: 'CDM site',
               link: 'http://servicemanagerapps.com',
               code: '#',
@@ -131,7 +131,7 @@ export const useProjectStore = defineStore('ProjectStore', {
           },
           {
               id: 10,
-              name: 'Onlinekeycodes Site',
+              name: 'Onlinekeycodes',
               nickname: 'OKC site',
               link: 'http://onlinekeycodes.com',
               code: '#',
@@ -215,7 +215,7 @@ export const useProjectStore = defineStore('ProjectStore', {
           },
           {
               id: 16,
-              name: 'Martian Robot Programming Challenge',
+              name: 'Martian Robot',
               nickname: 'Martian',
               link: 'http://martianrobot.ml',
               code: 'https://github.com/sanzmoses/martianrobot',

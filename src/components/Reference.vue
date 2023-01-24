@@ -10,7 +10,8 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { process } from '@/composables/jsonHighlighter.js'
 import { useComponentsPageStore } from '/src/stores/ComponentsPageStore'
 import { useSkillsStore } from '@/stores/SkillsStore'
