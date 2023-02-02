@@ -46,6 +46,10 @@ export default {
         return new URL(`../assets/screenshot/a_${name}`, import.meta.url).href
     }
 
+    onMounted(() => {
+      
+    })
+
     return {
       drawer,
       project,

@@ -55,10 +55,10 @@ export default {
   },
   mounted() {
     let animation = gsap.to("#header", {
-          backgroundColor: '#00355c', 
-          duration: .5,
-          paused: true
-        });
+      backgroundColor: '#00355c', 
+      duration: .5,
+      paused: true
+    });
     window.onscroll = () => {
       if(document.documentElement.scrollTop > 100) {
         animation.play()

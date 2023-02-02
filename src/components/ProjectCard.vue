@@ -27,6 +27,17 @@
               </p>
             </div>            
           </div>
+
+          <div class="content-details">
+            <div class="bg-div-details"></div>
+            <h2>{{ project.responsibilities }}</h2>
+            <AnimatedString :list="project.responsibilities" />
+            <h4>{{ project.type }}</h4>
+            <h5>{{ project.nickname  }}</h5>
+            <h6>{{ project.description }}</h6>
+            <h5>{{ project.tools }}</h5>
+          </div>   
+
         </div>
       </template>
           
@@ -38,9 +49,13 @@
 import { process } from '@/composables/jsonHighlighter.js'
 import gsap from 'gsap'
 import { onMounted, onBeforeUnmount, ref } from 'vue'
+import AnimatedString from './Animated/Typing.vue'
 
 export default {
   name: "BrowserCard",
+  components: {
+    AnimatedString
+  },
   props: {
     project: {
       type: Object,
@@ -63,7 +78,6 @@ export default {
     function onHover() {
       let progress = Math.trunc(timeline.progress() * 100);
       if(progress < 32) {
-        console.log("progress", progress)
         timeline.tweenTo(1)
       }
     }
@@ -176,6 +190,27 @@ export default {
 
   .gentext-container {
     overflow: hidden;
+  }
+
+  .content-details {
+    position: absolute;
+    bottom: 20px;
+    padding: 20px;
+    max-width: 30em;
+
+    .bg-div-details {
+      position: absolute !important;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: $grey-10;
+    }
+
+    * {
+      position: relative;
+      margin: 0px;
+    }
   }
 }
 
