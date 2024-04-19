@@ -1,17 +1,26 @@
 <template>
-  <div id="header" :class="['fixed-header text-center']">
-    <q-tabs v-model="tab">
-      <template v-for="route in routes" :key="route.name">
-        <q-tab 
-          color="primary"
-          class="text-capitalize"
-          @click="goTo(route.link)" 
-          :name="route.name" 
-          :label="route.name"
-          :value="route.name"
-        />
-      </template>
+  <div id="header" :class="['fixed-header d-flex justify-space-between']">
+    <q-toolbar>
+      <q-btn flat label="sanzmoses" />
+      <q-space />
+
+      <!--
+        notice shrink property since we are placing it
+        as child of QToolbar
+      -->
+      <q-tabs v-model="tab">
+        <template v-for="route in routes" :key="route.name">
+          <q-tab 
+            color="primary"
+            class="text-capitalize"
+            @click="goTo(route.link)" 
+            :name="route.name" 
+            :label="route.name"
+            :value="route.name"
+          />
+        </template>
       </q-tabs>
+    </q-toolbar>    
   </div>
 </template>
 
