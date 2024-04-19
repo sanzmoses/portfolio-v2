@@ -1,13 +1,16 @@
 <template>
   <div id="header" :class="['fixed-header d-flex justify-space-between']">
     <q-toolbar>
-      <q-btn flat label="sanzmoses" />
-      <q-space />
+      <q-btn flat @click="goToSetTab('Projects')" >
+        <q-img
+          :src="logo"
+          style="height: 20px; width: 20px"
+        />
 
-      <!--
-        notice shrink property since we are placing it
-        as child of QToolbar
-      -->
+        <span class="ml-2">sanzmoses</span>
+      </q-btn>
+      <q-space />
+      
       <q-tabs v-model="tab">
         <template v-for="route in routes" :key="route.name">
           <q-tab 
@@ -26,30 +29,39 @@
 
 <script>
 import { useRouter, useRoute  } from 'vue-router';
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import gsap from 'gsap'
 
 export default {
   setup() {
     const routes = ref([
-      { name: 'Home', link: '/' },
+      { name: 'Projects', link: '/' },
       { name: 'About', link: '/about' },
-      { name: 'Components', link: '/components' },
+      { name: 'Contact', link: '/contact' },
     ])
 
     let first_load = false;
     const router = useRouter()
     const vueRoute = useRoute()
-    const tab = ref('Home')
+    const tab = ref('Projects')
+
+    const logo = computed(() => {
+      return new URL(`../assets/sanz_logo_accent.svg`, import.meta.url).href
+    })
 
     const goTo = (value) => {
       router.push(value);
+    }   
+
+    const goToSetTab = (value) => {
+      router.push("/");
+      tab.value = "Projects"
     }   
     
     // Bad Implementation
     watch(() => vueRoute.name, () => {
       if(!first_load) {
-        tab.value = vueRoute.name
+        tab.value = "Projects"
         first_load = true;
       }
     });    
@@ -60,6 +72,8 @@ export default {
       routes,
       vueRoute,
       drawer: ref(false),
+      goToSetTab,
+      logo
     }
   },
   mounted() {
@@ -68,6 +82,7 @@ export default {
       duration: .5,
       paused: true
     });
+
     window.onscroll = () => {
       if(document.documentElement.scrollTop > 100) {
         animation.play()

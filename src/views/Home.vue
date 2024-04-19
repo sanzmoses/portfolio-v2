@@ -16,7 +16,7 @@ export default {
   setup() {
     const lorem = ref(null);
 
-    lorem.value = 'lorem ipsum tutut kasjdfhlkajshd fl adf';
+    lorem.value = '';
 
     return { 
       lorem

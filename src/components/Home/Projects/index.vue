@@ -35,9 +35,7 @@ export default {
   },
   setup() {
     const { projects } = getData()
-    const show = ref(1)
-
-    console.log("show", show.value)
+    const show = ref(-1)
 
     const setShow = (item) => {
       show.value = item.id

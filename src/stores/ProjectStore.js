@@ -4,6 +4,20 @@ export const useProjectStore = defineStore('ProjectStore', {
     state: () => ({
         projects: [
           {
+            id: -1,
+            name: 'Typanic',
+            nickname: 'Typanic',
+            link: 'https://typanic.sanzmoses.net/',
+            code: 'https://github.com/sanzmoses/typanic',
+            img: 'typanic.png',
+            responsibilities: ['Frontend'],
+            tools: ['Javascript', 'VueJS', 'Quasar'],
+            type: 'Sample',
+            description: 'A replica of my favorite browser game',
+            color: '', 
+            icon: 'code'
+          },
+          {
             id: 0,
             name: 'PZSE Portal',
             nickname: 'PZSE Portal',
@@ -213,20 +227,20 @@ export const useProjectStore = defineStore('ProjectStore', {
           //     color: 'purple-card', 
           //     icon: 'cloudy_snowing'
           // },
-          {
-            id: 15,
-            name: 'Twitter Clone',
-            nickname: 'TwitterClone',
-            link: 'https://sanzmoses.github.io/ng-twa',
-            code: 'https://github.com/sanzmoses/ng-twa',
-            img: 'twa.png',
-            responsibilities: ['Frontend'],
-            tools: ['Javascript', 'Angular 5'],
-            type: 'Sample',
-            description: 'Practice App using Angular 5',
-            color: '', 
-            icon: 'code'
-          },
+          // {
+          //   id: 15,
+          //   name: 'Twitter Clone',
+          //   nickname: 'TwitterClone',
+          //   link: 'https://sanzmoses.github.io/ng-twa',
+          //   code: 'https://github.com/sanzmoses/ng-twa',
+          //   img: 'twa.png',
+          //   responsibilities: ['Frontend'],
+          //   tools: ['Javascript', 'Angular 5'],
+          //   type: 'Sample',
+          //   description: 'Practice App using Angular 5',
+          //   color: '', 
+          //   icon: 'code'
+          // },
           // {
           //   id: 17,
           //   name: 'Martian Robot',
