@@ -14,6 +14,6 @@ jobs:
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.2
       with:
-        server: ftp.sanzmoses.ml
-        username: u562569675.sanz.ml
+        server: ftp.sanzmoses.net
+        username: u141166830.portfolio
         password: ${{ secrets.ftp_password }}
