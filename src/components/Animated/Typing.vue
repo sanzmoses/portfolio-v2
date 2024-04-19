@@ -1,7 +1,7 @@
 <template>
-  <div class="flex" style="font-size: 40px">
+  <div :class="['flex', 'text-'+color]" :style="{ fontSize }">
     
-    <template v-for="(word, word_index) in list" :key="`word-${word}-${word_index}`">
+    <template v-for="(word, word_index) in processed_list" :key="`word-${word}-${word_index}`">
       <template v-for="(letter, letter_index) in word" :key="`animate-${letter}-${letter_index}`">
         <span :class="`letter letter-${word_index}`">{{ letter }}</span>
       </template>
@@ -23,29 +23,53 @@ export default {
     list: {
       type: [Array, String],
       required: true
+    },
+    fontSize: {
+      type: String,
+      default: "16px",
+    },
+    reverse: {
+      type: Boolean,
+      default: true
+    },
+    repeat: {
+      type: Boolean,
+      default: true
+    },
+    color: {
+      type: String,
+      default: "white"
     }
   },
   setup(props) {
     const blink = ref(false)
-    const list = props.list.map(item => {
-      return item.split("")
-    });
+
+    const { reverse, repeat, list } = props
+    let processed_list;
+
+    if(Array.isArray(list)) {
+      processed_list = list.map(item => {
+        return item.split("")
+      });    
+    } else {
+      processed_list = [].concat([list])
+    }
 
     let timeline = gsap.timeline({
-      repeat: -1
+      repeat: (repeat)? -1: 0
     })
     
     onMounted(() => {
-      list.forEach((item, index) => {
+      processed_list.forEach((item, index) => {
         timeline
         .to(`.blinker-${index}`, {
           keyframes: [
             { opacity: 0, visibility:"hidden", duration: .2, ease: "none" },
             { opacity: 1, visibility:"visible", duration: .2 },
           ],
-          duration: .7,
-          repeatDelay: .5,
-          repeat: 1,
+          duration: .5,
+          repeatDelay: .3,
+          repeat: .5,
           ease: "none"
         })
         .to(`.letter-${index}`, {
@@ -59,9 +83,9 @@ export default {
             { opacity: 0, visibility:"hidden", duration: .2, ease: "none" }, // BLINK VISIBILITY
             { opacity: 1, visibility:"visible", duration: .2 },
           ],
-          duration: .7,
-          repeatDelay: .5,
-          repeat: 2,
+          duration: .5,
+          repeatDelay: .3,
+          repeat: (reverse)? 1: -1,
           ease: "none"
         })
         .to(`.letter-${index}`, {
@@ -85,7 +109,7 @@ export default {
     })   
     
     return {
-      list,
+      processed_list,
       blink
     }
   }

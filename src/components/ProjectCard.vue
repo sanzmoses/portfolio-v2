@@ -30,12 +30,32 @@
 
           <div class="content-details">
             <div class="bg-div-details"></div>
-            <h2>{{ project.responsibilities }}</h2>
-            <AnimatedString :list="project.responsibilities" />
-            <h4>{{ project.type }}</h4>
-            <h5>{{ project.nickname  }}</h5>
-            <h6>{{ project.description }}</h6>
-            <h5>{{ project.tools }}</h5>
+            <p class="text-subtitle mb-0">Project:</p> 
+            <p class="text-body1 text-primary">{{ project.nickname  }}</p>
+
+            <p class="text-subtitle mb-0">Work Type:</p> 
+            <p class="text-body1 text-primary">{{ project.type }}</p>
+
+            <p class="text-subtitle mb-0">Responsibilities:</p> 
+            <AnimatedString 
+              :list="project.responsibilities" 
+              :fontSize="1.3"
+              color="primary"
+            />
+
+            <div class="flex mt-10">
+              <template v-for="tool in project.tools" :key="'tool-'+tool">
+                <q-chip 
+                  outline
+                  size="sm"
+                  color="accent" 
+                  text-color="black" 
+                  class="mr-5"
+                >
+                  {{ tool }}
+                </q-chip>
+              </template>
+            </div>
           </div>   
 
         </div>
@@ -49,7 +69,7 @@
 import { process } from '@/composables/jsonHighlighter.js'
 import gsap from 'gsap'
 import { onMounted, onBeforeUnmount, ref } from 'vue'
-import AnimatedString from './Animated/Typing.vue'
+import AnimatedString from './Animated/Switch.vue'
 
 export default {
   name: "BrowserCard",
@@ -195,7 +215,7 @@ export default {
   .content-details {
     position: absolute;
     bottom: 20px;
-    padding: 20px;
+    padding: 30px 30px;
     max-width: 30em;
 
     .bg-div-details {
@@ -204,12 +224,11 @@ export default {
       left: 0;
       height: 100%;
       width: 100%;
-      background: $grey-10;
+      background: $dark-page
     }
 
     * {
       position: relative;
-      margin: 0px;
     }
   }
 }

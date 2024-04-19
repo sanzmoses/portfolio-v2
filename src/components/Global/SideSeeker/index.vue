@@ -49,7 +49,7 @@ export default {
     Arrow
   },
   data: () => ({
-    active: 1,
+    active: 0,
     show_number: false,
   }),
   computed: {

@@ -4,8 +4,23 @@ export const useExpStore = defineStore('ExpStore', {
     state: () => ({
       experience: [
         {
+          id: 10,
+          company: 'ZTM Academy',
+          address: 'Udemy Course',
+          role: 'Student',
+          experience: {
+            type: 'Online Course',
+            description: 'Javascript: The Advanced Concepts', 
+          },
+          datestamp: {
+            start: '2023-01-01',
+            end: '2023-31-01'
+          },
+          description: 'Key concepts, best practices and latest features of Javascript.'
+        },
+        {
           id: 9,
-          company: 'Freelance',
+          company: 'RemotePro.ph',
           address: 'Davao City',
           role: 'Front End Developer',
           experience: {
