@@ -4,13 +4,21 @@
     @mouseenter="onHover"
     @mouseleave="timeline.resume()"
   > 
-    <div class="outer-text upper-right">
+    <div class="outer-text upper-left">
       <AnimatedString 
         :list="project.responsibilities" 
         :fontSize="1.3"
         :repeat="responsibilities_length > 1 ? true: false"
         color="primary"
       />
+    </div>
+
+    <div class="outer-text upper-right">
+      <a target="_blank" :href="project.link" class="link-name text-accent">
+        {{ project.nickname }}
+        <q-icon color="accent" name="mdi-call-made" />      
+        <span class="underline"></span>    
+      </a>
     </div>
 
     <q-card 
@@ -55,8 +63,10 @@
 
     <div class="outer-text lower-right" ref="tools">
       <template v-for="(tool, index) in project.tools" :key="'tool-'+tool">
-        <p class="tool">{{ tool }}</p>
-        <div v-if="index < tools_length - 1" class="tool-line"></div> 
+        <section class="tool-container">
+          <p :class="['tool', 'tool-'+index]">{{ tool }}</p>
+          <div v-if="index < tools_length - 1" :class="['toolline', 'toolline-'+index]"></div> 
+        </section>
       </template>
     </div>
 
@@ -88,6 +98,7 @@ export default {
     const on_filter = ref(true)
     let frontText;
     let timeline = gsap.timeline()
+    let skills_timeline = gsap.timeline({ delay: 1 })
 
     const getImageUrl = (name) => {
       return new URL(`../assets/screenshot/a_${name}`, import.meta.url).href
@@ -150,7 +161,46 @@ export default {
         }
       })
 
+      gsap.fromTo(".link-name", {
+        y: 100,
+      }, {
+        y: 0,
+        duration: .5,
+        ease: 'Power.easeOut',
+        delay: 1
+      })
+
+      gsap.fromTo(".underline", {
+        x: -150,
+      }, {
+        x: 150,
+        duration: 1.5,
+        ease: 'Power.easeOut',
+        repeat: -1
+      })
+
+      project.tools.forEach((tool, index) => {
+        skills_timeline.fromTo('.tool-'+index, {
+          x: -100,
+        }, {
+          x: 0,
+          duration: .5,
+          ease: 'Power.easeOut',
+        }); 
+        
+        if(index < tools_length.value - 1) {
+          skills_timeline.fromTo('.toolline-'+index, {
+            width: 0,
+          }, {
+            width: 30,
+            duration: .1,
+            ease: 'Power.easeIn',
+          }, ">")
+        };
+      })
+
       timeline.play();
+      skills_timeline.play()
     })    
 
     return {
@@ -245,6 +295,14 @@ export default {
     position: absolute;
 
     &.upper-right {
+      top: -25px;
+      right: -10px;
+      min-width: 130px;
+      display: flex;
+      overflow: hidden;
+    }
+
+    &.upper-left {
       top: 51px;
       left: -57px;
       min-width: 130px;
@@ -252,21 +310,44 @@ export default {
     }
 
     &.lower-right {
-      display: flex;
-      align-items: center;
       bottom: -28px;
       left: 28px;
+      display: flex;
+      align-items: center;
+
+      .tool-container {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+      }
 
       .tool {
-        margin: 0px;;
+        margin: 0px;
 
-        &-line {
+        &line {
           width: 30px;
           border-top: 1px solid white;
           height: 1px;
           margin: 0px 20px;
         }
       }
+    }
+  }
+
+  .link-name {
+    z-index: 10;
+    cursor: pointer;
+    text-decoration: none;
+    overflow: hidden;
+
+    .underline {
+      border-bottom: 1px dashed rgb(0, 81, 255);
+      display: inline-block;
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      left: 0;
     }
   }
 }

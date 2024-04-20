@@ -14,7 +14,6 @@
         </transition>
       </router-view>
     </div>
-    
   </div>
 </template>
 
@@ -24,7 +23,7 @@ import Header from './components/Header.vue'
 export default {
   name: 'App',
   components: {
-    Header
+    Header,
   },
   data: () => ({
     //

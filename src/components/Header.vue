@@ -1,7 +1,7 @@
 <template>
   <div id="header" :class="['fixed-header d-flex justify-space-between']">
     <q-toolbar>
-      <q-btn flat @click="goToSetTab('Projects')" >
+      <q-btn flat @click="goToSetTab('Projects')" class="header-logo" >
         <q-img
           :src="logo"
           style="height: 20px; width: 20px"
@@ -11,7 +11,7 @@
       </q-btn>
       <q-space />
       
-      <q-tabs v-model="tab">
+      <q-tabs v-model="tab" class="header-links">
         <template v-for="route in routes" :key="route.name">
           <q-tab 
             color="primary"
@@ -28,22 +28,25 @@
 </template>
 
 <script>
-import { useRouter, useRoute  } from 'vue-router';
-import { ref, watch, computed } from 'vue'
 import gsap from 'gsap'
+import { useRouter, useRoute  } from 'vue-router';
+import { ref, watchEffect, computed, onMounted } from 'vue'
+import { useGlobalStore } from '/src/stores/GlobalStore'
 
 export default {
   setup() {
     const routes = ref([
-      { name: 'Projects', link: '/' },
+      { name: 'Projects', link: '/projects' },
       { name: 'About', link: '/about' },
       { name: 'Contact', link: '/contact' },
     ])
 
-    let first_load = false;
     const router = useRouter()
     const vueRoute = useRoute()
     const tab = ref('Projects')
+    const toolbar = ref(null)
+    const global_store = useGlobalStore()
+    let timeline = gsap.timeline()
 
     const logo = computed(() => {
       return new URL(`../assets/sanz_logo_accent.svg`, import.meta.url).href
@@ -54,17 +57,50 @@ export default {
     }   
 
     const goToSetTab = (value) => {
-      router.push("/");
+      router.push("/projects");
       tab.value = "Projects"
     }   
-    
-    // Bad Implementation
-    watch(() => vueRoute.name, () => {
-      if(!first_load) {
-        tab.value = "Projects"
-        first_load = true;
+        
+    watchEffect(async () => {
+      if(!global_store.initial_loading) {
+        timeline.play();
       }
-    });    
+    })
+
+    onMounted(() => {
+      timeline.fromTo(".header-logo", {
+        y: -100
+      }, {
+        y: 0,
+        duration: .7,
+        ease: 'Power.easeIn',
+      })
+
+      timeline.fromTo(".header-links", {
+        y: -100
+      }, {
+        y: 0,
+        delay: .2,
+        duration: .7,
+        ease: 'Power.easeIn',
+      }, "<")
+
+      let animation = gsap.to("#header", {
+        backgroundColor: '#00355c', 
+        duration: .5,
+        paused: true
+      });
+
+      window.onscroll = () => {
+        if(document.documentElement.scrollTop > 100) {
+          animation.play()
+        } else {
+          animation.reverse()
+        }
+      };
+
+      timeline.pause();
+    })
 
     return { 
       goTo,
@@ -73,24 +109,10 @@ export default {
       vueRoute,
       drawer: ref(false),
       goToSetTab,
-      logo
+      logo,
+      toolbar,
     }
   },
-  mounted() {
-    let animation = gsap.to("#header", {
-      backgroundColor: '#00355c', 
-      duration: .5,
-      paused: true
-    });
-
-    window.onscroll = () => {
-      if(document.documentElement.scrollTop > 100) {
-        animation.play()
-      } else {
-        animation.reverse()
-      }
-    };
-  }
 }
 </script>
 
