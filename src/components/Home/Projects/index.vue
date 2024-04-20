@@ -1,7 +1,8 @@
 <template>
     <div class="row justify-center">
-        <div class="col-xs-12 col-sm-9">
+        <div class="col-xs-12 col-sm-8">
           <div class="relative-position">
+            <h1 class="page-title">PROJECTS</h1>
             <template v-for="project in projects" :key="project.name">
               <template v-if="project.id === show" >
                 <ProjectItem 
@@ -56,6 +57,11 @@ export default {
     //     });
     //   })
     // }, 100)
+
+    gsap.to(".page-title", {
+      opacity: 0.1,
+      delay: 1
+    });
   }
 }
 </script>
@@ -65,5 +71,14 @@ export default {
   position: absolute;
   top: 0;
   right: -10px;
+}
+
+.page-title {
+  position: absolute;
+  margin: 0px;
+  opacity: 1;
+  font-size: 6em;
+  font-weight: bold;
+  transform: translate(20px, -74px);
 }
 </style>

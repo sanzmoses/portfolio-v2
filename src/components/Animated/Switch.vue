@@ -38,31 +38,49 @@ export default {
     const { fontSize, repeat, list } = props
 
     let timeline = gsap.timeline({
-      repeat: (repeat)? -1: 0
+      repeat: (repeat)? -1: 0,
+      delay: 1
     })
     
     const displacement = fontSize * 22;
 
     onMounted(() => {
-      list.forEach((item, index) => {
-        timeline
-        .fromTo(`.letter-${index}`,
-        {
-          y: displacement,
-        },
-        {
-          y: 3
-          ,
-          duration: .5,
-          ease: 'Power.easeIn',
-        }, "<")
-        .to(`.letter-${index}`, {
-          y: displacement,
-          delay: 2,
-          duration: .5,
-          ease: 'Power.easeOut',
+      if(list.length > 1) {
+        list.forEach((item, index) => {
+          timeline
+          .fromTo(`.letter-${index}`,
+          {
+            y: displacement,
+          },
+          {
+            y: 3
+            ,
+            duration: .5,
+            ease: 'Power.easeIn',
+          })
+          .to(`.letter-${index}`, {
+            y: displacement,
+            delay: 2,
+            duration: .5,
+            ease: 'Power.easeOut',
+          })
         })
-      })
+      } else {
+        timeline
+          .fromTo(`.letter-0`,
+          {
+            y: displacement,
+            duration: .5,
+            ease: 'Power.easeIn',
+          },
+          {
+            y: 3
+            ,
+            duration: .5,
+            ease: 'Power.easeIn',
+          })
+      }
+      
       
       timeline.play()
     })   

@@ -11,7 +11,7 @@
 
 <script>
 import { onMounted } from 'vue'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { process } from '@/composables/jsonHighlighter.js'
 import { useComponentsPageStore } from '/src/stores/ComponentsPageStore'
 import { useSkillsStore } from '@/stores/SkillsStore'
@@ -39,6 +39,10 @@ export default {
 
     const project = props.project
 
+    const logo = computed(() => {
+      return new URL(`../assets/sanz_logo_accent.svg`, import.meta.url).href
+    })
+    
     console.log('lodash', _.find(skills_store.skills, { exp: '12'}))
     
     // standard practise

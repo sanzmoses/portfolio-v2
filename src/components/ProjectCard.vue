@@ -8,6 +8,7 @@
       <AnimatedString 
         :list="project.responsibilities" 
         :fontSize="1.3"
+        :repeat="responsibilities_length > 1 ? true: false"
         color="primary"
       />
     </div>
@@ -45,27 +46,6 @@
 
             <p class="text-subtitle mb-0">Work Type:</p> 
             <p class="text-body1 text-primary">{{ project.type }}</p>
-
-            <p class="text-subtitle mb-0">Responsibilities:</p> 
-            <AnimatedString 
-              :list="project.responsibilities" 
-              :fontSize="1.3"
-              color="primary"
-            />
-
-            <div class="flex mt-10">
-              <template v-for="tool in project.tools" :key="'tool-'+tool">
-                <q-chip 
-                  outline
-                  size="sm"
-                  color="accent" 
-                  text-color="black" 
-                  class="mr-5"
-                >
-                  {{ tool }}
-                </q-chip>
-              </template>
-            </div>
           </div>    -->
 
         </div>
@@ -73,10 +53,10 @@
           
     </q-card>
 
-    <div class="outer-text lower-right">
+    <div class="outer-text lower-right" ref="tools">
       <template v-for="(tool, index) in project.tools" :key="'tool-'+tool">
-        <p class="tool">{{ tool }} {{ project.tools.length }}</p>
-        <div v-if="index < project.tools.length - 1" class="tool-line"></div> 
+        <p class="tool">{{ tool }}</p>
+        <div v-if="index < tools_length - 1" class="tool-line"></div> 
       </template>
     </div>
 
@@ -86,7 +66,7 @@
 <script>
 import { process } from '@/composables/jsonHighlighter.js'
 import gsap from 'gsap'
-import { onMounted, onBeforeUnmount, ref } from 'vue'
+import { onMounted, onBeforeUnmount, ref, computed } from 'vue'
 import AnimatedString from './Animated/Switch.vue'
 
 export default {
@@ -112,6 +92,14 @@ export default {
     const getImageUrl = (name) => {
       return new URL(`../assets/screenshot/a_${name}`, import.meta.url).href
     }
+
+    const responsibilities_length = computed(() => {
+      return project.responsibilities.length
+    })
+
+    const tools_length = computed(() => {
+      return project.tools.length
+    })
 
     function onHover() {
       let progress = Math.trunc(timeline.progress() * 100);
@@ -171,9 +159,11 @@ export default {
       title,
       subtitle,
       on_filter,
-      getImageUrl,
       timeline,
-      onHover
+      responsibilities_length,
+      getImageUrl,
+      onHover,
+      tools_length,
     }
   },
 }
