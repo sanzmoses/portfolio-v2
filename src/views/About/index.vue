@@ -15,6 +15,7 @@
           />
         </div>
       </div> -->
+      
       <div class="col-1"></div>
       <div class="col-5">
         <section class="pr-5">

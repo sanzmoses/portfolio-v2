@@ -4,9 +4,19 @@
     @mouseenter="onHover"
     @mouseleave="timeline.resume()"
   > 
-    
-    <q-card class="no-border-radius" flat :bordered="false">
+    <div class="outer-text upper-right">
+      <AnimatedString 
+        :list="project.responsibilities" 
+        :fontSize="1.3"
+        color="primary"
+      />
+    </div>
 
+    <q-card 
+      class="no-border-radius" 
+      :bordered="false"
+      flat 
+    >
       <q-img
         :class="['col-12 image-ss', {'on-filter': on_filter}]"
         :src="getImageUrl(project.img)"
@@ -28,7 +38,7 @@
             </div>            
           </div>
 
-          <div class="content-details">
+          <!-- <div class="content-details">
             <div class="bg-div-details"></div>
             <p class="text-subtitle mb-0">Project:</p> 
             <p class="text-body1 text-primary">{{ project.nickname  }}</p>
@@ -56,12 +66,20 @@
                 </q-chip>
               </template>
             </div>
-          </div>   
+          </div>    -->
 
         </div>
       </template>
           
     </q-card>
+
+    <div class="outer-text lower-right">
+      <template v-for="(tool, index) in project.tools" :key="'tool-'+tool">
+        <p class="tool">{{ tool }} {{ project.tools.length }}</p>
+        <div v-if="index < project.tools.length - 1" class="tool-line"></div> 
+      </template>
+    </div>
+
   </div>
 </template>
 
@@ -167,8 +185,9 @@ export default {
   height: 100%;
   max-width: 1200px;
   max-height: 650px;
-  overflow: hidden;
+  overflow: visible;
   position: relative;
+  padding: 0px 0px 0px 25px;
 
   .overlay-section {
     position: absolute;
@@ -229,6 +248,35 @@ export default {
 
     * {
       position: relative;
+    }
+  }
+
+  .outer-text {
+    position: absolute;
+
+    &.upper-right {
+      top: 51px;
+      left: -57px;
+      min-width: 130px;
+      transform: rotate(-90deg);
+    }
+
+    &.lower-right {
+      display: flex;
+      align-items: center;
+      bottom: -28px;
+      left: 28px;
+
+      .tool {
+        margin: 0px;;
+
+        &-line {
+          width: 30px;
+          border-top: 1px solid white;
+          height: 1px;
+          margin: 0px 20px;
+        }
+      }
     }
   }
 }

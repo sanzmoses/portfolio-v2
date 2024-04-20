@@ -48,7 +48,7 @@ export default {
         timeline
         .fromTo(`.letter-${index}`,
         {
-          y: -displacement,
+          y: displacement,
         },
         {
           y: 3
@@ -82,7 +82,7 @@ export default {
   .letter {
     position: absolute !important;
     top: 0;
-    left: 0;
+    right: 0;
   }
 }
 
