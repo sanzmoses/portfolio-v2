@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-xl contact">
+  <div class="q-pa-sm contact">
 
     <div class="row contact--body">
       <div class="col-2">

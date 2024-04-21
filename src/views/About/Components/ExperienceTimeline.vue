@@ -4,7 +4,7 @@
       <div class="nav-btn mt-10">
         <!-- <q-icon class="animated fadeOutRight infinite slower mr-1" name="arrow_right_alt"></q-icon> -->
 
-        <q-btn @click="$emit('navigate', 'about')" color="white mr-10" outline> 
+        <q-btn @click="goAboutMe" color="white mr-10" outline> 
           <div class="line"></div>
 
           <span class="font-weight-bold text-lowercase">
@@ -13,24 +13,26 @@
         </q-btn>      
       </div>
 
-      <div class="focus-exp">
-        <h3 class="company text-primary">RemotePro.ph</h3>
-        <div class="sub-info">
-          <span class="date text-accent">February 2021</span> 
-          <div class="line-divider"></div>
-          <span class="type">Employment</span> 
-          <div class="line-divider"></div>
-          <span class="resp">Front-end Developer</span>
-        </div>
+      <template v-if="active_exp">
+        <div class="focus-exp">
+          <h3 class="company text-primary">{{ active_exp.company }}</h3>
+          <div class="sub-info">
+            <span class="date text-accent">{{ formatDate(active_exp.datestamp.start) }}</span> 
+            <div class="line-divider"></div>
+            <span class="type">{{ active_exp.experience.type }}</span> 
+            <div class="line-divider"></div>
+            <span class="resp">{{ active_exp.role }}</span>
+          </div>
 
-        <p class="desc">Develops web app as front-end developer for an engineering firm using vue and laravel</p>
-      </div>
+          <p class="desc">{{ active_exp.description }}</p>
+        </div>
+      </template>
     </section>
    
     <section class="exp-carousel">
       <div class="years">
         <template v-for="year in years" :key="year">
-          <div class="year-dot">
+          <div @click="active_year = year" :class="['year-dot', { active: active_year == year }]">
             <p>{{ year }}</p>
             <div class="dot"></div>
           </div>
@@ -38,114 +40,123 @@
       </div>
       <div class="timeline"></div>
       <div class="list-per-year">
-        <template v-for="exp in exps" :key="exp">
-          <ExpCard :exp="exp" />
+        <template v-for="exp in exps_year" :key="exp">
+          <ExpCard :exp="exp" @click="selectExp(exp)" />
         </template>
       </div>
     </section>
   </div>
-  <!-- <q-timeline :layout="layout" color="accent">
-    <q-timeline-entry heading>
-      Experience
-      ({{$q.screen.lt.sm ? 'Dense' : ($q.screen.lt.md ? 'Comfortable' : 'Loose')}} 
-    </q-timeline-entry>
-
-    <template v-for="(exp, index) in expStore.experience" :key="'exp-'+index">
-      <q-timeline-entry
-        :title="exp.company"
-        :subtitle="formatDate(exp.datestamp.start)"
-        :side="(index%2==0)?'left':'right'"
-      >
-        <div>
-          <p class="mb-0 text-bold">{{ '<'+exp.experience.description+'/>' }}</p>
-        <p>{{formatDate(exp.datestamp.start)}}</p>
-          <p class="text-caption">{{ exp.role }}</p>
-          <p class="text-caption mt-2">
-            {{ exp.description }}
-          </p>
-        </div>
-      </q-timeline-entry>
-    </template>  
-  </q-timeline> -->
+  
 </template>
 
 <script>
 import { useExpStore } from '@/stores/ExperienceStore'
 import { useQuasar } from 'quasar'
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import moment from 'moment'
+import _ from 'lodash'
 import ExpCard from "@/components/Experience/DateExpCard.vue"
+import gsap from 'gsap'
 
 export default {
+  name: "ExperienceTimeline",
   components: {
     ExpCard
   },
-  setup() {
+  setup(props, { emit }) {
     const expStore = useExpStore();
+    const experiences = expStore.experience
     const $q = useQuasar()
-    const years = ref([2018, 2019, 2020, 2021, 2022])
-    const exps = ref([
-      {
-        id: 10,
-        company: 'ZTM Academy',
-        address: 'Udemy Course',
-        role: 'Student',
-        experience: {
-          type: 'Online Course',
-          description: 'Javascript: The Advanced Concepts', 
-        },
-        datestamp: {
-          start: '2023-01-01',
-          end: '2023-31-01'
-        },
-        description: 'Key concepts, best practices and latest features of Javascript.'
-      },
-      {
-        id: 9,
-        company: 'RemotePro.ph',
-        address: 'Davao City',
-        role: 'Front End Developer',
-        experience: {
-          type: 'Employment',
-          description: 'Self-employed',
-        },
-        datestamp: {
-          start: '2021-02-01',
-          end: 'present'
-        },
-        description: 'Develops web app as front-end developer for an engineering firm using vue and laravel'
-      },
-      {
-        id: 8,
-        company: 'Link Value Inc.',
-        address: 'Davao City',
-        role: 'Front End Developer',
-        experience: {
-          type: 'Employment',
-          description: 'Self-employed',
-        },
-        datestamp: {
-          start: '2020-02-01',
-          end: '2021-10-01'
-        },
-        description: 'Develops web app as front-end developer - with Vue and Nuxt as JS framework, UIKit as library and GIT as version control. Working on Social site for a crypto coin in thailand called LVC.'
-      },
-    ])
+    // const years = ref([2018, 2019, 2020, 2021, 2022])
+    const exps = ref([])
+    const active_year = ref(2021)
+    const active_exp = ref(null)
+    
+    let timeline = gsap.timeline({
+      ease: 'Power4.easeInOut',
+      duration: 0.4,
+      onReverseComplete: () => {
+        emit('navigate', 'about')
+      }
+    })
 
     const layout = computed(() => {
       return $q.screen.lt.sm ? 'dense' : ($q.screen.lt.md ? 'comfortable' : 'loose')
+    })
+
+    const years = computed(() => {
+      const yrs = experiences.map(exp => {
+        const date_object = moment(exp.datestamp.start);
+        return date_object.format('YYYY');
+      })
+
+      return _.intersection(yrs).sort()
+    })
+
+    const exps_year = computed(() => {
+      return _.filter(experiences, function(exp) {
+        const date_object = moment(exp.datestamp.start);
+        const year = date_object.format('YYYY');
+        return year == active_year.value
+      });
     })
 
     const formatDate = (d) => {
       return moment(d).format("MMMM YYYY")
     }
 
+    const selectExp = exp => {
+      active_exp.value = exp
+    }
+
+    const goAboutMe = () => {
+      timeline.reverse();
+    }
+
+    active_exp.value = exps_year.value[0]
+
+    onMounted(() => {
+      
+      timeline
+      .from(".nav-btn", {
+        opacity: 0,
+        x: 20
+      })
+      .from(".line", {
+        opacity: 0,
+        x: -500
+      }, "<")
+      .from(".focus-exp", {
+        opacity: 0,
+        y: -20
+      })
+      .from(".years", {
+        opacity: 0,
+        x: -50
+      })
+      .from(".timeline", {
+        opacity: 0,
+        x: 50
+      }, "<")
+      .from(".list-per-year", {
+        opacity: 0,
+        x: 50
+      }, "<")
+
+      timeline.play()
+    })
+
     return {
       expStore,
       layout,
       formatDate,
       years,
-      exps
+      exps,
+      active_year,
+      exps_year,
+      active_exp,
+      selectExp,
+      goAboutMe,
     }
   },
 }
@@ -213,14 +224,22 @@ export default {
     width: 100%;
     .years {
       display: flex;
-      justify-content: center;
+      justify-content: end;
     
       .year-dot {
         width: 300px;
-        text-align: center;
         cursor: pointer;
         position: relative;
         flex-shrink: 0;
+        display: flex;
+        align-items: end;
+        justify-content: center;
+        
+        p {
+          font-size: 16px;
+          margin-bottom: 15px;
+          transition: all 0.4 ease-out;
+        }
         
         .dot {
           width: 10px;
@@ -229,7 +248,25 @@ export default {
           background-color: white;
           position: absolute;
           bottom: -5px;
-          left: calc(50% - 5px)
+          left: calc(50% - 5px);
+          transition: all 0.4 ease-in-out;
+        }
+
+        &.active {
+          p {
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #45e3ff;
+            transition: all 0.4 ease-in-out;
+          }
+          .dot {
+            width: 18px;
+            height: 18px;
+            bottom: -10px;
+            background-color: #45e3ff;
+            transition: all 0.4 ease-in-out;
+          }
         }
       }
     }

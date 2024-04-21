@@ -46,6 +46,7 @@ export default {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  padding: 0px 0px 20px
 }
 
 </style>

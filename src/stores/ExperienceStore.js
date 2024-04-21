@@ -13,7 +13,7 @@ export const useExpStore = defineStore('ExpStore', {
             description: 'Javascript: The Advanced Concepts', 
           },
           datestamp: {
-            start: '2023-01-01',
+            start: '2023-01-10',
             end: '2023-31-01'
           },
           description: 'Key concepts, best practices and latest features of Javascript.'
@@ -28,7 +28,7 @@ export const useExpStore = defineStore('ExpStore', {
             description: 'Self-employed',
           },
           datestamp: {
-            start: '2021-02-01',
+            start: '2021-10-23',
             end: 'present'
           },
           description: 'Develops web app as front-end developer for an engineering firm using vue and laravel'
@@ -43,7 +43,7 @@ export const useExpStore = defineStore('ExpStore', {
             description: 'Self-employed',
           },
           datestamp: {
-            start: '2020-02-01',
+            start: '2020-02-07',
             end: '2021-10-01'
           },
           description: 'Develops web app as front-end developer - with Vue and Nuxt as JS framework, UIKit as library and GIT as version control. Working on Social site for a crypto coin in thailand called LVC.'
@@ -58,7 +58,7 @@ export const useExpStore = defineStore('ExpStore', {
             description: 'Full-time',
           },
           datestamp: {
-            start: '2019-08-01',
+            start: '2019-08-15',
             end: '2020-01-01'
           },
           description: 'Develops websites for clients and uses mostly plain CSS and Javascript, UIKIT as library, GIT as version control.'
@@ -73,7 +73,7 @@ export const useExpStore = defineStore('ExpStore', {
             description: 'Remote',
           },
           datestamp: {
-            start: '2019-04-01',
+            start: '2019-04-05',
             end: '2019-08-01'
           },
           description: 'Development of plugins in a web marketing app,  and automated testings using selenium and codeception.'
@@ -97,7 +97,7 @@ export const useExpStore = defineStore('ExpStore', {
           id: 4,
           company: 'U:Hack X Tech Up Agri Hackathon',
           address: 'Azuela Cove, Davao City',
-          role: 'Front-end',
+          role: 'Participant',
           experience: {
             type: 'Event', 
             description: 'Hackathon',
@@ -118,7 +118,7 @@ export const useExpStore = defineStore('ExpStore', {
             description: 'Full-time', // Hackathon
           },
           datestamp: {
-            start: '2018-04-01',
+            start: '2018-04-15',
             end: '2019-02-01'
           },
           description: 'Developing and maintaining cms, microsites and web applications for marketing purpose using Wordpress, OctoberCMS and Laravel framework. Assigned in both back-end and front-end tasks as well as documentations. Working with tools like Git, Gitlab CI, APIs and SaaS integrations.'

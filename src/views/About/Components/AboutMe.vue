@@ -1,15 +1,15 @@
 <template>
   <section class="about-me">
     <div class="title">
-      <h1 class="text">ABOUT</h1>
+      <h1 class="text text-title">ABOUT</h1>
     </div>
 
     <div class="name text-primary">
-      <h4 class="text">SANZ MOSES</h4>
+      <h4 class="text text-name">SANZ MOSES</h4>
     </div>
 
-    <div class="intro-container">
-      <div class="line"></div>
+    <div class="intro-container p-body">
+      <div class="line line-top"></div>
       <p class="text-h6">I am a</p>
 
       <div class="designation-container">
@@ -24,25 +24,25 @@
       </div>
     </div> 
     
-    <p class="text-weight-thin text-justify">
+    <p class="text-weight-thin text-justify p-body">
       I've been working as a professional web developer since April of 2018. My career progressed from being a full-stack developer with Php (Laravel) and Yii, to a more narrowed field in the web development process which is front-end. I am adept in building websites from scratch using only vanilla JS and css preprocessors and also experienced mobile development using React-native and experienced other front-end tools like Angular but my repertoire has always been <span class="text-weight-bold">VueJs</span>.
     </p>
-    <p class="text-weight-thin text-justify">
+    <p class="text-weight-thin text-justify p-body">
       Although I am more inclined in Web Development as it has been since my bread and butter. I am beginning to explore other fields such as design and even more specialize spheres like web 3d animations.         
     </p>
-    <p class="text-weight-thin text-justify">
+    <p class="text-weight-thin text-justify p-body">
       Having an Insatiable desire to learn new things, I am always open for opportunities, love figuring things out on my own and constantly improving.
     </p>
 
     <div class="nav-btn mt-15">
       <!-- <q-icon class="animated fadeOutRight infinite slower mr-1" name="arrow_right_alt"></q-icon> -->
 
-      <q-btn @click="$emit('navigate', 'exp')" color="white mr-10" outline> 
+      <q-btn @click="goTimeline" color="white mr-10" outline> 
         <span class="font-weight-bold text-lowercase">
           timeline
         </span>
 
-        <div class="line"></div>
+        <div class="line line-bot"></div>
       </q-btn>      
     </div>
   </section>
@@ -51,27 +51,62 @@
 <script>
 import { ref, onMounted } from 'vue'
 import AnimatedString from '@/components/Animated/Switch.vue'
+import gsap from 'gsap'
 
 export default {
   name: 'AboutMe',
   components: {
     AnimatedString
   },
-  setup() {
+  setup(props,  { emit }) {
     const designations = ref([
       "Front-end Developer", 
       "Javascript Developer", 
       "Web Developer",
     ]);
 
+    let timeline = gsap.timeline({
+      ease: 'Power4.easeInOut',
+      duration: 0.4,
+      onReverseComplete: () => {
+        emit('navigate', 'exp')
+      }
+    })
 
+    const goTimeline = () => {
+      // Reverse the timeline
+      timeline.reverse();
+    }
 
     onMounted(() => {
-      
+      timeline
+      .from(".text-title", {
+          y: 200,
+        })
+      .from(".text-name", {
+          y: -100,
+        }, "<")
+      .from(".p-body", {
+          x: -20,
+          opacity: 0
+        })
+      .from(".nav-btn", {
+          x: 20,
+          opacity: 0
+        }, "<")
+      .from(".line-top", {
+          x: -500,
+        })
+      .from(".line-bot", {
+          x: 500,
+        }, "<")
+
+      timeline.play()
     })
     
     return { 
-      designations
+      designations,
+      goTimeline
     }
   }
 }
@@ -82,6 +117,7 @@ export default {
   max-width: 960px;
   padding: 0 20px;
   .title {
+    overflow: hidden;
     .text {
       font-weight: bold;
       margin: 0px;
@@ -91,6 +127,7 @@ export default {
   }
 
   .name {
+    overflow: hidden;
     margin-top: -30px;
     .text {
       font-weight: bold;

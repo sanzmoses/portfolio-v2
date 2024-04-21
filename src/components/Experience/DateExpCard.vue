@@ -39,6 +39,7 @@ export default {
     })
     
     return { 
+      exp,
       company,
       role,
       date,
@@ -53,7 +54,7 @@ export default {
   width: 310px;
   padding: 20px;
   margin-top: 20px;
-  
+
   h5 {
     margin-bottom: 10px;
     margin-top: 0px;
