@@ -85,6 +85,12 @@ export const useQuoteStore = defineStore('QuoteStore', {
         },
       ]
     }),
+    getters: {
+      random_quote: (state) => {
+        const random = Math.floor(Math.random() * state.quotes.length);
+        return state.quotes[random];
+      },
+    },
     actions: {
       SET_SKILL(data) {
         this.skills.push(data)

@@ -74,8 +74,8 @@
 </template>
 
 <script>
-import { process } from '@/composables/jsonHighlighter.js'
 import gsap from 'gsap'
+import { process } from '@/composables/jsonHighlighter.js'
 import { onMounted, onBeforeUnmount, ref, computed } from 'vue'
 import AnimatedString from './Animated/Switch.vue'
 
