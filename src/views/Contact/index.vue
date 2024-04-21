@@ -5,7 +5,7 @@
       <div class="col-2">
       </div>
       <div class="col-6">
-        <h3 class="q-mt-none">{{ '<Contact/>' }}</h3>
+        <h2 class="q-mt-none text-weight-bold">Contact</h2>
         
         <p class="text-subtitle-1 text-weight-thin"> 
             I am currently living in Davao, but I wouldn't mind an adventure.

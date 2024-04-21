@@ -1,6 +1,12 @@
 <template>
   <div class="about-container">
-    <AboutMe />
+    <template v-if="nav == 'about'">
+      <AboutMe @navigate="navTo" />
+    </template>
+    <template v-else>
+      <ExperienceTimeline @navigate="navTo" />
+    </template>
+    
   </div>
 </template>
 
@@ -19,12 +25,15 @@ export default {
     Skills,
   },
   setup () {
-    const lorem = ref(null);
+    const nav = ref('about');
 
-    lorem.value = '';
+    const navTo = name => {
+      nav.value = name
+    }
 
     return {
-      lorem
+      nav,
+      navTo
     }
   },
 }

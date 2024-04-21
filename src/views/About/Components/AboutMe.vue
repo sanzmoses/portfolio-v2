@@ -1,7 +1,12 @@
 <template>
   <section class="about-me">
-    <h1 class="title">ABOUT</h1>
-    <h4 class="name text-primary">SANZ MOSES</h4>
+    <div class="title">
+      <h1 class="text">ABOUT</h1>
+    </div>
+
+    <div class="name text-primary">
+      <h4 class="text">SANZ MOSES</h4>
+    </div>
 
     <div class="intro-container">
       <div class="line"></div>
@@ -32,7 +37,7 @@
     <div class="nav-btn mt-15">
       <!-- <q-icon class="animated fadeOutRight infinite slower mr-1" name="arrow_right_alt"></q-icon> -->
 
-      <q-btn color="white mr-10" outline> 
+      <q-btn @click="$emit('navigate', 'exp')" color="white mr-10" outline> 
         <span class="font-weight-bold text-lowercase">
           timeline
         </span>
@@ -56,8 +61,10 @@ export default {
     const designations = ref([
       "Front-end Developer", 
       "Javascript Developer", 
-      "Web Developer"
+      "Web Developer",
     ]);
+
+
 
     onMounted(() => {
       
@@ -75,17 +82,21 @@ export default {
   max-width: 960px;
   padding: 0 20px;
   .title {
-    font-weight: bold;
-    margin-bottom: 0px;
-    opacity: .15;
-    text-align: right;
+    .text {
+      font-weight: bold;
+      margin: 0px;
+      opacity: .15;
+      text-align: right;
+    }
   }
 
   .name {
-    font-weight: bold;
-    margin-bottom: 0px;
     margin-top: -30px;
-    text-align: right;
+    .text {
+      font-weight: bold;
+      margin: 0px;
+      text-align: right;
+    }
   }
 
   .intro-container {

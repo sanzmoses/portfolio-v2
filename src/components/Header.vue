@@ -46,7 +46,13 @@ export default {
     const tab = ref('Projects')
     const toolbar = ref(null)
     const global_store = useGlobalStore()
-    let timeline = gsap.timeline()
+    let timeline = gsap.timeline({
+      onStart: () => {
+        // initialize route name
+        const route_name = vueRoute.name
+        tab.value = route_name
+      }
+    })
 
     const logo = computed(() => {
       return new URL(`../assets/sanz_logo_accent.svg`, import.meta.url).href
@@ -88,7 +94,7 @@ export default {
       let animation = gsap.to("#header", {
         backgroundColor: '#00355c', 
         duration: .5,
-        paused: true
+        paused: true,
       });
 
       window.onscroll = () => {
