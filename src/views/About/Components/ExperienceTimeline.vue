@@ -52,7 +52,7 @@
 <script>
 import { useExpStore } from '@/stores/ExperienceStore'
 import { useQuasar } from 'quasar'
-import { computed, ref, onMounted } from 'vue'
+import { computed, ref, onMounted, watch } from 'vue'
 import moment from 'moment'
 import _ from 'lodash'
 import ExpCard from "@/components/Experience/DateExpCard.vue"
@@ -114,6 +114,10 @@ export default {
     }
 
     active_exp.value = exps_year.value[0]
+
+    watch(exps_year, () => {
+      active_exp.value = exps_year.value[0]
+    })
 
     onMounted(() => {
       
@@ -192,6 +196,7 @@ export default {
   .focus-exp {
     max-width: 620px;
     margin: 0 auto;
+    min-height: 240px;
 
     .company {
       margin-bottom: 0px;
@@ -281,6 +286,7 @@ export default {
     .list-per-year {
       display: flex;
       justify-content: center;
+      cursor: pointer;
     }
   }
 }  
