@@ -19,15 +19,30 @@
 
 <script>
 import Header from './components/Header.vue'
+import { useRoute  } from 'vue-router';
+import { onMounted } from 'vue'
+import { useGlobalStore } from '/src/stores/GlobalStore'
 
 export default {
   name: 'App',
   components: {
     Header,
   },
-  data: () => ({
-    //
-  }),
+  setup() {
+    const global_store = useGlobalStore()
+    const setInitialLoading = global_store.SET_INITIAL_LOADING
+
+    const vueRoute = useRoute()
+
+    onMounted(async () => {
+      setTimeout(() => {
+        if(vueRoute.name !== "Initial") {
+          setInitialLoading(false)
+        }
+      }, 100)
+    })
+   
+  }
 }
 </script>
 

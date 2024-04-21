@@ -67,7 +67,6 @@ export default {
       const actual_height = quote_height.height
       
       const proper_height = actual_height > 30 ? -20: 0
-      console.log(quote_height, proper_height)
 
       gsap.set(".ct-words", {
         top: proper_height

@@ -1,5 +1,5 @@
 <template>
-  <div :class="['container', 'text-'+color]" :style="{ fontSize: fontSize+'em', height: fontSize+.5+'em' }">
+  <div :class="['container', 'text-'+color, classes]" :style="{ fontSize: fontSize+'em', height: fontSize+.5+'em' }">
     
     <template v-for="(word, word_index) in list" :key="`word-${word}-${word_index}`">
       <span :class="`letter letter-${word_index}`">{{ word }}</span>
@@ -30,12 +30,20 @@ export default {
     color: {
       type: String,
       default: "white"
+    },
+    classes: {
+      type: String,
+      default: "right"
+    },
+    classic: {
+      type: Boolean,
+      default: false
     }
   },
   setup(props) {
     const blink = ref(false)
 
-    const { fontSize, repeat, list } = props
+    const { fontSize, repeat, list, classic } = props
 
     let timeline = gsap.timeline({
       repeat: (repeat)? -1: 0,
@@ -43,6 +51,7 @@ export default {
     })
     
     const displacement = fontSize * 22;
+    const dynamic_disp = classic? -displacement: displacement
 
     onMounted(() => {
       if(list.length > 1) {
@@ -50,7 +59,7 @@ export default {
           timeline
           .fromTo(`.letter-${index}`,
           {
-            y: displacement,
+            y: dynamic_disp,
           },
           {
             y: 3
@@ -97,11 +106,22 @@ export default {
   position: relative;
   overflow: hidden;
 
-  .letter {
-    position: absolute !important;
-    top: 0;
-    right: 0;
+  &.right {
+    .letter {
+      position: absolute !important;
+      top: 0;
+      right: 0;
+    }
   }
+
+  &.left {
+    .letter {
+      position: absolute !important;
+      top: 0;
+      left: 0;
+    }
+  }
+ 
 }
 
 </style>
