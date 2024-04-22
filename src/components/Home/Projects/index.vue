@@ -49,15 +49,6 @@ export default {
     }
   },
   mounted() {
-    // setTimeout(() => {
-    //   this.projects.forEach(project => {
-    //     gsap.from("#project-"+project.id, {
-    //       x: -100,
-    //       opacity: 0,
-    //     });
-    //   })
-    // }, 100)
-
     gsap.to(".page-title", {
       opacity: 0.1,
       delay: 1

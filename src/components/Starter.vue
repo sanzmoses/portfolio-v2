@@ -9,12 +9,17 @@ import { ref, onMounted } from 'vue'
 
 export default {
   name: 'Starter',
+  props: {
+    data: {
+      type: Object,
+      required: true
+    }
+  },
   components: {
     
   },
-  setup() {
+  setup(props) {
     const lorem = ref(null);
-
     lorem.value = '';
 
     onMounted(() => {

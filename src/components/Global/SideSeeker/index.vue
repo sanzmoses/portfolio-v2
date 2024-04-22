@@ -51,6 +51,9 @@ export default {
   data: () => ({
     active: -1,
     show_number: false,
+    scroll_activity: 0,
+    scroll_activity_threshold: 500,
+    timeout: null
   }),
   computed: {
     current_item() {
@@ -67,13 +70,13 @@ export default {
       if(indexOfCurrentItem >= this.items.length - 1) indexOfCurrentItem = -1
       return this.items[indexOfCurrentItem+=1]
     },
+    prev_item() {
+      let indexOfCurrentItem = this.index_of_current_item - 1;
+      if(indexOfCurrentItem <= 0) indexOfCurrentItem = this.items.length - 1
+      return this.items[indexOfCurrentItem]
+    },
     index_of_current_item() {
       return this.items.indexOf(this.current_item)
-    }
-  },
-  watch: {
-    current_item: function(value) {
-      this.$emit("seekerClicked", value)
     }
   },
   methods: {
@@ -109,11 +112,40 @@ export default {
         onComplete: done
       })
     },
+    scrollEvent(event) {
+      this.scroll_activity += event.wheelDelta
+
+      if(this.scroll_activity > this.scroll_activity_threshold) {
+        this.scroll_activity = 0;
+        this.itemClicked(this.prev_item.id)
+      }
+
+      if(this.scroll_activity < -this.scroll_activity_threshold) {
+        this.scroll_activity = 0;
+        this.itemClicked('next')
+      }
+    }
+  },
+  watch: {
+    current_item: function(value) {
+      this.$emit("seekerClicked", value)
+    },
+    scroll_activity(value) {
+      if(value > 0) {
+        clearTimeout(this.timeout)
+
+        this.timeout = setTimeout(() => {
+          this.scroll_activity = 0
+        }, 400)
+      }
+    }
   },
   mounted() {
     setTimeout(() => {
       this.show_number = true;
     }, 2000)
+
+    onwheel = (event) => this.scrollEvent(event);
   }
 }
 </script>
