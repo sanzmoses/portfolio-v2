@@ -66,7 +66,7 @@ export default {
     ]);
 
     let timeline = gsap.timeline({
-      ease: 'Power4.easeInOut',
+      ease: 'Power2.inOut',
       duration: 0.4,
       onReverseComplete: () => {
         emit('navigate', 'exp')
@@ -95,10 +95,10 @@ export default {
           opacity: 0
         }, "<")
       .from(".line-top", {
-          x: -500,
+          x: -800,
         })
       .from(".line-bot", {
-          x: 500,
+          x: 800,
         }, "<")
 
       timeline.play()
@@ -162,7 +162,7 @@ export default {
 
     .line {
       height: 1px;
-      width: calc(100vw - 75vw);
+      width: calc(100vw - 60vw);
       background-color: white;
       position: absolute;
       top: 17px;

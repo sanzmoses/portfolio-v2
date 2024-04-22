@@ -1,23 +1,28 @@
 <template>
-  <div class="date-exp">
+  <div :class="['date-exp', { 'text-primary': is_active }]">
     <h5>
       <span class="date">{{ date }}</span> 
       <span class="month">{{ month }}</span>
     </h5>
-    <p>{{ company }}</p>
+    <p class="text-body1">{{ company }}</p>
     <p>{{ role }}</p>
   </div>
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
+import { onMounted, computed } from 'vue'
 import moment from "moment"
+import _ from "lodash"
 
 export default {
   name: 'DateExpCard',
   components: { },
   props: {
     exp: {
+      type: Object,
+      required: true
+    },
+    active: {
       type: Object,
       required: true
     }
@@ -34,8 +39,11 @@ export default {
     const date = date_object.date(); // Get the date (day of the month)
     const month = date_object.format('MMMM');
 
+    const is_active = computed(() => {
+      return _.isEqual(exp, props.active)
+    })
+
     onMounted(() => {
-      
     })
     
     return { 
@@ -43,7 +51,8 @@ export default {
       company,
       role,
       date,
-      month
+      month,
+      is_active
     }
   }
 }

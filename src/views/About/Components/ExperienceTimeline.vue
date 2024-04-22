@@ -13,35 +13,38 @@
         </q-btn>      
       </div>
 
-      <template v-if="active_exp">
-        <div class="focus-exp">
-          <h3 class="company text-primary">{{ active_exp.company }}</h3>
-          <div class="sub-info">
-            <span class="date text-accent">{{ formatDate(active_exp.datestamp.start) }}</span> 
-            <div class="line-divider"></div>
-            <span class="type">{{ active_exp.experience.type }}</span> 
-            <div class="line-divider"></div>
-            <span class="resp">{{ active_exp.role }}</span>
-          </div>
-
-          <p class="desc">{{ active_exp.description }}</p>
-        </div>
-      </template>
+      <transition
+        mode="out-in"
+        @before-enter="beforeEnter"
+        @enter="onEnter"
+        @leave="onLeave"
+      >
+        <FocusedExpCard 
+          :key="active_exp.id" 
+          :data="active_exp" 
+          class="focus-card" 
+        />
+      </transition>
+      
     </section>
    
     <section class="exp-carousel">
       <div class="years">
-        <template v-for="year in years" :key="year">
-          <div @click="active_year = year" :class="['year-dot', { active: active_year == year }]">
+        <template v-for="(year, index) in years" :key="year">
+          <div 
+            @click="setActiveYear(year, index)" 
+            :class="['year-dot', `year-${year}`, { active: active_year == year }]"
+          >
             <p>{{ year }}</p>
             <div class="dot"></div>
           </div>
         </template>
       </div>
       <div class="timeline"></div>
+      
       <div class="list-per-year">
-        <template v-for="exp in exps_year" :key="exp">
-          <ExpCard :exp="exp" @click="selectExp(exp)" />
+        <template v-for="exp in exps_year" :key="`expcard-${exp.id}`">
+          <ExpCard :active="active_exp"  :exp="exp" @click="selectExp(exp)" />
         </template>
       </div>
     </section>
@@ -56,30 +59,32 @@ import { computed, ref, onMounted, watch } from 'vue'
 import moment from 'moment'
 import _ from 'lodash'
 import ExpCard from "@/components/Experience/DateExpCard.vue"
+import FocusedExpCard from "@/components/Experience/FocusedExpCard.vue"
 import gsap from 'gsap'
 
 export default {
   name: "ExperienceTimeline",
   components: {
-    ExpCard
+    ExpCard,
+    FocusedExpCard,
   },
   setup(props, { emit }) {
     const expStore = useExpStore();
     const experiences = expStore.experience
     const $q = useQuasar()
-    // const years = ref([2018, 2019, 2020, 2021, 2022])
     const exps = ref([])
     const active_year = ref(2021)
     const active_exp = ref(null)
+    const current_center = ref(300)
     
     let timeline = gsap.timeline({
-      ease: 'Power4.easeInOut',
+      ease: 'Power2.inOut',
       duration: 0.4,
       onReverseComplete: () => {
         emit('navigate', 'about')
       }
     })
-
+    
     const layout = computed(() => {
       return $q.screen.lt.sm ? 'dense' : ($q.screen.lt.md ? 'comfortable' : 'loose')
     })
@@ -93,6 +98,13 @@ export default {
       return _.intersection(yrs).sort()
     })
 
+    const year_placement = computed(() => {
+      let start = 1080;
+      return years.value.map((yr, index) => {
+        return start - (index * 300)
+      })
+    })
+
     const exps_year = computed(() => {
       return _.filter(experiences, function(exp) {
         const date_object = moment(exp.datestamp.start);
@@ -101,51 +113,100 @@ export default {
       });
     })
 
-    const formatDate = (d) => {
-      return moment(d).format("MMMM YYYY")
-    }
-
     const selectExp = exp => {
       active_exp.value = exp
     }
 
-    const goAboutMe = () => {
-      timeline.reverse();
+    const setActiveYear = (year, index) => {
+      const x = year_placement.value[index]
+      gsap.to(".years", {
+        x,
+        ease: 'Power3.inOut',
+        duration: 0.5,
+        onStart: () => {
+          gsap.to(".list-per-year", {
+            y: 20,
+            opacity: 0,
+            duration: 0.5,
+            ease: 'Power2.inOut',
+          })
+        },
+        onComplete: () => {
+          active_year.value = year
+
+          gsap.fromTo(".list-per-year", {
+            y: -20,
+            opacity: 0,
+          }, {
+            y: 0,
+            opacity: 1,
+            duration: 0.5,
+            ease: 'Power2.inOut',
+          })
+        }
+      })
+    }
+
+    const goAboutMe = () => timeline.reverse();
+
+    const beforeEnter = (el, done) => {
+      gsap.set(el, {
+        x: -50,
+        opacity: 0,
+        duration: .5,
+        onComplete: done
+      })
+    }
+
+    const onEnter = (el, done) => {
+      gsap.to(el, {
+        x: 0,
+        opacity: 1,
+        duration: .5,
+        onComplete: done
+      })
+    }
+
+    const onLeave = (el, done) => {
+      gsap.to(el, {
+        x: 50,
+        opacity: 0,
+        duration: .5,
+        onComplete: done
+      })
     }
 
     active_exp.value = exps_year.value[0]
-
     watch(exps_year, () => {
-      active_exp.value = exps_year.value[0]
+      selectExp(exps_year.value[0])
     })
 
     onMounted(() => {
-      
       timeline
-      .from(".nav-btn", {
-        opacity: 0,
-        x: 20
-      })
-      .from(".line", {
-        opacity: 0,
-        x: -500
-      }, "<")
-      .from(".focus-exp", {
-        opacity: 0,
-        y: -20
-      })
-      .from(".years", {
-        opacity: 0,
-        x: -50
-      })
-      .from(".timeline", {
-        opacity: 0,
-        x: 50
-      }, "<")
-      .from(".list-per-year", {
-        opacity: 0,
-        x: 50
-      }, "<")
+        .from(".nav-btn", {
+          opacity: 0,
+          x: 20
+        })
+        .from(".line", {
+          opacity: 0,
+          x: -800
+        }, "<")
+        .from(".focus-card", {
+          opacity: 0,
+          y: -20
+        })
+        .from(".years", {
+          opacity: 0,
+          x: -50
+        })
+        .from(".timeline", {
+          opacity: 0,
+          x: 50
+        }, "<")
+        .from(".list-per-year", {
+          opacity: 0,
+          y: -30
+        }, "<")
 
       timeline.play()
     })
@@ -153,14 +214,18 @@ export default {
     return {
       expStore,
       layout,
-      formatDate,
       years,
       exps,
       active_year,
+      experiences,
       exps_year,
       active_exp,
       selectExp,
       goAboutMe,
+      setActiveYear,
+      beforeEnter,
+      onEnter,
+      onLeave,
     }
   },
 }
@@ -185,42 +250,11 @@ export default {
 
     .line {
       position: absolute;
-      width: calc(100vw - 75vw);
+      width: calc(100vw - 60vw);
       background-color: white;
       height: 1px;
       top: 17px;
       right: 73px;
-    }
-  }
-
-  .focus-exp {
-    max-width: 620px;
-    margin: 0 auto;
-    min-height: 240px;
-
-    .company {
-      margin-bottom: 0px;
-      font-size: 50px;
-    }
-
-    .sub-info {
-      display: flex;
-      align-items: center;
-      margin-bottom: 20px;
-      .date {
-        font-size: 20px;
-      }
-
-      .line-divider {
-        width: 20px;
-        height: 1px;
-        background-color: white;
-        margin: 0px 10px;
-      }
-    }
-
-    .desc {
-      max-width: 500px;
     }
   }
 
@@ -230,7 +264,6 @@ export default {
     .years {
       display: flex;
       justify-content: end;
-    
       .year-dot {
         width: 300px;
         cursor: pointer;
@@ -239,50 +272,42 @@ export default {
         display: flex;
         align-items: end;
         justify-content: center;
-        
+        padding: 10px;
+        margin-bottom: -15px;
+
         p {
           font-size: 16px;
           margin-bottom: 15px;
-          transition: all 0.4 ease-out;
+          transition: all 0.6s ease-out;
         }
-        
         .dot {
           width: 10px;
           height: 10px;
           border-radius: 25px;
           background-color: white;
           position: absolute;
-          bottom: -5px;
           left: calc(50% - 5px);
-          transition: all 0.4 ease-in-out;
+          transition: all 0.4s ease-in-out;
         }
-
         &.active {
           p {
-            font-size: 40px;
-            font-weight: bold;
+            transform: translateY(-25px) scale(2.5);
             margin-bottom: 15px;
             color: #45e3ff;
-            transition: all 0.4 ease-in-out;
           }
           .dot {
-            width: 18px;
-            height: 18px;
-            bottom: -10px;
+            transform: translateY(0px) scale(1.5);
             background-color: #45e3ff;
-            transition: all 0.4 ease-in-out;
           }
         }
       }
     }
-
     .timeline {
       width: 100%;
       height: 1px;
       background: rgb(69,227,255);
       background: linear-gradient(90deg, rgba(69,227,255,0) 0%, rgba(69,227,255,1) 51%, rgba(0,212,255,0) 100%);
     }
-
     .list-per-year {
       display: flex;
       justify-content: center;

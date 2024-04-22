@@ -51,7 +51,8 @@ export default {
     const $q = useQuasar()
 
     const is_mobile = computed(() => {
-      return $q.screen.lt.sm ? true : false
+      const is_height_mb = $q.screen.height < 500
+      return $q.screen.lt.sm || is_height_mb ? true : false
     })
 
     watch(is_mobile, () => {
@@ -97,5 +98,6 @@ body {
   padding: 20px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 </style>

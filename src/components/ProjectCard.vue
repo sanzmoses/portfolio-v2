@@ -61,7 +61,7 @@
           
     </q-card>
 
-    <div class="outer-text lower-right" ref="tools">
+    <div class="outer-text lower-left" ref="tools">
       <template v-for="(tool, index) in project.tools" :key="'tool-'+tool">
         <section class="tool-container">
           <p :class="['tool', 'tool-'+index]">{{ tool }}</p>
@@ -309,8 +309,8 @@ export default {
       transform: rotate(-90deg);
     }
 
-    &.lower-right {
-      bottom: -28px;
+    &.lower-left {
+      bottom: -30px;
       left: 28px;
       display: flex;
       align-items: center;
