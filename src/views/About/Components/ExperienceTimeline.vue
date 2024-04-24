@@ -1,5 +1,6 @@
 <template >
   <div class="exp-timeline">
+
     <section class="btn-presentation">
       <div class="nav-btn mt-10">
         <!-- <q-icon class="animated fadeOutRight infinite slower mr-1" name="arrow_right_alt"></q-icon> -->
@@ -13,33 +14,41 @@
         </q-btn>      
       </div>
 
-      <transition
-        mode="out-in"
-        @before-enter="beforeEnter"
-        @enter="onEnter"
-        @leave="onLeave"
-      >
-        <FocusedExpCard 
-          :key="active_exp.id" 
-          :data="active_exp" 
-          class="focus-card" 
-        />
-      </transition>
-      
+      <div class="focus-card" >
+        <transition
+          mode="out-in"
+          @before-enter="beforeEnter"
+          @enter="onEnter"
+          @leave="onLeave"
+        >
+          <FocusedExpCard 
+            :key="active_exp.id" 
+            :data="active_exp" 
+          />
+        </transition>
+      </div>
     </section>
    
     <section class="exp-carousel">
       <div class="years">
-        <template v-for="(year, index) in years" :key="year">
-          <div 
-            @click="setActiveYear(year, index)" 
-            :class="['year-dot', `year-${year}`, { active: active_year == year }]"
-          >
-            <p>{{ year }}</p>
-            <div class="dot"></div>
-          </div>
-        </template>
+        <div class="years-dots">
+          <template v-for="(year, index) in years" :key="year">
+            <div 
+              @click="setActiveYear(year, index)" 
+              :class="['year-dot', 
+                { 
+                  active: active_year == year,
+                  edges: checkIfEdgesOfActiveYearIndex(index),
+                }
+              ]"
+            >
+              <p :class="[`year-${year}`]">{{ year }}</p>
+              <div :class="['dot', `dot-${year}`]"></div>
+            </div>
+          </template>
+        </div>
       </div>
+
       <div class="timeline"></div>
       
       <div class="list-per-year">
@@ -73,16 +82,16 @@ export default {
     const experiences = expStore.experience
     const $q = useQuasar()
     const exps = ref([])
-    const active_year = ref(2021)
+    const active_year = ref(2019)
     const active_exp = ref(null)
-    const current_center = ref(300)
+    const is_forward = ref(false)
     
     let timeline = gsap.timeline({
       ease: 'Power2.inOut',
       duration: 0.4,
       onReverseComplete: () => {
         emit('navigate', 'about')
-      }
+      },
     })
     
     const layout = computed(() => {
@@ -99,7 +108,7 @@ export default {
     })
 
     const year_placement = computed(() => {
-      let start = 1080;
+      let start = 770;
       return years.value.map((yr, index) => {
         return start - (index * 300)
       })
@@ -119,7 +128,10 @@ export default {
 
     const setActiveYear = (year, index) => {
       const x = year_placement.value[index]
-      gsap.to(".years", {
+      const previous_year = active_year.value
+      is_forward.value = (year - previous_year) > 0
+
+      gsap.to(".years-dots", {
         x,
         ease: 'Power3.inOut',
         duration: 0.5,
@@ -128,6 +140,20 @@ export default {
             y: 20,
             opacity: 0,
             duration: 0.5,
+            ease: 'Power2.inOut',
+          })
+
+          gsap.to(`.year-${previous_year}`, {
+            y: 0,
+            scale: 1,
+            duration: 0.2,
+            ease: 'Power2.inOut',
+          })
+
+          gsap.to(`.year-${year}`, {
+            y: -10,
+            scale: 2,
+            duration: 0.1,
             ease: 'Power2.inOut',
           })
         },
@@ -147,11 +173,19 @@ export default {
       })
     }
 
-    const goAboutMe = () => timeline.reverse();
+    const goAboutMe = () => {
+      timeline.timeScale(1.5);
+      timeline.reverse();
+    }
+
+    const checkIfEdgesOfActiveYearIndex = (index) => {
+      const active_yr_index = years.value.findIndex(yr => yr == active_year.value)
+      return Math.abs(index - active_yr_index) >= 2
+    }
 
     const beforeEnter = (el, done) => {
       gsap.set(el, {
-        x: -50,
+        x: is_forward.value ? 50: -50,
         opacity: 0,
         duration: .5,
         onComplete: done
@@ -169,7 +203,7 @@ export default {
 
     const onLeave = (el, done) => {
       gsap.to(el, {
-        x: 50,
+        x: is_forward.value ? -50: 50,
         opacity: 0,
         duration: .5,
         onComplete: done
@@ -182,6 +216,8 @@ export default {
     })
 
     onMounted(() => {
+      // set default active year
+
       timeline
         .from(".nav-btn", {
           opacity: 0,
@@ -205,7 +241,12 @@ export default {
         }, "<")
         .from(".list-per-year", {
           opacity: 0,
-          y: -30
+          y: -30,
+          onComplete: () => {
+            const starting_year = 2021
+            const active_year_index = years.value.findIndex(x => x == starting_year)
+            setActiveYear(starting_year, active_year_index)
+          }
         }, "<")
 
       timeline.play()
@@ -226,6 +267,7 @@ export default {
       beforeEnter,
       onEnter,
       onLeave,
+      checkIfEdgesOfActiveYearIndex,
     }
   },
 }
@@ -261,9 +303,10 @@ export default {
   .exp-carousel {
     margin-top: 50px;
     width: 100%;
-    .years {
+    .years-dots {
       display: flex;
-      justify-content: end;
+      justify-content: center;
+      z-index: 1;
       .year-dot {
         width: 300px;
         cursor: pointer;
@@ -291,13 +334,19 @@ export default {
         }
         &.active {
           p {
-            transform: translateY(-25px) scale(2.5);
-            margin-bottom: 15px;
             color: #45e3ff;
           }
           .dot {
-            transform: translateY(0px) scale(1.5);
             background-color: #45e3ff;
+          }
+        }
+
+        &.edges {
+          p {
+            color: #ffffff79;
+          }
+          .dot {
+            background-color: #ffffff77;
           }
         }
       }

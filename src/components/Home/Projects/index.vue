@@ -4,7 +4,7 @@
           <div class="relative-position">
             <h1 class="page-title">PROJECTS</h1>
             <template v-for="project in projects" :key="project.name">
-              <template v-if="project.id === show" >
+              <template v-if="project.id === active_id" >
                 <ProjectItem 
                   :id="'project-'+project.id" 
                   :item="project" 
@@ -22,9 +22,10 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import ProjectItem from "./ProjectItem.vue"
 import { getData } from '@/composables/projects.js'
+import { useProjectStore } from '@/stores/ProjectStore'
 import SideSeeker from "@/components/Global/SideSeeker/index.vue";
 import gsap from 'gsap'
 
@@ -36,16 +37,20 @@ export default {
   },
   setup() {
     const { projects } = getData()
-    const show = ref(-1)
+    const projectStore = useProjectStore()
 
     const setShow = (item) => {
-      show.value = item.id
+      projectStore.SET_ACTIVE_PROJECT(item.id)
     }
+
+    const active_id = computed(() => {
+      return projectStore.active_project_id
+    })
 
     return { 
       projects,
-      show,
       setShow,
+      active_id
     }
   },
   mounted() {

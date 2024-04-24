@@ -75,6 +75,7 @@ export default {
 
     const goTimeline = () => {
       // Reverse the timeline
+      timeline.timeScale(1.5);
       timeline.reverse();
     }
 

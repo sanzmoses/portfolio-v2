@@ -4,7 +4,7 @@ export const useProjectStore = defineStore('ProjectStore', {
     state: () => ({
         projects: [
           {
-            id: -1,
+            id: 0,
             name: 'Typanic',
             nickname: 'Typanic',
             link: 'https://typanic.sanzmoses.net/',
@@ -18,7 +18,7 @@ export const useProjectStore = defineStore('ProjectStore', {
             icon: 'code'
           },
           {
-            id: 0,
+            id: 1,
             name: 'PZSE Portal',
             nickname: 'PZSE Portal',
             link: 'https://app-dev.pzse.com',
@@ -32,7 +32,7 @@ export const useProjectStore = defineStore('ProjectStore', {
             icon: 'js'
           },
           {
-            id: 1,
+            id: 2,
             name: 'Link Value',
             nickname: 'Link Value',
             link: 'https://linkvalue.net/',
@@ -46,7 +46,7 @@ export const useProjectStore = defineStore('ProjectStore', {
             icon: 'currency_exchange'
           },
           {
-            id: 2,
+            id: 3,
             name: 'GS Living',
             nickname: 'GS Value',
             link: 'https://greatersydneyliving.com.au/',
@@ -60,7 +60,7 @@ export const useProjectStore = defineStore('ProjectStore', {
             icon: 'newspaper'
           },
           {
-            id: 3,
+            id: 4,
             name: 'Super Student HQ',
             nickname: 'Superstudent',
             link: 'https://sshq.cre8iv.click/',
@@ -74,7 +74,7 @@ export const useProjectStore = defineStore('ProjectStore', {
             icon: 'school'
           },
           {
-            id: 4,
+            id: 5,
             name: 'Ecoplant Australia',
             nickname: 'Ecoplant',
             link: 'https://ecoplantaustralia.com.au/',
@@ -88,7 +88,7 @@ export const useProjectStore = defineStore('ProjectStore', {
             icon: 'forest'
           },
           {
-            id: 5,
+            id: 6,
             name: 'Online Expert',
             nickname: 'Oexpert',
             link: 'https://oexpert.cre8iv.click/',
@@ -102,7 +102,7 @@ export const useProjectStore = defineStore('ProjectStore', {
             icon: 'laptop_mac'
           },
           {
-            id: 6,
+            id: 7,
             name: 'Sue Tsigaros',
             nickname: 'Sue Tsigaros',
             link: 'https://suetsigaros.cre8iv.click/',
@@ -116,7 +116,7 @@ export const useProjectStore = defineStore('ProjectStore', {
             icon: 'self_improvement'
           },
           {
-            id: 7,
+            id: 8,
             name: 'Cost Miner',
             nickname: 'Cost Miner',
             link: 'https://cm.cre8iv.click/',
@@ -130,7 +130,7 @@ export const useProjectStore = defineStore('ProjectStore', {
             icon: 'request_quote'
           },
           {
-            id: 8,
+            id: 9,
             name: 'Photopro Website',
             nickname: 'Photopro',
             link: 'http://photoprotrading.com',
@@ -144,7 +144,7 @@ export const useProjectStore = defineStore('ProjectStore', {
             icon: 'shopping_cart'
           },
           {
-            id: 9,
+            id: 10,
             name: 'Cased Dimensions',
             nickname: 'CDM site',
             link: 'http://servicemanagerapps.com',
@@ -158,7 +158,7 @@ export const useProjectStore = defineStore('ProjectStore', {
             icon: 'support_agent'
           },
           {
-            id: 10,
+            id: 11,
             name: 'Onlinekeycodes',
             nickname: 'OKC site',
             link: 'http://onlinekeycodes.com',
@@ -172,7 +172,7 @@ export const useProjectStore = defineStore('ProjectStore', {
             icon: 'key'
           },
           // {
-          //     id: 11,
+          //     id: 12,
           //     name: 'SOS Network Davao Site',
           //     nickname: 'SOS Network',
           //     link: '#',
@@ -186,7 +186,7 @@ export const useProjectStore = defineStore('ProjectStore', {
           //     icon: 'family_restroom'
           // },
           // {
-          //     id: 12,
+          //     id: 13,
           //     name: 'Quizz App',
           //     nickname: 'Quizzapp',
           //     link: 'https://sanzmoses.github.io/quizzapp',
@@ -200,7 +200,7 @@ export const useProjectStore = defineStore('ProjectStore', {
           //     icon: 'terminal'
           // },
           // {
-          //     id: 13,
+          //     id: 14,
           //     name: 'Wiki App',
           //     nickname: 'Wiki App',
           //     link: 'https://sanzmoses.github.io/wiki',
@@ -214,7 +214,7 @@ export const useProjectStore = defineStore('ProjectStore', {
           //     icon: 'manage_search  '
           // },
           // {
-          //     id: 14,
+          //     id: 15,
           //     name: 'Weather App',
           //     nickname: 'Weather App',
           //     link: 'https://sanzmoses.github.io/wep',
@@ -228,7 +228,7 @@ export const useProjectStore = defineStore('ProjectStore', {
           //     icon: 'cloudy_snowing'
           // },
           // {
-          //   id: 15,
+          //   id: 16,
           //   name: 'Twitter Clone',
           //   nickname: 'TwitterClone',
           //   link: 'https://sanzmoses.github.io/ng-twa',
@@ -255,12 +255,16 @@ export const useProjectStore = defineStore('ProjectStore', {
           //   color: 'green-card', 
           //   icon: 'php'
           // },
-        ] 
+        ],
+        active_project_id: 0
     }),
     actions: {
       // since we rely on `this`, we cannot use an arrow function
       SET_PROJECTS(projects) {
         this.projects = projects
+      },
+      SET_ACTIVE_PROJECT(id) {
+        this.active_project_id = id
       },
     },
 })

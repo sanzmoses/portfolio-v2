@@ -31,7 +31,6 @@ export default {
     },
     methods: {
         deleteItem() {
-          console.log("deleting item", this.item.id)
             // fetch(`http://localhost:3000/projects/${this.item.id}`, {
             //     method: 'DELETE',
             // })
