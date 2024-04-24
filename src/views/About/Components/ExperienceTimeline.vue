@@ -57,6 +57,8 @@
         </template>
       </div>
     </section>
+
+    <MouseScroll />
   </div>
   
 </template>
@@ -71,12 +73,14 @@ import { computed, ref, onMounted, watch } from 'vue'
 import ExpCard from "@/components/Experience/DateExpCard.vue"
 import FocusedExpCard from "@/components/Experience/FocusedExpCard.vue"
 import { useWheelEvent } from '@/composables/onwheel.js'
+import MouseScroll from "@/components/Animated/MouseScroll.vue"
 
 export default {
   name: "ExperienceTimeline",
   components: {
     ExpCard,
     FocusedExpCard,
+    MouseScroll,
   },
   setup(props, { emit }) {
     const expStore = useExpStore();
