@@ -97,8 +97,8 @@ export default {
     const subtitle = ref(null);
     const on_filter = ref(true)
     let frontText;
-    let timeline = gsap.timeline()
-    let skills_timeline = gsap.timeline({ delay: 1 })
+    const timeline = gsap.timeline()
+    const skills_timeline = gsap.timeline({ delay: 1 })
 
     const getImageUrl = (name) => {
       return new URL(`../assets/screenshot/a_${name}`, import.meta.url).href
