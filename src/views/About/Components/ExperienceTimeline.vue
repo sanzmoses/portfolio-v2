@@ -62,14 +62,15 @@
 </template>
 
 <script>
+import _ from 'lodash'
+import gsap from 'gsap'
+import moment from 'moment'
 import { useExpStore } from '@/stores/ExperienceStore'
 import { useQuasar } from 'quasar'
 import { computed, ref, onMounted, watch } from 'vue'
-import moment from 'moment'
-import _ from 'lodash'
 import ExpCard from "@/components/Experience/DateExpCard.vue"
 import FocusedExpCard from "@/components/Experience/FocusedExpCard.vue"
-import gsap from 'gsap'
+import { useWheelEvent } from '@/composables/onwheel.js'
 
 export default {
   name: "ExperienceTimeline",
@@ -215,6 +216,8 @@ export default {
       selectExp(exps_year.value[0])
     })
 
+    const delta = ref(0)
+
     onMounted(() => {
       // set default active year
 
@@ -250,6 +253,22 @@ export default {
         }, "<")
 
       timeline.play()
+
+      useWheelEvent((direction) => {
+        const active_yr_index = years.value.findIndex(yr => yr == active_year.value)
+        let year = years.value[active_yr_index];
+        let index = active_yr_index
+
+        if(direction === "next") {
+          if(active_yr_index == years.value.length - 1) return;
+          year = years.value[index += 1];
+        } else {
+          if(active_yr_index == 0) return;
+          year = years.value[index -= 1];
+        }
+
+        setActiveYear(year, index)
+      })
     })
 
     return {
@@ -268,6 +287,8 @@ export default {
       onEnter,
       onLeave,
       checkIfEdgesOfActiveYearIndex,
+      delta,
+      useWheelEvent
     }
   },
 }

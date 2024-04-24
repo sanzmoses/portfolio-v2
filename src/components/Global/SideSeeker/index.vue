@@ -36,6 +36,7 @@ import SeekerItem from "./item.vue"
 import Arrow from "../Arrow.vue"
 import gsap from 'gsap'
 import { useProjectStore } from '@/stores/ProjectStore'
+import { useWheelEvent } from '@/composables/onwheel.js'
 
 export default {
   name: "SideSeeker",
@@ -51,9 +52,6 @@ export default {
   },
   data: () => ({
     show_number: false,
-    scroll_activity: 0,
-    scroll_activity_threshold: 500,
-    timeout: null
   }),
   computed: {
     current_item() {
@@ -72,7 +70,7 @@ export default {
     },
     prev_item() {
       let indexOfCurrentItem = this.index_of_current_item - 1;
-      if(indexOfCurrentItem <= 0) indexOfCurrentItem = this.items.length - 1
+      if(this.index_of_current_item <= 0) indexOfCurrentItem = this.items.length - 1
       return this.items[indexOfCurrentItem]
     },
     index_of_current_item() {
@@ -118,41 +116,22 @@ export default {
         onComplete: done
       })
     },
-    scrollEvent(event) {
-      this.scroll_activity += event.wheelDelta
-
-      if(this.scroll_activity > this.scroll_activity_threshold) {
-        this.scroll_activity = 0;
-        this.itemClicked(this.prev_item.id)
-      }
-
-      if(this.scroll_activity < -this.scroll_activity_threshold) {
-        this.scroll_activity = 0;
-        this.itemClicked('next')
-      }
+    scrollEvent(direction) {
+      this.itemClicked(direction === 'next' ? direction: this.prev_item.id)
     }
   },
   watch: {
     current_item: function(value) {
       this.$emit("seekerClicked", value)
     },
-    scroll_activity(value) {
-      if(value > 0) {
-        clearTimeout(this.timeout)
-
-        this.timeout = setTimeout(() => {
-          this.scroll_activity = 0
-        }, 400)
-      }
-    }
   },
   mounted() {
     setTimeout(() => {
       this.show_number = true;
     }, 2000)
 
-    onwheel = (event) => this.scrollEvent(event);
-  }
+    useWheelEvent(this.scrollEvent)
+  },
 }
 </script>
 
