@@ -17,20 +17,20 @@ export const useProjectStore = defineStore('ProjectStore', {
             color: '', 
             icon: 'code'
           },
-          {
-            id: 1,
-            name: 'PZSE Portal',
-            nickname: 'PZSE Portal',
-            link: 'https://app-dev.pzse.com',
-            code: '#',
-            img: 'pzse.png',
-            responsibilities: ['Frontend'],
-            tools: ['Laravel', 'VueJS', 'Vuetify 2', 'SCSS'],
-            type: 'Employment',
-            description: 'Front-end development',
-            color: 'green-card', 
-            icon: 'js'
-          },
+          // {
+          //   id: 1,
+          //   name: 'PZSE Portal',
+          //   nickname: 'PZSE Portal',
+          //   link: 'https://app-dev.pzse.com',
+          //   code: '#',
+          //   img: 'pzse.png',
+          //   responsibilities: ['Frontend'],
+          //   tools: ['Laravel', 'VueJS', 'Vuetify 2', 'SCSS'],
+          //   type: 'Employment',
+          //   description: 'Front-end development',
+          //   color: 'green-card', 
+          //   icon: 'js'
+          // },
           {
             id: 2,
             name: 'Link Value',
