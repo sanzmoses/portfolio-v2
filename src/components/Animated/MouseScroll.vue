@@ -1,7 +1,7 @@
 <template>
   <div class="mouse-scroll" 
     :style="{ 
-      left: position.x - 30 + 'px', 
+      left: position.x - 40 + 'px', 
       top: position.y + 'px', 
     }"
   >
@@ -55,7 +55,7 @@ export default {
 .mouse-scroll {
   position: absolute;
   margin: auto;
-  width :34px;
+  width : 34px;
   height: 55px;
 }
 .mousey {

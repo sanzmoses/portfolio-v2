@@ -9,14 +9,14 @@ export const useExpStore = defineStore('ExpStore', {
           address: 'Udemy Course',
           role: 'Student',
           experience: {
-            type: 'Online Course',
+            type: 'Udemy Course',
             description: 'Javascript: The Advanced Concepts', 
           },
           datestamp: {
             start: '2023-01-10',
             end: '2023-31-01'
           },
-          description: 'Key concepts, best practices and latest features of Javascript.'
+          description: 'Key concepts, best practices and latest features of Javascript ES2023.'
         },
         {
           id: 9,
@@ -31,7 +31,7 @@ export const useExpStore = defineStore('ExpStore', {
             start: '2021-10-23',
             end: 'present'
           },
-          description: 'Develops web app as front-end developer for an engineering firm using vue and laravel'
+          description: 'Develops web app as front-end developer for an engineering firm using Vue2 as Frontend with Vuetify as library and Laravel as backend, integrating api and tools like google maps and braintree'
         },
         {
           id: 8,
