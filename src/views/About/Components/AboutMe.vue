@@ -25,14 +25,21 @@
     </div> 
     
     <p class="text-weight-thin text-justify p-body">
-      I've been working as a professional web developer since April of 2018. My career progressed from being a full-stack developer with Php (Laravel) and Yii, to a more narrowed field in the web development process which is front-end. I am adept in building websites from scratch using only vanilla JS and css preprocessors and also experienced mobile development using React-native and experienced other front-end tools like Angular but my repertoire has always been <span class="text-weight-bold">VueJs</span>.
+      I've been working as a professional web developer for {{ years_fromnow }} years. My career progressed from being a full-stack developer with Php (Laravel) and Yii, to a more narrowed field in the web development process which is front-end. I am adept in building websites from scratch using only vanilla JS and css preprocessors and also experienced mobile development using React-native and experienced other front-end tools like Angular but my repertoire has always been <span class="text-weight-bold">VueJs</span>.
     </p>
     <p class="text-weight-thin text-justify p-body">
-      Although I am more inclined in Web Development as it has been since my bread and butter. I am beginning to explore other fields such as design and even more specialize spheres like web 3d animations.         
+      Although I am more inclined in Front-end development as it has been since my bread and butter. I am beginning to explore other domains such as design and web 3d animations.         
     </p>
     <p class="text-weight-thin text-justify p-body">
       Having an Insatiable desire to learn new things, I am always open for opportunities, love figuring things out on my own and constantly improving.
     </p>
+
+    <div class="exp-yrs-container">
+      <h1 class="text-weight-bold text-yrs">
+        <span class="mr-1">{{ years_fromnow }}</span>
+        <span class="text-h3">yrs of exp</span>
+      </h1>
+    </div>
 
     <div class="nav-btn mt-15">
       <!-- <q-icon class="animated fadeOutRight infinite slower mr-1" name="arrow_right_alt"></q-icon> -->
@@ -49,9 +56,10 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import AnimatedString from '@/components/Animated/Switch.vue'
 import gsap from 'gsap'
+import moment from 'moment'
 
 export default {
   name: 'AboutMe',
@@ -59,11 +67,17 @@ export default {
     AnimatedString
   },
   setup(props,  { emit }) {
+    const start_working = ref("2018-04-15")
+
     const designations = ref([
       "Front-end Developer", 
       "Javascript Developer", 
       "Web Developer",
     ]);
+
+    const years_fromnow = computed(() => {
+      return moment().diff(start_working.value, 'years')
+    })
 
     let timeline = gsap.timeline({
       ease: 'Power2.inOut',
@@ -87,6 +101,9 @@ export default {
       .from(".text-name", {
           y: -100,
         }, "<")
+      .from(".text-yrs", {
+          y: 300,
+        }, "<")
       .from(".p-body", {
           x: -20,
           opacity: 0
@@ -95,19 +112,27 @@ export default {
           x: 20,
           opacity: 0
         }, "<")
+      .to(".text-yrs", {
+          opacity: 0.1,
+        }, "<")
       .from(".line-top", {
           x: -800,
         })
       .from(".line-bot", {
           x: 800,
         }, "<")
+      .to(".text-title", {
+          opacity: 0.15,
+        }, "<")
+      
 
       timeline.play()
     })
     
     return { 
       designations,
-      goTimeline
+      goTimeline,
+      years_fromnow
     }
   }
 }
@@ -115,6 +140,7 @@ export default {
 
 <style lang="scss" scoped>
 .about-me {
+  position: relative;
   max-width: 960px;
   padding: 0 20px;
   .title {
@@ -122,7 +148,6 @@ export default {
     .text {
       font-weight: bold;
       margin: 0px;
-      opacity: .15;
       text-align: right;
     }
   }
@@ -168,6 +193,16 @@ export default {
       position: absolute;
       top: 17px;
       left: 98px;
+    }
+  }
+
+  .exp-yrs-container {
+    overflow: hidden;
+    position: absolute;
+    transform: translate(-60px, -50px);
+
+    h1 {
+      margin: 0px;
     }
   }
 }

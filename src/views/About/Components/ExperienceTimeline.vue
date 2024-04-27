@@ -14,6 +14,12 @@
         </q-btn>      
       </div>
 
+      <div class="title-container">
+        <h1 class="title">
+          TIMELINE
+        </h1>
+      </div>
+
       <div class="focus-card" >
         <transition
           mode="out-in"
@@ -234,6 +240,10 @@ export default {
           opacity: 0,
           x: -800
         }, "<")
+        .from(".title", {
+          opacity: 0,
+          y: -150
+        }, "<")
         .from(".focus-card", {
           opacity: 0,
           y: -20
@@ -254,6 +264,9 @@ export default {
             const active_year_index = years.value.findIndex(x => x == starting_year)
             setActiveYear(starting_year, active_year_index)
           }
+        }, "<")
+        .to(".title", {
+          opacity: 0.15,
         }, "<")
 
       timeline.play()
@@ -305,6 +318,18 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  position: relative;
+
+  .title-container {
+    position: absolute;
+    top: -5px;
+    right: 0px;
+
+    .title {
+      font-weight: bold;
+      margin: 0px;
+    }
+  }  
 
   .btn-presentation {
     width: 100%;

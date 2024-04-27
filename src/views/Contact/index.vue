@@ -6,7 +6,7 @@
       </div>
       <div class="col-6">
         <div class="overflow-hidden">
-          <h2 id="title" class="q-mt-none text-weight-bold mb-0 mt-3">Contact</h2>
+          <h1 id="title" class="q-mt-none text-weight-bold mb-0">Contact</h1>
         </div>
         
         <div class="overflow-hidden">
