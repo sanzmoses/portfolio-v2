@@ -10,7 +10,7 @@
         </div>
         
         <div class="overflow-hidden">
-          <p id="subtitle" class="text-subtitle-1 text-weight-thin"> 
+          <p id="subtitle" class="text-subtitle-1 text-weight-thin mb-0"> 
             I am currently living in Davao, but I wouldn't mind an adventure.
             <br> I treat opportunities as privilege and every connection a friend. 
             <br> Dont be a stranger. Just say Hi!
@@ -19,11 +19,16 @@
 
         <div class="">
             <p class="mb-0 mt-8"><b> Email me at</b></p>
-            <div class="overflow-hidden">
-              <p id="email" 
-                class="text-subtitle-1 text-weight-thin">
-                <i class="fas fa-envelope"></i>sanzmoses@gmail.com
-              </p>
+            <div class="overflow-hidden flex">
+              <a 
+                id="email" 
+                href="mailto:sanzmoses@gmail.com"
+                class="text-subtitle-1 email-link"
+              >
+                <q-icon name="mdi-gmail" color="white" /> 
+                <span class="ml-1 text-white">sanzmoses@gmail.com</span>
+                <span class="underline"></span> 
+              </a>
             </div>
             
             <p class="mb-0 mt-5"><b> Reach me on</b></p>
@@ -38,8 +43,8 @@
                   <span class="text-weight-thin ml-2">@Sanzmoses</span>
                 </p>
                 <p class="mt-0 mb-0">
-                  <q-icon name="mdi-phone" color="white" /> 
-                  <span class="text-weight-thin ml-2">+63 907 423 9571 </span>   
+                  <q-icon name="mdi-phone-in-talk" color="white" /> 
+                  <span class="text-weight-thin ml-2">+639074239571</span>
                 </p>
               </div>
             </section>  
@@ -55,10 +60,13 @@
                       <q-icon name="mdi-facebook" color="white" />
                   </a> 
                   <a class="mr-1" href="https://twitter.com/sanzillion" target="_blank">
-                      <q-icon name="mdi-twitter" color="white" />
+                      <q-icon name="mdi-close" color="white" />
                   </a> 
                   <a class="mr-1" href="https://www.instagram.com/sanzmoses/" target="_blank">
                       <q-icon name="mdi-instagram" color="white" />
+                  </a> 
+                  <a class="mr-1" href="https://www.linkedin.com/in/sandru-moses-valle-881039175/" target="_blank">
+                      <q-icon name="mdi-linkedin" color="white" />
                   </a> 
                 </p>
               </div>
@@ -96,6 +104,15 @@ export default {
     })
 
     onMounted(() => {
+      gsap.fromTo(".underline", {
+        x: -200,
+      }, {
+        x: 200,
+        duration: 1.5,
+        ease: 'Power.easeOut',
+        repeat: -1
+      })
+
       timeline
         .from("#title", {
           y: 50
@@ -126,3 +143,20 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.email-link {
+  display: block;
+  text-decoration: none;
+  overflow: hidden;
+
+  .underline {
+    border-bottom: 1px dashed rgb(0, 81, 255);
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+  }
+}
+</style>
