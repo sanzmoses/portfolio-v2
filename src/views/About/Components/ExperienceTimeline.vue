@@ -66,7 +66,6 @@
 
     <MouseScroll />
   </div>
-  
 </template>
 
 <script>
@@ -242,7 +241,7 @@ export default {
         }, "<")
         .from(".title", {
           opacity: 0,
-          y: -150
+          x: 150
         }, "<")
         .from(".focus-card", {
           opacity: 0,
@@ -318,12 +317,12 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  position: relative;
 
   .title-container {
     position: absolute;
-    top: -5px;
+    top: 90px;
     right: 0px;
+    overflow: hidden;
 
     .title {
       font-weight: bold;

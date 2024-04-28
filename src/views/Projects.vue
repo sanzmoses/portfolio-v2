@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-xl">
+  <div class="q-pa-xl position-relative">
     <Projects />
 
     <MouseScroll />
