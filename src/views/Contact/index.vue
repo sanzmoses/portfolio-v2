@@ -44,7 +44,10 @@
                 </p>
                 <p class="mt-0 mb-0">
                   <q-icon name="mdi-phone-in-talk" color="white" /> 
-                  <span class="text-weight-thin ml-2">+639074239571</span>
+                  <span class="text-weight-thin ml-2">(+63)9074239571</span>
+                </p>
+                <p class="mt-0 mb-0">
+                  <span class="text-weight-thin ml-6">(+63)9762193058</span>
                 </p>
               </div>
             </section>  
