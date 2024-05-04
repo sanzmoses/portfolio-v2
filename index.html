@@ -6,18 +6,118 @@
   <link rel="preload" as="style" onload="this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Courier Prime:wght@400;700&family=JetBrains Mono:wght@100;400;800&display=swap">
 
     <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon-32x32.ico" />
     <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAxJJREFUWEe9109oXFUUx/HPzQyJFinV0oWpLpWgYJW6V1xZS5F0SsCYtnRjtSKodFOQEpCiUZGCG6E1rVDbMJlE3IgiYhcKBXVjrAs31Y2ooFZoi6SZXOdmkpI/M/Pea5Le3fB+95zvPffcc84EOdZXlP/mSOAoyu22RH6fYuswsznMzklClrDKHSXew75AVyf9mgN8Qu8MZwKP54FdU4AqD5c5h76sKC18XzOACXYGRiN3Bj6Y5YecENf28GFO7cocGKZrG4ciI6hHXp1itEhSFXG+JAlPcdtG3sBLgb9mGBrgi6IGi+rnXsEkmyOjgV0p2SKfVthZ1NjN6EON+7oYwyMLmX5LASb4LXD3Yvp2ADWGAm9mnHQmcqzCyUDMikqYbCFqBzDBwcD7WUZxPfJunaMDTHfSrxdA8pnKcS1wsJ/L7SASQBIuKclrEIEb/iIXunimn19aQSSAYziM7kUVreUrGGdHib05rmBB8hh6I5cwWOHC8r0hFZ+H2I/j2JgEa/UKztLXw1hgG/6Z5fk9jDddNNeN0Fd5otwso1sjn1fYUeCkbaVVtpQ4FXgK0437Hv6Rd4aZWQKQftToC5wNPJCEs7w9QH21IGe4ZwNTjShvisym/nKFV/ZxdcU8kIjLjfqPJyOnr/JyEq4G4hy93VwMbJq3EyNf1tnbciCpcnuJkcAL+E4ziTJX5HKFFxffcdrUAmA+1XzddiKqUio1G1N6JRsyvTe9thzJ2gAkkykqndc4T3dxIrAlS3sTAD9lAiSnVbaX+Qj3dxrNCgKkPPg+F8D8Pd7bw8nIgx0i8eduti9vQm2ScCoymBsgK/ydvi8DSEXos/84MMgftwSgxqONyfp8oCdyopvDu7i2ohCt5pTt9i6qsJtTe77YKPkLVbAwQCScp5QH9GfCXQyVOB65HnhuNx8vrxGFrmCSA/NNKw9D0qT6cSnybGPG/LbVpkIABSaiuUoX+QZDFX5tR7wuAKnhNP5RjdU5NMC/ncK1HgDTkbfqvJ41DxZOwhr7A691CGdq3SP9nM4zESc7/wMk9fyne4WzugAAAABJRU5ErkJggg==" sizes="32x32" />
     <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAYdJREFUOE+N0z9rFFEUhvHfNbLIghKRoNjFQoVoISLY2KtgEUdlZWOjnXY2dmFrRbCwiSh2IehmFwQ7wS8QFESwUJQUggT/gESNMcw1s2bDeDMrnm7Oee9zz5zz3iCJNmOBR4E9/VJkMWMbYqoP5USH45jG9nL+vwAdrkQu5VwNLJYBK+QNnqW3F9/hKZs/cTNwdomxJl+qhINyYZbHgRORNxl7C+E0O2s0y4cC7zK6G2bQWRtM5HUf0OVwZC4R57j1gmstVvq10OVtZLQMmOFA7c8w0xiOPP/BhQm+9mbwgF1DzGKk38Gg/52ivoO7gf1LjDeZ762xKIwwlTP/kskWRbuVcY+twywEPuecXvdBi00HmQw0sJz44HvG0SJXAmzB+7+MVAge0hziDupVTiwDIh82AIpDq6s9EjlW6mL5DLeTDr5FGpWAfxmpzbnVQ61fZA1eVQLWNnMxBUV2B/bVOH+Kj701Vt02wEgx536dyyf5uW6kKkCbQ4EnJVHxjG+Mcz0kT/o30fxwCywCClMAAAAASUVORK5CYII=" sizes="16x16" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sanz Moses</title>
-  <script type="module" crossorigin src="/assets/index.5c28ba09.js"></script>
+  <script type="module" crossorigin src="/assets/index.bb5b3c19.js"></script>
   <link rel="stylesheet" href="/assets/index.f22f3d6a.css">
 </head>
 
 <body>
-    <div id="app"></div>
+    <div id="app">
+      <div class="--loader-container">
+        <div class="--loader-box">
+          <p class="--text --text-s">S</p>
+          <p class="--text --text-a">A</p>
+          <p class="--text --text-n">N</p>
+          <p class="--text --text-z">Z</p>
+        </div>
+      </div>
+
+    </div>
     
 </body>
 
 </html>
+
+<style>
+.--loader-container {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0b0021;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.--loader-box {
+  color: white;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
+  font-size: 25px;
+  border: 1px solid white;
+  display: flex;
+  flex-wrap: wrap;
+  width: 50px;
+  height: 50px;
+}
+
+.--text {
+  width: 25px;
+  height: 25px;
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.--text-s {
+  animation-name: s-path;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+.--text-a {
+  animation-name: a-path;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+.--text-n {
+  animation-name: n-path;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+.--text-z {
+  animation-name: z-path;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes s-path {
+  0%   { transform: translate(0px, 0px); }
+  25%  { transform: translate(25px, 0px);}
+  50%  { transform: translate(25px, 25px);}
+  75%  { transform: translate(0px, 25px);}
+  100% { transform: translate(0px, 0px);}
+}
+
+@keyframes a-path {
+  0%   { transform: translate(0px, 0px); }
+  25%  { transform: translate(0px, 25px);}
+  50%  { transform: translate(-25px, 25px);}
+  75%  { transform: translate(-25px, 0px);}
+  100% { transform: translate(0px, 0px);}
+}
+
+@keyframes n-path {
+  0%   { transform: translate(0px, 0px); }
+  25%  { transform: translate(0px, -25px);}
+  50%  { transform: translate(25px, -25px);}
+  75%  { transform: translate(25px, 0px);}
+  100% { transform: translate(0px, 0px);}
+}
+
+@keyframes z-path {
+  0%   { transform: translate(0px, 0px); }
+  25%  { transform: translate(-25px, 0px);}
+  50%  { transform: translate(-25px, -25px);}
+  75%  { transform: translate(0px, -25px);}
+  100% { transform: translate(0px, 0px);}
+}
+</style>
