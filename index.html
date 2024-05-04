@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon-32x32.ico" />
     <link rel="icon" type="image/png" href="src/assets/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="src/assets/favicon-16x16.png" sizes="16x16" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,8 +10,109 @@
 </head>
 
 <body>
-    <div id="app"></div>
+    <div id="app">
+      <div class="--loader-container">
+        <div class="--loader-box">
+          <p class="--text --text-s">S</p>
+          <p class="--text --text-a">A</p>
+          <p class="--text --text-n">N</p>
+          <p class="--text --text-z">Z</p>
+        </div>
+      </div>
+
+    </div>
     <script type="module" src="/src/main.js"></script>
 </body>
 
 </html>
+
+<style>
+.--loader-container {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0b0021;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.--loader-box {
+  color: white;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
+  font-size: 25px;
+  border: 1px solid white;
+  display: flex;
+  flex-wrap: wrap;
+  width: 50px;
+  height: 50px;
+}
+
+.--text {
+  width: 25px;
+  height: 25px;
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.--text-s {
+  animation-name: s-path;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+.--text-a {
+  animation-name: a-path;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+.--text-n {
+  animation-name: n-path;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+.--text-z {
+  animation-name: z-path;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes s-path {
+  0%   { transform: translate(0px, 0px); }
+  25%  { transform: translate(25px, 0px);}
+  50%  { transform: translate(25px, 25px);}
+  75%  { transform: translate(0px, 25px);}
+  100% { transform: translate(0px, 0px);}
+}
+
+@keyframes a-path {
+  0%   { transform: translate(0px, 0px); }
+  25%  { transform: translate(0px, 25px);}
+  50%  { transform: translate(-25px, 25px);}
+  75%  { transform: translate(-25px, 0px);}
+  100% { transform: translate(0px, 0px);}
+}
+
+@keyframes n-path {
+  0%   { transform: translate(0px, 0px); }
+  25%  { transform: translate(0px, -25px);}
+  50%  { transform: translate(25px, -25px);}
+  75%  { transform: translate(25px, 0px);}
+  100% { transform: translate(0px, 0px);}
+}
+
+@keyframes z-path {
+  0%   { transform: translate(0px, 0px); }
+  25%  { transform: translate(-25px, 0px);}
+  50%  { transform: translate(-25px, -25px);}
+  75%  { transform: translate(0px, -25px);}
+  100% { transform: translate(0px, 0px);}
+}
+</style>

@@ -1,7 +1,7 @@
 <template>
   <div id="header" :class="['fixed-header d-flex justify-space-between']">
     <q-toolbar>
-      <q-btn flat @click="goToSetTab('Projects')" class="header-logo" >
+      <q-btn flat @click="goToSetTab('/')" class="header-logo" >
         <q-img
           :src="logo"
           style="height: 20px; width: 20px"
@@ -36,7 +36,7 @@ import { useGlobalStore } from '/src/stores/GlobalStore'
 export default {
   setup() {
     const routes = ref([
-      { name: 'Projects', link: '/projects' },
+      { name: 'Projects', link: '/' },
       { name: 'About', link: '/about' },
       { name: 'Contact', link: '/contact' },
     ])
@@ -63,7 +63,7 @@ export default {
     }   
 
     const goToSetTab = (value) => {
-      router.push("/projects");
+      router.push(value);
       tab.value = "Projects"
     }   
         

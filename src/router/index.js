@@ -7,11 +7,10 @@ import Contact from '../views/Contact/index.vue'
 import Initial from '../views/Initial.vue'
 
 const routes = [
-    { path: '/projects', name: 'Projects', component: Projects },
+    { path: '/', name: 'Projects', component: Projects },
     { path: '/about', name: 'About', component: About },
     { path: '/contact', name: 'Contact', component: Contact },
     { path: '/components', name: 'Components', component: Components },
-    { path: '/', name: 'Initial', component: Initial },
 ]
 
 const router = createRouter({
