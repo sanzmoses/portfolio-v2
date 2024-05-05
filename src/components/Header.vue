@@ -1,14 +1,16 @@
 <template>
   <div id="header" :class="['fixed-header d-flex justify-space-between']">
     <q-toolbar>
-      <q-btn flat @click="goToSetTab('/')" class="header-logo" >
-        <q-img
-          :src="logo"
-          style="height: 20px; width: 20px"
-        />
+        <div class="header-logo" @click="goToSetTab('/')">
+          <q-img
+            class="logo"
+            :src="logo"
+          />
 
-        <span class="ml-2">sanzmoses</span>
-      </q-btn>
+          <div class="overflow-hidden">
+            <p class="ml-2 logo-text">SANZMOSES</p>
+          </div>
+        </div>
       <q-space />
       
       <q-tabs v-model="tab" class="header-links">
@@ -32,6 +34,7 @@ import gsap from 'gsap'
 import { useRouter, useRoute  } from 'vue-router';
 import { ref, watchEffect, computed, onMounted } from 'vue'
 import { useGlobalStore } from '/src/stores/GlobalStore'
+import { useResponsive } from '@/composables/responsive.js'
 
 export default {
   setup() {
@@ -46,12 +49,21 @@ export default {
     const tab = ref('Projects')
     const toolbar = ref(null)
     const global_store = useGlobalStore()
-    let timeline = gsap.timeline({
+
+    const { is_mobile } = useResponsive()
+
+    const timeline = gsap.timeline({
       onStart: () => {
         // initialize route name
         const route_name = vueRoute.name
         tab.value = route_name
       }
+    })
+
+    const logo_animation = gsap.timeline({ 
+      duration: 0.4, 
+      ease: 'Power2.inOut',
+      paused: true,
     })
 
     const logo = computed(() => {
@@ -71,9 +83,20 @@ export default {
       if(!global_store.initial_loading) {
         timeline.play();
       }
+
+      if(is_mobile.value) {
+        logo_animation.play();
+      } else {
+        logo_animation.reverse();
+      }
     })
 
     onMounted(() => {
+      logo_animation.to(".logo-text", {
+        x: -150,
+        width: 0,
+      })
+
       timeline.fromTo(".header-logo", {
         y: -100
       }, {
@@ -127,5 +150,30 @@ export default {
   position: fixed;
   width: 100%;
   z-index: 99;
+}
+
+.header-logo {
+  overflow: hidden;
+  display: flex;
+  cursor: pointer;
+  padding: 10px 5px;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    transition: all 0.4s ease-in-out;
+    background-color: rgba(255, 255, 255, 0.10);
+  }
+
+  .logo {
+    height: 20px; 
+    width: 20px;
+
+  }
+
+  .logo-text {
+    display: inline-block;
+    margin: 0px;
+  }
 }
 </style>
