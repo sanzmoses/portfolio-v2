@@ -338,6 +338,7 @@ export default {
   .nav-btn {
     text-align: left;
     position: relative;
+    z-index: 1;
 
     .line {
       position: absolute;
