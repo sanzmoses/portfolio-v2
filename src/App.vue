@@ -15,7 +15,7 @@
       </router-view>
     </div>
 
-    <template v-if="is_mobile">
+    <!-- <template v-if="is_mobile">
       <div class="cover-banner">
         <q-banner class="bg-red">
           <template v-slot:avatar>
@@ -27,9 +27,7 @@
           <p class="mb-0">Sorry for the inconvinience</p>
         </q-banner>
       </div>
-    </template>
-
-    
+    </template> -->
   </div>
 </template>
 
@@ -38,7 +36,6 @@ import Header from './components/Header.vue'
 import { useRoute  } from 'vue-router';
 import { onMounted, computed, watch } from 'vue'
 import { useGlobalStore } from '/src/stores/GlobalStore'
-import { useQuasar } from 'quasar'
 
 export default {
   name: 'App',
@@ -50,24 +47,7 @@ export default {
     const setInitialLoading = global_store.SET_INITIAL_LOADING
 
     const vueRoute = useRoute()
-    const $q = useQuasar()
-
-    const is_mobile = computed(() => {
-      const is_height_mb = $q.screen.height < 500
-      return $q.screen.lt.sm || is_height_mb ? true : false
-    })
-
-    watch(is_mobile, () => {
-      const body = document.body;
-
-      if(is_mobile) {
-        // Change overflow to hidden
-        body.style.overflow = 'hidden';
-      } else {
-        body.style.overflow = 'auto';
-      }
-    })
-
+    
     onMounted(async () => {
       setTimeout(() => {
         if(vueRoute.name !== "Initial") {
@@ -75,10 +55,6 @@ export default {
         }
       }, 100)
     })
-   
-    return {
-      is_mobile
-    }
   }
 }
 </script>

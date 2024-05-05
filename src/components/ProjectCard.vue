@@ -6,8 +6,9 @@
   > 
     <div class="outer-text upper-left">
       <AnimatedString 
+        :data-id="`project-${project.id}`"
         :list="project.responsibilities" 
-        :fontSize="1.3"
+        :fontSize="is_mobile? .8: 1.3"
         :repeat="responsibilities_length > 1 ? true: false"
         color="primary"
       />
@@ -37,11 +38,11 @@
           <div class="bg-div"></div>
           <div class="content">
             <div class="gentext-container title-container">
-              <p ref="title" class="text-h2 text-weight-bold mb-0">{{ project.name }}</p>
+              <p ref="title" class="title">{{ project.name }}</p>
             </div>
             
             <div class="gentext-container subtitle-container">
-              <p ref="subtitle" class="text-body1 text-weight-thin">
+              <p ref="subtitle" class="title-link">
                 {{ project.link }}
               </p>
             </div>            
@@ -76,11 +77,12 @@
 <script>
 import gsap from 'gsap'
 import { process } from '@/composables/jsonHighlighter.js'
-import { onMounted, onBeforeUnmount, ref, computed } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import AnimatedString from './Animated/Switch.vue'
+import { useResponsive } from '@/composables/responsive.js'
 
 export default {
-  name: "BrowserCard",
+  name: "ProjectCard",
   components: {
     AnimatedString
   },
@@ -96,9 +98,20 @@ export default {
     const title = ref(null);
     const subtitle = ref(null);
     const on_filter = ref(true)
+
     let frontText;
     const timeline = gsap.timeline()
     const skills_timeline = gsap.timeline({ delay: 1 })
+    const { is_mobile, is_tablet, is_desktop } = useResponsive()
+
+    const tool_line_width = computed(() => {
+      let width = 30
+
+      if(is_tablet.value) { width = 20 }
+      if(is_mobile.value) { width = 15 }
+
+      return width
+    })
 
     const getImageUrl = (name) => {
       return new URL(`../assets/screenshot/a_${name}`, import.meta.url).href
@@ -192,7 +205,7 @@ export default {
           skills_timeline.fromTo('.toolline-'+index, {
             width: 0,
           }, {
-            width: 30,
+            width: tool_line_width.value,
             duration: .1,
             ease: 'Power.easeIn',
           }, ">")
@@ -214,6 +227,12 @@ export default {
       getImageUrl,
       onHover,
       tools_length,
+      is_mobile,
+      is_tablet,
+      tool_line_width,
+      is_mobile,
+is_tablet,
+is_desktop,
     }
   },
 }
@@ -256,6 +275,17 @@ export default {
       z-index: 10;
       text-align: center;
       height: 100%;
+    }
+
+    .title {
+      font-size: 4em;
+      font-weight: bold;
+      margin: 0px;
+
+      &-link {
+        font-size: 1em;
+        font-weight: thin;
+      }
     }
   }
 
@@ -324,6 +354,7 @@ export default {
 
       .tool {
         margin: 0px;
+        text-wrap: nowrap;
 
         &line {
           width: 30px;
@@ -352,4 +383,35 @@ export default {
   }
 }
 
+@media (max-width: $breakpoint-sm-max) {
+  .tool {
+    font-size: 14px;
+
+     &line {
+      margin: 0px 15px !important;
+    }
+  }
+
+  .overlay-section {
+    .title {
+      font-size: 3em !important;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-xs-max) {
+  .tool {
+    font-size: 9px;
+
+     &line {
+      margin: 0px 8px !important;
+    }
+  }
+
+  .overlay-section {
+    .title {
+      font-size: 2em !important;
+    }
+  }
+}
 </style>

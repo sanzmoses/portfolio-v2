@@ -1,30 +1,41 @@
 <template>
-    <div class="row justify-center">
-        <div class="col-xs-12 col-sm-8">
-          <div class="relative-position">
-            <h1 class="page-title">PROJECTS</h1>
-            <template v-for="project in projects" :key="project.name">
-              <template v-if="project.id === active_id" >
-                <ProjectItem 
-                  :id="'project-'+project.id" 
-                  :item="project" 
-                  class="project" 
-                />
-              </template>
+  <div class="row justify-center">
+    <div class="col-xs-12 col-md-8">
+      <div class="relative-position">
+        <h1 class="page-title">PROJECTS</h1>
+        <template v-for="project in projects" :key="project.name">
+          <template v-if="is_tablet">
+            <ProjectItem 
+              :id="'project-'+project.id" 
+              :item="project" 
+              class="project mb-20" 
+            />
+          </template>
+          <template v-else>
+            <template v-if="project.id === active_id" >
+              <ProjectItem 
+                :id="'project-'+project.id" 
+                :item="project" 
+                class="project" 
+              />
             </template>
-          </div>
-        </div>
-
-        <div class="col-sm-2 gt-xs pl-3">
-          <SideSeeker :items="projects" @seekerClicked="setShow" />
-        </div> 
+          </template>
+          
+        </template>
+      </div>
     </div>
+
+    <div class="col-sm-2 gt-sm pl-3">
+      <SideSeeker :items="projects" @seekerClicked="setShow" />
+    </div> 
+  </div>
 </template>
 
 <script>
 import { ref, computed } from 'vue'
 import ProjectItem from "./ProjectItem.vue"
 import { getData } from '@/composables/projects.js'
+import { useResponsive } from '@/composables/responsive.js'
 import { useProjectStore } from '@/stores/ProjectStore'
 import SideSeeker from "@/components/Global/SideSeeker/index.vue";
 import gsap from 'gsap'
@@ -32,12 +43,13 @@ import gsap from 'gsap'
 export default {
   name: "Projects",
   components: {
-      ProjectItem,
-      SideSeeker
+    ProjectItem,
+    SideSeeker
   },
   setup() {
     const { projects } = getData()
     const projectStore = useProjectStore()
+    const { is_mobile, is_tablet } = useResponsive()
 
     const setShow = (item) => {
       projectStore.SET_ACTIVE_PROJECT(item.id)
@@ -50,7 +62,9 @@ export default {
     return { 
       projects,
       setShow,
-      active_id
+      active_id,
+      is_mobile,
+      is_tablet
     }
   },
   mounted() {

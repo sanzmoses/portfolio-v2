@@ -2,9 +2,9 @@
   <div class="q-pa-sm contact">
 
     <div class="row contact--body">
-      <div class="col-2">
+      <div class="gt-sm col-2">
       </div>
-      <div class="col-6">
+      <div class="col-xs-12 col-md-6">
         <div class="overflow-hidden">
           <h1 id="title" class="q-mt-none text-weight-bold mb-0">Contact</h1>
         </div>

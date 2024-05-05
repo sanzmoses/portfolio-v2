@@ -151,7 +151,7 @@ export const useProjectStore = defineStore('ProjectStore', {
             code: '#',
             img: 'service.png',
             responsibilities: ['Backend', 'Frontend', 'Deployment', 'Integration'],
-            tools: ['Laravel 5.6', 'OctoberCMS', 'Javascript', 'Bootstrap'],
+            tools: ['Laravel 5.6', 'OctoberCMS', 'Javascript'],
             type: 'Employment',
             description: 'Having used OctoberCMS (Built on top of Laravel) countless of times for a handful of sites, we as a team has had to know all the details and parts of this app and the inner workings of the cms. From API integrations, like google\'s captcha, chatbot, email, currency api, cookies and etc.',
             color: 'purple-card',

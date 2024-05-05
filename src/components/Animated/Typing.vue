@@ -1,12 +1,12 @@
 <template>
   <div :class="['flex', 'text-'+color]" :style="{ fontSize }">
     
-    <template v-for="(word, word_index) in processed_list" :key="`word-${word}-${word_index}`">
-      <template v-for="(letter, letter_index) in word" :key="`animate-${letter}-${letter_index}`">
-        <span :class="`letter letter-${word_index}`">{{ letter }}</span>
+    <template v-for="(word, word_index) in processed_list" :key="`word-${word}-${word_index}-${dataId}`">
+      <template v-for="(letter, letter_index) in word" :key="`animate-${letter}-${letter_index}-${dataId}`">
+        <span :class="`letter letter-${word_index}-${dataId}`">{{ letter }}</span>
       </template>
-      <div :class="[`blinker-${word_index} text-blinker`, { 'blink': blink }]"></div>
-      <span :class="[`opacity-0 extra-${word_index}`]">|</span>
+      <div :class="[`blinker-${word_index}-${dataId} text-blinker`, { 'blink': blink }]"></div>
+      <span :class="[`opacity-0 extra-${word_index}-${dataId}`]">|</span>
     </template>
     <span class="opacity-0">|</span>
 
@@ -39,6 +39,10 @@ export default {
     color: {
       type: String,
       default: "white"
+    },
+    dataId: {
+      type: String,
+      required
     }
   },
   setup(props) {
@@ -61,8 +65,9 @@ export default {
     
     onMounted(() => {
       processed_list.forEach((item, index) => {
+        const index_id = `${index}-${dataId}`
         timeline
-        .to(`.blinker-${index}`, {
+        .to(`.blinker-${index_id}`, {
           keyframes: [
             { opacity: 0, visibility:"hidden", duration: .2, ease: "none" },
             { opacity: 1, visibility:"visible", duration: .2 },
@@ -72,13 +77,13 @@ export default {
           repeat: .5,
           ease: "none"
         })
-        .to(`.letter-${index}`, {
+        .to(`.letter-${index_id}`, {
           display: "inline-block",
           duration: .5,
           stagger: .1,
           ease: 'elastic',
         })
-        .to(`.blinker-${index}`, {
+        .to(`.blinker-${index_id}`, {
           keyframes: [
             { opacity: 0, visibility:"hidden", duration: .2, ease: "none" }, // BLINK VISIBILITY
             { opacity: 1, visibility:"visible", duration: .2 },
@@ -88,19 +93,19 @@ export default {
           repeat: (reverse)? 1: -1,
           ease: "none"
         })
-        .to(`.letter-${index}`, {
+        .to(`.letter-${index_id}`, {
           display: "none",
           duration: .5,
           stagger: -0.1, // REVERSE STAGGER
           ease: 'elastic',
         })
-        .to(`.blinker-${index}`, {
+        .to(`.blinker-${index_id}`, {
           display: "none",
         })
-        .to(`.letter-${index}`, {
+        .to(`.letter-${index_id}`, {
           display: "none",
         }, "<")
-        .to(`.extra-${index}`, {
+        .to(`.extra-${index_id}`, {
           display: "none",
         }, "<")
       })
@@ -110,7 +115,7 @@ export default {
     
     return {
       processed_list,
-      blink
+      blink,
     }
   }
 }
