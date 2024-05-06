@@ -10,12 +10,12 @@
 
     <div class="intro-container p-body">
       <div class="line line-top"></div>
-      <p class="text-h6">I am a</p>
+      <p class="mb-0 about-text">I am a</p>
 
       <div class="designation-container">
         <AnimatedString 
           :list="designations" 
-          :fontSize="1.3"
+          :fontSize="is_mobile ? 1: 1.3"
           :repeat="true"
           :classic="true"
           classes="left"
@@ -24,13 +24,13 @@
       </div>
     </div> 
     
-    <p class="text-weight-thin text-justify p-body">
+    <p class="text-weight-thin text-justify p-body about-text">
       I've been working as a professional web developer for {{ years_fromnow }} years. My career progressed from being a full-stack developer with Php (Laravel) and Yii, to a more narrowed field in the web development process which is front-end. I am adept in building websites from scratch using only vanilla JS and css preprocessors and also experienced mobile development using React-native and experienced other front-end tools like Angular but my repertoire has always been <span class="text-weight-bold">VueJs</span>.
     </p>
-    <p class="text-weight-thin text-justify p-body">
+    <p class="text-weight-thin text-justify p-body about-text">
       Although I am more inclined in Front-end development as it has been since my bread and butter. I am beginning to explore other domains such as design and web 3d animations.         
     </p>
-    <p class="text-weight-thin text-justify p-body">
+    <p class="text-weight-thin text-justify p-body about-text">
       Having an Insatiable desire to learn new things, I am always open for opportunities, love figuring things out on my own and constantly improving.
     </p>
 
@@ -60,6 +60,7 @@ import { ref, onMounted, computed } from 'vue'
 import AnimatedString from '@/components/Animated/Switch.vue'
 import gsap from 'gsap'
 import moment from 'moment'
+import { useResponsive } from '@/composables/responsive.js'
 
 export default {
   name: 'AboutMe',
@@ -68,6 +69,7 @@ export default {
   },
   setup(props,  { emit }) {
     const start_working = ref("2018-04-15")
+    const { is_mobile } = useResponsive()
 
     const designations = ref([
       "Front-end Developer", 
@@ -132,7 +134,8 @@ export default {
     return { 
       designations,
       goTimeline,
-      years_fromnow
+      years_fromnow,
+      is_mobile
     }
   }
 }
@@ -165,11 +168,14 @@ export default {
   .intro-container {
     position: relative;
     display: flex;
+    align-items: center;
     max-width: 500px;
+    margin-bottom: 5px;
+
     .designation-container {
       width: 240px;
       margin-left: 15px;
-      margin-bottom: 15px;
+      margin-bottom: 5px;
     }
 
     .line {
@@ -205,11 +211,29 @@ export default {
       margin: 0px;
     }
   }
+
+  .about-text {
+    font-size: 16px;
+  }
 }
 
 @media (max-width: $breakpoint-sm-max) {
-  .exp-yrs-container {
-    transform: translate(0px, -50px) !important;
+  .about-me {
+    .exp-yrs-container {
+      transform: translate(0px, -50px) !important;
+    }
+
+    .text-title {
+      font-size: 5.5em;
+    }
+
+    .text-name {
+      font-size: 2em;
+    }
+
+    .about-text {
+      font-size: 13px;
+    }
   }
 }
 </style>

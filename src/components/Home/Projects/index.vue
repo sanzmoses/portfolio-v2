@@ -91,4 +91,10 @@ export default {
   font-weight: bold;
   transform: translate(20px, -74px);
 }
+
+@media (max-width: $breakpoint-xs-max) {
+  .page-title {
+    font-size: 4em;
+  }
+}
 </style>
