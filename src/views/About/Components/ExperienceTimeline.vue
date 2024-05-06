@@ -424,4 +424,8 @@ export default {
     }
   }
 }  
+
+@media (max-width: $breakpoint-sm-max) {
+  
+}
 </style>

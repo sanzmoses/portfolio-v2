@@ -10,13 +10,13 @@
         {{ formatDate(exp.datestamp.start) }}
       </span> 
       <div class="line-divider"></div>
-      <span class="type">
-        {{ exp.experience.type }}
-      </span> 
-      <div class="line-divider"></div>
       <span class="resp">
         {{ exp.role }}
       </span>
+      <div class="line-divider"></div>
+      <span class="type">
+        {{ exp.experience.type }}
+      </span> 
     </div>
 
     <p class="desc">{{ exp.description }}</p>
@@ -84,6 +84,26 @@ export default {
 
   .desc {
     max-width: 500px;
+  }
+}
+
+@media (max-width: $breakpoint-sm-max) {
+  .focus-exp {
+    .company {
+      font-size: 30px;
+    }
+    .sub-info {
+      flex-direction: column;
+      align-items: start;
+      
+      .line-divider {
+        display: none;
+      }
+    }
+  }
+
+  .desc {
+    font-size: 13px;
   }
 }
 </style>

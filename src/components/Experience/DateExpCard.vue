@@ -4,8 +4,8 @@
       <span class="date">{{ date }}</span> 
       <span class="month">{{ month }}</span>
     </h5>
-    <p class="text-body1">{{ company }}</p>
-    <p>{{ role }}</p>
+    <p class="company">{{ company }}</p>
+    <p class="role">{{ role }}</p>
   </div>
 </template>
 
@@ -78,8 +78,57 @@ export default {
     font-size: 20px;
   }
 
-  p {
+  .company {
     margin-bottom: 0px;
+    font-size: 16px;
+  }
+
+  .role {
+    font-size: 14px;
   }
 }
+
+@media (max-width: $breakpoint-sm-max) {
+  .date-exp {
+    padding: 10px;
+    .date {
+      font-size: 25px;
+    }
+
+    .month {
+      font-size: 18px;
+    }
+
+    .company {
+      font-size: 14px;
+    }
+
+    .role {
+      font-size: 12px;
+    }
+  } 
+}
+
+@media (max-width: $breakpoint-xs-max) { 
+  .date-exp {
+    h5 {
+      line-height: 17px;
+    }
+    .date {
+      font-size: 20px;
+      display: block;
+    }
+    .month {
+      font-size: 15px;
+      display: block;
+    }
+    .company {
+      font-size: 13px;
+    }
+    .role {
+      font-size: 11px;
+    }
+  }
+}
+
 </style>
