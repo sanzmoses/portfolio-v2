@@ -72,13 +72,14 @@
 import _ from 'lodash'
 import gsap from 'gsap'
 import moment from 'moment'
-import { useExpStore } from '@/stores/ExperienceStore'
-import { useQuasar } from 'quasar'
-import { computed, ref, onMounted, watch } from 'vue'
 import ExpCard from "@/components/Experience/DateExpCard.vue"
 import FocusedExpCard from "@/components/Experience/FocusedExpCard.vue"
-import { useWheelEvent } from '@/composables/onwheel.js'
 import MouseScroll from "@/components/Animated/MouseScroll.vue"
+import { computed, ref, onMounted, watch } from 'vue'
+import { useQuasar } from 'quasar'
+import { useExpStore } from '@/stores/ExperienceStore'
+import { useWheelEvent } from '@/composables/onwheel.js'
+import { useSwipeEvent } from '@/composables/onswipe.js'
 
 export default {
   name: "ExperienceTimeline",
@@ -220,6 +221,23 @@ export default {
       })
     }
 
+    const goRightOrLeft = (direction) => {
+      // direction = left || right
+      const active_yr_index = years.value.findIndex(yr => yr == active_year.value)
+        let year = years.value[active_yr_index];
+        let index = active_yr_index
+
+        if(direction === "right") {
+          if(active_yr_index == years.value.length - 1) return;
+          year = years.value[index += 1];
+        } else if (direction === "left") {
+          if(active_yr_index == 0) return;
+          year = years.value[index -= 1];
+        }
+
+        setActiveYear(year, index)
+    }
+
     active_exp.value = exps_year.value[0]
     watch(exps_year, () => {
       selectExp(exps_year.value[0])
@@ -271,19 +289,11 @@ export default {
       timeline.play()
 
       useWheelEvent((direction) => {
-        const active_yr_index = years.value.findIndex(yr => yr == active_year.value)
-        let year = years.value[active_yr_index];
-        let index = active_yr_index
+        goRightOrLeft(direction === "next"? "right": "left")
+      })
 
-        if(direction === "next") {
-          if(active_yr_index == years.value.length - 1) return;
-          year = years.value[index += 1];
-        } else {
-          if(active_yr_index == 0) return;
-          year = years.value[index -= 1];
-        }
-
-        setActiveYear(year, index)
+      useSwipeEvent(direction => {
+        goRightOrLeft(direction)
       })
     })
 

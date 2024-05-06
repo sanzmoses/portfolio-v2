@@ -5,8 +5,6 @@ import { useQuasar } from 'quasar'
 export function useResponsive() {
   const $q = useQuasar()
 
-  console.log($q.screen)
-
   const is_mobile = computed(() => {
     const is_height_mb = $q.screen.height < 600
     return $q.screen.lt.sm || is_height_mb ? true : false
@@ -16,7 +14,6 @@ export function useResponsive() {
     return $q.screen.lt.md
   })
 
-  
   const is_desktop = computed(() => {
     return $q.screen.gt.sm
   })
